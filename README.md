@@ -17,6 +17,20 @@ Go from typing `claude` to orchestrating agents, hooks, skills, and MCP servers 
 
 ---
 
+## Table of Contents
+
+- [The Problem](#the-problem)
+- [How Claude How To Fixes This](#how-claude-how-to-fixes-this)
+- [How It Works](#how-it-works)
+- [Not Sure Where to Start?](#-not-sure-where-to-start)
+- [Get Started in 15 Minutes](#-get-started-in-15-minutes)
+- [What Can You Build With This?](#what-can-you-build-with-this)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
 ## The Problem
 
 You installed Claude Code. You ran a few prompts. Now what?
@@ -834,6 +848,10 @@ Quick start:
 </details>
 
 ---
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
 
 ## Contributors
 
