@@ -243,7 +243,6 @@ cp -r 03-skills/code-review ~/.claude/skills/
 ## 原项目
 
 - **GitHub**: https://github.com/luongnv89/claude-howto
-- **Star**: 5,900+
 - **License**: MIT
 - **Claude Code**: ≥ 2.1
 
