@@ -11,14 +11,14 @@
 
 [![原项目 Stars](https://img.shields.io/github/stars/luongnv89/claude-howto?style=flat&color=gold)](https://github.com/luongnv89/claude-howto/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![翻译版本](https://img.shields.io/badge/version-v2.2.0-brightgreen)](CHANGELOG.md)
+[![翻译版本](https://img.shields.io/badge/version-最新版-brightgreen)](CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-2.1+-purple)](https://code.claude.com)
 
 # Claude How To — 中文翻译版
 
 > **基于** [luongnv89/claude-howto](https://github.com/luongnv89/claude-howto) 的完整中文翻译
 >
-> **v2.2.0** · **与官方结构 1:1 对齐**
+> **与官方结构 1:1 对齐**
 
 **[15 分钟快速开始](#快速开始)** | [**找到你的水平**](#不确定从哪里开始)** | [**浏览功能目录**](CATALOG.md)**
 
@@ -199,7 +199,7 @@ cp -r 03-skills/code-review ~/.claude/skills/
 - ⚡ [快速参考卡](QUICK_REFERENCE.md) — 全功能速查表
 - 📋 [功能目录](CATALOG.md) — 99 个内置功能索引
 - 📚 [文件总索引](INDEX.md) — 完整文件清单
-- 📝 [更新日志](CHANGELOG.md) — v2.0 → v2.2.0 变更记录
+- 📝 [更新日志](CHANGELOG.md) — 完整变更记录
 
 ---
 
@@ -248,4 +248,4 @@ cp -r 03-skills/code-review ~/.claude/skills/
 
 ---
 
-*翻译完成于 2026-04-05 · 基于 v2.2.0 · 由 Rx782-Fss 翻译*
+*翻译完成于 2026-04-05 · 由 Rx782-Fss 翻译*
