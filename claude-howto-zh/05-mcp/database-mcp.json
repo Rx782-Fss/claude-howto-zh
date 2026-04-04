@@ -1,0 +1,1 @@
+{"mcpServers": {"database": {"command": "npx", "args": ["@modelcontextprotocol/server-database"], "env": {"DATABASE_URL": "postgresql://user:pass@localhost/mydb"}}}}

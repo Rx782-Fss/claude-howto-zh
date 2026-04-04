@@ -1,0 +1,1 @@
+{"mcpServers": {"github": {"command": "npx", "args": ["@modelcontextprotocol/server-github"], "env": {"GITHUB_TOKEN": "${GITHUB_TOKEN}"}}, "database": {"command": "npx", "args": ["@modelcontextprotocol/server-postgres"], "env": {"DATABASE_URL": "${DATABASE_URL}"}}, "filesystem": {"command": "npx", "args": ["@modelcontextprotocol/server-filesystem", "/home/user/projects"]}}}
