@@ -62,7 +62,7 @@
 
 ### 你将获得：
 
-- **完整的教程模块**，覆盖 Claude Code 每个功能 —— 从斜杠命令到自定义 Agent 团队
+- **10 大教程模块**，覆盖 Claude Code 每个功能 —— 从斜杠命令到自定义 Agent 团队
 - **开箱即用的配置模板** —— 斜杠命令、CLAUDE.md 模板、钩子脚本、MCP 配置、子代理定义、完整插件包
 - **Mermaid 图表** 展示每个功能的内部工作原理，让你不仅知其然更知其所以然
 - **渐进式学习路径**，带你从入门到高手（11-13 小时）
@@ -104,7 +104,7 @@
 | **中级** | 会用 CLAUDE.md 和自定义命令 | [技能](03-skills/) | ~3.5 小时 |
 | **高级** | 能配置 MCP 服务器和钩子 | [高级功能](09-advanced-features/) | ~5 小时 |
 
-**完整学习路径：**
+**完整学习路径（全部 10 个模块）：**
 
 | 序号 | 模块 | 水平 | 时间 |
 |------|------|------|------|
@@ -180,24 +180,24 @@ cp -r 03-skills/code-review ~/.claude/skills/
 
 ## 翻译范围
 
-| 模块 | 内容 |
-|------|------|
-| [01 斜杠命令](01-slash-commands/) | Slash Commands 参考 |
-| [02 记忆系统](02-memory/) | Memory / CLAUDE.md |
-| [03 技能](03-skills/) | Skills 系统（7 个子技能） |
-| [04 子代理](04-subagents/) | Subagents |
-| [05 MCP](05-mcp/) | Model Context Protocol |
-| [06 钩子](06-hooks/) | Hooks 系统 |
-| [07 插件](07-plugins/) | Plugins 架构（3 个示例） |
-| [08 检查点](08-checkpoints/) | Checkpoints |
-| [09 高级功能](09-advanced-features/) | Advanced Features |
-| [10 CLI 参考](10-cli/) | CLI Reference |
+| 模块 | 内容 | 文件数 |
+|------|------|--------|
+| [01 斜杠命令](01-slash-commands/) | Slash Commands 参考 | 9 |
+| [02 记忆系统](02-memory/) | Memory / CLAUDE.md | 6 |
+| [03 技能](03-skills/) | Skills 系统（7 个子技能） | 22 |
+| [04 子代理](04-subagents/) | Subagents | 9 |
+| [05 MCP](05-mcp/) | Model Context Protocol | 5 |
+| [06 钩子](06-hooks/) | Hooks 系统 | 9 |
+| [07 插件](07-plugins/) | Plugins 架构（3 个示例） | 39 |
+| [08 检查点](08-checkpoints/) | Checkpoints | 2 |
+| [09 高级功能](09-advanced-features/) | Advanced Features | 4 |
+| [10 CLI 参考](10-cli/) | CLI Reference | 1 |
 
 ### 辅助文档
 
 - 📖 [学习路线图](LEARNING-ROADMAP.md) — Level 1→3 渐进式路径（6 个里程碑）
 - ⚡ [快速参考卡](QUICK_REFERENCE.md) — 全功能速查表
-- 📋 [功能目录](CATALOG.md) — 内置功能索引
+- 📋 [功能目录](CATALOG.md) — 99 个内置功能索引
 - 📚 [文件总索引](INDEX.md) — 完整文件清单
 - 📝 [更新日志](CHANGELOG.md) — v2.0 → v2.2.0 变更记录
 
@@ -243,6 +243,7 @@ cp -r 03-skills/code-review ~/.claude/skills/
 ## 原项目
 
 - **GitHub**: https://github.com/luongnv89/claude-howto
+- **Star**: 5,900+
 - **License**: MIT
 - **Claude Code**: ≥ 2.1
 
