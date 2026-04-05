@@ -199,7 +199,7 @@ graph TD
 
     M --> N[Review & Refactor]
 
-    N --> O[More Features?]
+    N --> O[More Features]
 
     O -->|Yes| K
 
@@ -236,7 +236,7 @@ graph TD
 ```mermaid
 graph TD
 
-    A[Start with Existing Repository] --> B[Legacy Codebase?]
+    A[Start with Existing Repository] --> B[Legacy Codebase]
 
     B -->|Yes| C[Create CLAUDE_LEGACY.md]
 
@@ -276,7 +276,7 @@ graph TD
 
 
 
-    N --> O[Multiple Features?]
+    N --> O[Multiple Features]
 
     O -->|Yes| P[Create Git Worktrees]
 
@@ -302,7 +302,7 @@ graph TD
 
 
 
-    X --> Y[More Tasks?]
+    X --> Y[More Tasks]
 
     Y -->|Yes| H
 

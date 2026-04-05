@@ -617,7 +617,7 @@ sequenceDiagram
     participant Memory as CLAUDE.md
 
     User->>Claude: "记住:使用 async/await"
-    Claude->>User: "保存到哪个记忆文件?"
+    Claude->>User: "保存到哪个记忆文件"
     User->>Claude: "项目记忆"
     Claude->>Editor: 打开 ~/.claude/settings.json
     Claude->>Memory: 写入 ./CLAUDE.md
@@ -1188,9 +1188,9 @@ WHERE created_at > NOW() - INTERVAL '1 day'
 
 ```mermaid
 graph TD
-    A["需要外部数据?"]
+    A["需要外部数据"]
     A -->|否| B["使用记忆"]
-    A -->|是| C["是否频繁变化?"]
+    A -->|是| C["是否频繁变化"]
     C -->|否/很少| B
     C -->|是/经常| D["使用 MCP"]
 
@@ -2119,10 +2119,10 @@ if __name__ == '__main__':
 graph TD
     A["用户请求"] --> B["Claude 分析"]
     B -->|扫描| C["可用技能"]
-    C -->|元数据检查| D["描述匹配?"]
+    C -->|元数据检查| D["描述匹配"]
     D -->|是| E["加载 SKILL.md"]
     D -->|否| F["尝试下一个技能"]
-    F -->|还有技能?| D
+    F -->|还有技能|D
     F -->|没有了| G["使用通用知识"]
     E --> H["提取指令"]
     H --> I["执行技能"]
@@ -2482,14 +2482,14 @@ graph LR
 
 ```mermaid
 graph TD
-    A["我应该创建插件吗?"]
-    A -->|需要多个组件| B["多个命令 或子代理 或 MCP?"]
+    A["我应该创建插件吗"]
+    A -->|需要多个组件| B["多个命令 或子代理 或 MCP"]
     B -->|是| C[" 创建插件"]
     B -->|否| D["使用单个功能"]
-    A -->|团队工作流| E["需要与 团队共享?"]
+    A -->|团队工作流| E["需要与 团队共享"]
     E -->|是| C
     E -->|否| F["保留为本地设置"]
-    A -->|复杂设置| G["需要自动 配置?"]
+    A -->|复杂设置| G["需要自动 配置"]
     G -->|是| C
     G -->|否| D
 ```
@@ -2711,7 +2711,7 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A["新任务"] --> B[任务类型?]
+    A["新任务"] --> B[任务类型]
 
     B -->|重复工作流| C["斜杠命令"]
     B -->|需要实时数据| D["MCP 协议"]
@@ -2730,17 +2730,17 @@ graph TD
 
 ```mermaid
 graph TD
-    Start["需要扩展 Claude?"]
+    Start["需要扩展 Claude"]
 
-    Start -->|快速重复任务| A["手动 or 自动?"]
+    Start -->|快速重复任务| A["手动 or 自动"]
     A -->|手动| B["斜杠命令"]
     A -->|自动| C["技能"]
 
-    Start -->|需要外部数据| D["实时?"]
+    Start -->|需要外部数据| D["实时"]
     D -->|是| E["MCP 协议"]
     D -->|否/跨会话| F["记忆"]
 
-    Start -->|复杂项目| G["多个角色?"]
+    Start -->|复杂项目| G["多个角色"]
     G -->|是| H["子代理"]
     G -->|否| I["技能 + 记忆"]
 

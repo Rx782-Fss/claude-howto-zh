@@ -556,9 +556,9 @@ claude mcp add --transport stdio filesystem -- npx @modelcontextprotocol/server-
 
 ```mermaid
 graph TD
-    A["Need external data?"]
+    A["Need external data"]
     A -->|No| B["Use Memory"]
-    A -->|Yes| C["Does it change frequently?"]
+    A -->|Yes| C["Does it change frequently"]
     C -->|No/Rarely| B
     C -->|Yes/Often| D["Use MCP"]
 

@@ -76,7 +76,7 @@ sequenceDiagram
     Claude->>Claude: 将请求匹配到技能描述
     Claude->>Skill: bash: read code-review/SKILL.md
     Skill-->>Claude: 指令已加载到上下文
-    Claude->>Claude: 判断:需要模板?
+    Claude->>Claude: 判断:需要模板
     Claude->>Skill: bash: read templates/checklist.md
     Skill-->>Claude: 模板已加载
     Claude->>Claude: 执行技能指令

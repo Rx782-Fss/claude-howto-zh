@@ -405,7 +405,7 @@ sequenceDiagram
     participant Memory as CLAUDE.md
 
     User->>Claude: "Remember: use async/await"
-    Claude->>User: "Which memory file?"
+    Claude->>User: "Which memory file"
     User->>Claude: "Project memory"
     Claude->>Editor: Open ~/.claude/settings.json
     Claude->>Memory: Write to ./CLAUDE.md
