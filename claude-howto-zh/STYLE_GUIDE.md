@@ -3,7 +3,7 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Style Guide（风格指南）
+# Style Guide(风格指南)
 
 > 贡献到 Claude How To 时的格式规范和排版规则。遵循本指南以保持内容一致、专业且易于维护。
 
@@ -33,7 +33,7 @@
 
 ### Lesson Folders
 
-Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述符：
+Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述符:
 
 ```
 01-slash-commands/
@@ -59,8 +59,8 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Rules
 
-- 所有文件和文件夹名称使用**小写**（除顶层文档如 `README.md`、`CATALOG.md` 外）
-- 使用**连字符**（`-`）作为单词分隔符，绝不使用下划线或空格
+- 所有文件和文件夹名称使用**小写**(除顶层文档如 `README.md`、`CATALOG.md` 外)
+- 使用**连字符**(`-`)作为单词分隔符,绝不使用下划线或空格
 - 保持名称描述性但简洁
 
 ---
@@ -69,13 +69,13 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Root README
 
-根 `README.md` 遵循此顺序：
+根 `README.md` 遵循此顺序:
 
-1. Logo（`<picture>` 元素，支持深色/浅色变体）
+1. Logo(`<picture>` 元素,支持深色/浅色变体)
 2. H1 标题
-3. 引言 blockquote（一行价值主张）
+3. 引言 blockquote(一行价值主张)
 4. "Why This Guide?" 章节 + 对比表格
-5. 水平分隔线（`---`）
+5. 水平分隔线(`---`)
 6. 目录
 7. Feature Catalog
 8. Quick Navigation
@@ -87,24 +87,24 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Lesson README
 
-每个 lesson `README.md` 遵循此顺序：
+每个 lesson `README.md` 遵循此顺序:
 
-1. H1 标题（例如 `# Slash Commands`）
+1. H1 标题(例如 `# Slash Commands`)
 2. 简短概述段落
-3. 快速参考表（可选）
-4. 架构图（Mermaid）
-5. 详细章节（H2）
-6. 实际示例（编号，4-6 个示例）
-7. 最佳实践（Do's 和 Don'ts 表格）
+3. 快速参考表(可选)
+4. 架构图(Mermaid)
+5. 详细章节(H2)
+6. 实际示例(编号,4-6 个示例)
+7. 最佳实践(Do's 和 Don'ts 表格)
 8. 故障排除
 9. 相关指南 / 官方文档
 10. 文档元数据页脚
 
 ### Feature/Example File
 
-独立的功能文件（例如 `optimize.md`、`pr.md`）：
+独立的功能文件(例如 `optimize.md`、`pr.md`):
 
-1. YAML frontmatter（如适用）
+1. YAML frontmatter(如适用)
 2. H1 标题
 3. 目的 / 描述
 4. 使用说明
@@ -113,7 +113,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Section Separators
 
-使用水平分隔线（`---`）分隔主要的文档区域：
+使用水平分隔线(`---`)分隔主要的文档区域:
 
 ```markdown
 ---
@@ -131,18 +131,18 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 | 级别 | 用途 | 示例 |
 |-------|-----|---------|
-| `#` H1 | 页面标题（每文档一个） | `# Slash Commands` |
+| `#` H1 | 页面标题(每文档一个) | `# Slash Commands` |
 | `##` H2 | 主要章节 | `## Best Practices` |
 | `###` H3 | 子章节 | `### Adding a Skill` |
-| `####` H4 | 子子章节（罕见） | `#### Configuration Options` |
+| `####` H4 | 子子章节(罕见) | `#### Configuration Options` |
 
 ### Rules
 
-- **每文档只有一个 H1** — 仅页面标题
-- **永不跳级** — 不要从 H2 直接跳到 H4
-- **保持标题简洁** — 目标 2-5 个词
-- **使用句子大小写** — 仅首单词和专有名词大写（例外：功能名称保持原样）
-- **仅在根 README 章节标题上添加 emoji 前缀**（见 [Emoji Usage](#emoji-usage)）
+- **每文档只有一个 H1** -- 仅页面标题
+- **永不跳级** -- 不要从 H2 直接跳到 H4
+- **保持标题简洁** -- 目标 2-5 个词
+- **使用句子大小写** -- 仅首单词和专有名词大写(例外:功能名称保持原样)
+- **仅在根 README 章节标题上添加 emoji 前缀**(见 [Emoji Usage](#emoji-usage))
 
 ---
 
@@ -158,7 +158,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Blockquotes for Callouts
 
-使用加粗前缀的 blockquote 表示重要说明：
+使用加粗前缀的 blockquote 表示重要说明:
 
 ```markdown
 > **Note**: Custom slash commands have been merged into skills since v2.0.
@@ -168,13 +168,13 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 > **Tip**: Combine memory with skills for maximum effectiveness.
 ```
 
-支持的 callout 类型：**Note**、**Important**、**Tip**、**Warning**。
+支持的 callout 类型:**Note**、**Important**、**Tip**、**Warning**。
 
 ### Paragraphs
 
-- 保持段落简短（2-4 句）
+- 保持段落简短(2-4 句)
 - 段落之间添加空行
-- 以关键点开头，然后提供上下文
+- 以关键点开头,然后提供上下文
 - 解释"为什么"而不仅仅是"是什么"
 
 ---
@@ -183,20 +183,20 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Unordered Lists
 
-使用连字符（`-`）配合 2 空格缩进进行嵌套：
+使用连字符(`-`)配合 2 空格缩进进行嵌套:
 
 ```markdown
 - First item
 - Second item
   - Nested item
   - Another nested item
-    - Deep nested（避免超过 3 层深度）
+    - Deep nested(避免超过 3 层深度)
 - Third item
 ```
 
 ### Ordered Lists
 
-对顺序步骤、指令和排名项使用编号列表：
+对顺序步骤、指令和排名项使用编号列表:
 
 ```markdown
 1. First step
@@ -208,7 +208,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Descriptive Lists
 
-对键值对风格的列表使用粗体标签：
+对键值对风格的列表使用粗体标签:
 
 ```markdown
 - **Performance bottlenecks** - identify O(n^2) operations, inefficient loops
@@ -218,9 +218,9 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Rules
 
-- 保持一致的缩进（每级 2 空格）
+- 保持一致的缩进(每级 2 空格)
 - 列表前后各留一空行
-- 保持列表项结构平行（都以动词开头，或都是名词等）
+- 保持列表项结构平行(都以动词开头,或都是名词等)
 - 避免超过 3 层的嵌套
 
 ---
@@ -267,9 +267,9 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Rules
 
-- 当表格头是行标签（第一列）时使用**粗体**
-- 对齐管道以提高源码可读性（可选但推荐）
-- 保持单元格内容简洁；使用链接获取详情
+- 当表格头是行标签(第一列)时使用**粗体**
+- 对齐管道以提高源码可读性(可选但推荐)
+- 保持单元格内容简洁;使用链接获取详情
 - 在单元格中对命令和文件路径使用 `代码格式`
 
 ---
@@ -278,7 +278,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Language Tags
 
-始终指定语言标签以获得语法高亮：
+始终指定语言标签以获得语法高亮:
 
 | 语言 | 标签 | 用于 |
 |------|-----|---------|
@@ -290,7 +290,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 | YAML | `yaml` | Frontmatter、配置 |
 | Markdown | `markdown` | Markdown 示例 |
 | SQL | `sql` | 数据库查询 |
-| Plain text | （无标签） | 预期输出、目录树 |
+| Plain text | (无标签) | 预期输出、目录树 |
 
 ### Conventions
 
@@ -302,11 +302,11 @@ claude mcp add notion --transport http https://mcp.notion.com/mcp
 - 在非显而易见的命令前添加**注释行**
 - 使所有示例**可直接复制粘贴**
 - 在相关时同时展示**简单版和高级版**
-- 包含**预期输出**以辅助理解（使用无标签代码块）
+- 包含**预期输出**以辅助理解(使用无标签代码块)
 
 ### Installation Blocks
 
-使用此模式作为安装说明：
+使用此模式作为安装说明:
 
 ```bash
 # Copy files to your project
@@ -330,9 +330,9 @@ ls .claude/commands/
 
 ## Links and Cross-References
 
-### Internal Links（相对路径）
+### Internal Links(相对路径)
 
-对所有内部链接使用相对路径：
+对所有内部链接使用相对路径:
 
 ```markdown
 [Slash Commands](01-slash-commands/)
@@ -340,16 +340,16 @@ ls .claude/commands/
 [Memory Architecture](02-memory/#memory-architecture)
 ```
 
-从 lesson 文件夹返回根目录或同级目录：
+从 lesson 文件夹返回根目录或同级目录:
 
 ```markdown
 [Back to main guide](../README.md)
 [Related: Skills](../03-skills/)
 ```
 
-### External Links（绝对路径）
+### External Links(绝对路径)
 
-使用完整 URL 配合描述性锚文本：
+使用完整 URL 配合描述性锚文本:
 
 ```markdown
 [Anthropic's official documentation](https://code.claude.com/docs/en/overview)
@@ -360,7 +360,7 @@ ls .claude/commands/
 
 ### Section Anchors
 
-使用 GitHub 风格锚点链接到同一文档内的章节：
+使用 GitHub 风格锚点链接到同一文档内的章节:
 
 ```markdown
 [Feature Catalog](#-feature-catalog)
@@ -369,7 +369,7 @@ ls .claude/commands/
 
 ### Related Guides Pattern
 
-Lesson 结尾处添加相关指南章节：
+Lesson 结尾处添加相关指南章节:
 
 ```markdown
 ## Related Guides
@@ -385,15 +385,15 @@ Lesson 结尾处添加相关指南章节：
 
 ### Mermaid
 
-所有图表使用 Mermaid。支持的类型：
+所有图表使用 Mermaid。支持的类型:
 
-- `graph TB` / `graph LR` — 架构、层级、流程
-- `sequenceDiagram` — 交互流程
-- `timeline` — 时间序列
+- `graph TB` / `graph LR` -- 架构、层级、流程
+- `sequenceDiagram` -- 交互流程
+- `timeline` -- 时间序列
 
 ### Style Conventions
 
-使用 style blocks 应用一致的颜色：
+使用 style blocks 应用一致的颜色:
 
 ```mermaid
 graph TB
@@ -417,11 +417,11 @@ graph TB
 
 ### Rules
 
-- 使用 `["Label text"]` 作为节点标签（支持特殊字符）
-- 使用空格代替 `<br/>` 作为标签内的换行（GitHub 兼容性）
-- 保持图表简洁（最多 10-12 个节点）
+- 使用 `["Label text"]` 作为节点标签(支持特殊字符)
+- 使用空格代替 `<br/>` 作为标签内的换行(GitHub 兼容性)
+- 保持图表简洁(最多 10-12 个节点)
 - 在图表下方添加简要文字描述以提高可访问性
-- 层级结构使用从上到下（`TB`），工作流使用从左到右（`LR`）
+- 层级结构使用从上到下(`TB`),工作流使用从左到右(`LR`)
 
 ---
 
@@ -429,7 +429,7 @@ graph TB
 
 ### Emoji 使用位置
 
-Emoji **谨慎且有目的地使用** — 仅在特定场景下：
+Emoji **谨慎且有目的地使用** -- 仅在特定场景下:
 
 | 场景 | Emoji | 示例 |
 |------|-------|---------|
@@ -458,15 +458,15 @@ Emoji **谨慎且有目的地使用** — 仅在特定场景下：
 ### Rules
 
 - **正文中永不使用 emoji** 或段落
-- **仅在根 README 的标题中使用 emoji**（不在 lesson README 中）
-- **不要添加装饰性 emoji** — 每个 emoji 都应有意义
+- **仅在根 README 的标题中使用 emoji**(不在 lesson README 中)
+- **不要添加装饰性 emoji** -- 每个 emoji 都应有意义
 - 保持 emoji 使用与上表一致
 
 ---
 
 ## YAML Frontmatter
 
-### Feature Files（Skills、Commands、Agents）
+### Feature Files(Skills、Commands、Agents)
 
 ```yaml
 ---
@@ -505,7 +505,7 @@ agent: Explore                     # Agent type for context: fork
 
 ### Logo Pattern
 
-所有以 logo 开头的文档都使用 `<picture>` 元素以支持深色/浅色模式：
+所有以 logo 开头的文档都使用 `<picture>` 元素以支持深色/浅色模式:
 
 ```html
 <picture>
@@ -516,17 +516,17 @@ agent: Explore                     # Agent type for context: fork
 
 ### Screenshots
 
-- 存储在对应的 lesson 文件夹中（例如 `01-slash-commands/pr-slash-command.png`）
+- 存储在对应的 lesson 文件夹中(例如 `01-slash-commands/pr-slash-command.png`)
 - 使用 kebab-case 文件名
 - 包含描述性 alt text
-- 图表优先使用 SVG，截图使用 PNG
+- 图表优先使用 SVG,截图使用 PNG
 
 ### Rules
 
 - 始终为图片提供 alt text
-- 保持图片文件大小合理（PNG 小于 500KB）
+- 保持图片文件大小合理(PNG 小于 500KB)
 - 图片引用使用相对路径
-- 将图片存储在引用文档所在目录，或使用 `assets/` 存放共享图片
+- 将图片存储在引用文档所在目录,或使用 `assets/` 存放共享图片
 
 ---
 
@@ -534,25 +534,25 @@ agent: Explore                     # Agent type for context: fork
 
 ### Writing Style
 
-- **专业但亲切** — 技术准确但不堆砌术语
-- **主动语态** — "Create a file" 而非 "A file should be created"
-- **直接指令** — "Run this command" 而非 "You might want to run this command"
-- **新手友好** — 假设读者对 Claude Code 新手，但对编程不陌生
+- **专业但亲切** -- 技术准确但不堆砌术语
+- **主动语态** -- "Create a file" 而非 "A file should be created"
+- **直接指令** -- "Run this command" 而非 "You might want to run this command"
+- **新手友好** -- 假设读者对 Claude Code 新手,但对编程不陌生
 
 ### Content Principles
 
 | 原则 | 示例 |
 |-----------|-----------|
-| **Show, don't tell** | 提供可工作的示例，而非抽象描述 |
-| **渐进式复杂性** | 从简单开始，在后续章节增加深度 |
+| **Show, don't tell** | 提供可工作的示例,而非抽象描述 |
+| **渐进式复杂性** | 从简单开始,在后续章节增加深度 |
 | **解释"为什么"** | "Use memory for... because..." 而不仅仅是 "Use memory for..." |
 | **可直接复制粘贴** | 每个代码块粘贴后即可运行 |
-| **真实世界场景** | 使用实际场景，而非刻意构造的例子 |
+| **真实世界场景** | 使用实际场景,而非刻意构造的例子 |
 
 ### Vocabulary
 
-- 使用 "Claude Code"（不用 "Claude CLI" 或 "the tool"）
-- 使用 "skill"（不用 "custom command" — 旧称）
+- 使用 "Claude Code"(不用 "Claude CLI" 或 "the tool")
+- 使用 "skill"(不用 "custom command" -- 旧称)
 - 使用 "lesson" 或 "guide" 指代编号章节
 - 使用 "example" 指代独立的功能文件
 
@@ -560,7 +560,7 @@ agent: Explore                     # Agent type for context: fork
 
 ## Commit Messages
 
-遵循 [Conventional Commits](https://www.conventionalcommits.org/)：
+遵循 [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 type(scope): description
@@ -580,7 +580,7 @@ type(scope): description
 
 ### Scopes
 
-使用 lesson 名称或文件区域作为 scope：
+使用 lesson 名称或文件区域作为 scope:
 
 ```
 feat(slash-commands): Add API documentation generator
@@ -593,7 +593,7 @@ docs(skills): Add comprehensive code review skill
 
 ## Document Metadata Footer
 
-Lesson README 以元数据块结尾：
+Lesson README 以元数据块结尾:
 
 ```markdown
 ---
@@ -602,7 +602,7 @@ Lesson README 以元数据块结尾：
 **Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5
 ```
 
-- 使用月份+年份格式（例如 "March 2026"）
+- 使用月份+年份格式(例如 "March 2026")
 - 功能变更时更新版本
 - 列出所有兼容模型
 
@@ -610,20 +610,20 @@ Lesson README 以元数据块结尾：
 
 ## Checklist for Authors
 
-提交内容之前，请验证：
+提交内容之前,请验证:
 
 - [ ] 文件/文件夹名称使用 kebab-case
-- [ ] 文档以 H1 标题开头（每文件一个）
-- [ ] 标题层级正确（无跳级）
+- [ ] 文档以 H1 标题开头(每文件一个)
+- [ ] 标题层级正确(无跳级)
 - [ ] 所有代码块都有语言标签
 - [ ] 代码示例可直接复制粘贴
 - [ ] 内部链接使用相对路径
 - [ ] 外部链接具有描述性锚文本
 - [ ] 表格格式正确
-- [ ] Emoji 遵循标准集（如果使用的话）
+- [ ] Emoji 遵循标准集(如果使用的话)
 - [ ] Mermaid 图表使用标准调色板
-- [ ] 无敏感信息（API 密钥、凭据）
-- [ ] YAML frontmatter 有效（如适用）
+- [ ] 无敏感信息(API 密钥、凭据)
+- [ ] YAML frontmatter 有效(如适用)
 - [ ] 图片有 alt text
 - [ ] 段落简短且聚焦
 - [ ] 相关指南章节链接到相关 lesson
