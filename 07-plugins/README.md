@@ -40,7 +40,7 @@ sequenceDiagram
     participant SlashCmds as SlashCommands
     participant Subagents as Subagents
     participant MCPServers as MCP 服务器
-    participant Hooks as 钩子
+    participant Hooks as HooksSystem
     participant Tools as ConfiguredTools
 
     User->>Claude: /plugin install pr-review

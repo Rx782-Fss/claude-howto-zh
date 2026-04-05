@@ -244,7 +244,7 @@ sequenceDiagram
     participant User
     participant MainAgent as MainAgent
     participant CodeReviewer as CodeReviewer<br/>子代理
-    participant Context as 独立<br/>上下文窗口
+    participant Context as IsolatedContext
 
     User->>MainAgent: "构建新的认证功能"
     MainAgent->>MainAgent: 分析任务
@@ -2190,7 +2190,7 @@ sequenceDiagram
     participant SlashCmds as SlashCommands
     participant Subagents as Subagents
     participant MCPServers as MCP 服务器
-    participant Hooks as 钩子
+    participant Hooks as HooksSystem
     participant Tools as ConfiguredTools
 
     User->>Claude: /plugin install pr-review
