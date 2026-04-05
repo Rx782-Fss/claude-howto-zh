@@ -374,7 +374,7 @@ graph TD
     A["Claude 会话开始"] --> B["加载 MEMORY.md<br/>（前200行）"]
     B --> C["会话活跃中"]
     C --> D["Claude 发现<br/>模式与洞察"]
-    D --> E{"写入<br/>自动记忆"}
+    D --> E["写入<br/>自动记忆"]
     E -->|通用笔记| F["MEMORY.md"]
     E -->|特定主题| G["debugging.md"]
     E -->|特定主题| H["api-conventions.md"]
