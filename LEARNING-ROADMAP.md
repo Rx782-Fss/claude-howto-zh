@@ -54,23 +54,23 @@
 
 ```mermaid
 graph TD
-    Q["🧭 自评测验<br/>确定你的水平"] --> L1
+    Q["🧭 自评测验 确定你的水平"] --> L1
     Q --> L2
     Q --> L3
 
     subgraph L1["🟢 Level 1: 初学者 — 入门"]
         direction LR
-        A["1A: 首个命令与记忆<br/>Slash Commands + Memory"] --> B["1B: 安全探索<br/>Checkpoints + CLI Basics"]
+        A["1A: 首个命令与记忆 Slash Commands + Memory"] --> B["1B: 安全探索 Checkpoints + CLI Basics"]
     end
 
     subgraph L2["🔵 Level 2: 中级 — 构建工作流"]
         direction LR
-        C["2A: 自动化<br/>Skills + Hooks"] --> D["2B: 集成<br/>MCP + Subagents"]
+        C["2A: 自动化 Skills + Hooks"] --> D["2B: 集成 MCP + Subagents"]
     end
 
     subgraph L3["🔴 Level 3: 高级 — 高手"]
         direction LR
-        E["3A: 高级功能<br/>Planning + Permissions"] --> F["3B: 团队与分发<br/>Plugins + CLI Mastery"]
+        E["3A: 高级功能 Planning + Permissions"] --> F["3B: 团队与分发 Plugins + CLI Mastery"]
     end
 
     L1 --> L2
