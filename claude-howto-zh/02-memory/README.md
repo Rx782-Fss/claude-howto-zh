@@ -259,13 +259,13 @@ Claude 按此顺序搜索记忆文件，较早的位置优先：
 
 ```mermaid
 graph TD
-    A["Managed Policy<br/>/Library/.../ClaudeCode/CLAUDE.md"] -->|highest priority| A2["Managed Drop-ins<br/>managed-settings.d/"]
-    A2 --> B["Project Memory<br/>./CLAUDE.md"]
-    B --> C["Project Rules<br/>./.claude/rules/*.md"]
-    C --> D["User Memory<br/>~/.claude/CLAUDE.md"]
-    D --> E["User Rules<br/>~/.claude/rules/*.md"]
-    E --> F["Local Project Memory<br/>./CLAUDE.local.md"]
-    F --> G["Auto Memory<br/>~/.claude/projects/.../memory/"]
+    A["Managed Policy /Library/.../ClaudeCode/CLAUDE.md"] -->|highest priority| A2["Managed Drop-ins managed-settings.d/"]
+    A2 --> B["Project Memory ./CLAUDE.md"]
+    B --> C["Project Rules ./.claude/rules/*.md"]
+    C --> D["User Memory ~/.claude/CLAUDE.md"]
+    D --> E["User Rules ~/.claude/rules/*.md"]
+    E --> F["Local Project Memory ./CLAUDE.local.md"]
+    F --> G["Auto Memory ~/.claude/projects/.../memory/"]
 
     B -->|imports| H["@docs/architecture.md"]
     H -->|imports| I["@docs/api-standards.md"]
@@ -430,14 +430,14 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A["Claude Session Starts"] --> B["Load MEMORY.md<br/>(first 200 lines)"]
+    A["Claude Session Starts"] --> B["Load MEMORY.md (first 200 lines)"]
     B --> C["Session Active"]
-    C --> D["Claude discovers<br/>patterns & insights"]
-    D --> E{"Write to<br/>auto memory"}
+    C --> D["Claude discovers patterns & insights"]
+    D --> E["Write to auto memory"]
     E -->|General notes| F["MEMORY.md"]
     E -->|Topic-specific| G["debugging.md"]
     E -->|Topic-specific| H["api-conventions.md"]
-    C --> I["On-demand load<br/>topic files"]
+    C --> I["On-demand load topic files"]
     I --> C
 
     style A fill:#e1f5fe,stroke:#333,color:#333
@@ -856,9 +856,9 @@ Added to ./CLAUDE.md:
 
 ```mermaid
 graph LR
-    A["Day 1: User<br/>Conversations"] -->|24 hours| B["Day 2: Memory<br/>Synthesis"]
-    B -->|Automatic| C["Memory Updated<br/>Summarized"]
-    C -->|Loaded in| D["Day 2-N:<br/>New Conversations"]
+    A["Day 1: User Conversations"] -->|24 hours| B["Day 2: Memory Synthesis"]
+    B -->|Automatic| C["Memory Updated Summarized"]
+    C -->|Loaded in| D["Day 2-N: New Conversations"]
     D -->|Add to| E["Memory"]
     E -->|24 hours later| F["Memory Refreshed"]
 ```

@@ -193,7 +193,7 @@ sequenceDiagram
     Claude->>Claude: 加载 Markdown 内容
     Claude->>User: 显示提示词上下文
     User->>Claude: 提供要分析的代码
-    Claude->>CLI: （可能执行脚本）
+    Claude->>CLI: (可能执行脚本)
     CLI-->>Claude: 结果
     Claude->>User: 返回分析结果
 ```
@@ -221,11 +221,11 @@ sequenceDiagram
 
 ```mermaid
 graph TB
-    User["👤 用户"]
-    Main["🎯 主代理<br/>（协调者）"]
-    Reviewer["🔍 代码审查者<br/>子代理"]
-    Tester["✅ 测试工程师<br/>子代理"]
-    Docs["📝 文档编写<br/>子代理"]
+    User[" 用户"]
+    Main[" 主代理 (协调者)"]
+    Reviewer["🔍 代码审查者 子代理"]
+    Tester[" 测试工程师 子代理"]
+    Docs["📝 文档编写 子代理"]
 
     User -->|请求| Main
     Main -->|委托| Reviewer
@@ -243,8 +243,8 @@ graph TB
 sequenceDiagram
     participant User
     participant MainAgent as 主代理
-    participant CodeReviewer as 代码审查者<br/>子代理
-    participant Context as 独立<br/>上下文窗口
+    participant CodeReviewer as 代码审查者 子代理
+    participant Context as 独立 上下文窗口
 
     User->>MainAgent: "构建新的认证功能"
     MainAgent->>MainAgent: 分析任务
@@ -270,7 +270,7 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A["子代理配置"] -->|选项 1| B["继承主线程<br/>的所有工具"]
+    A["子代理配置"] -->|选项 1| B["继承主线程 的所有工具"]
     A -->|选项 2| C["指定单个工具"]
     B -->|包含| B1["文件操作"]
     B -->|包含| B2["Shell 命令"]
@@ -505,10 +505,10 @@ tools: read, write, bash, grep, edit, glob
 
 ```mermaid
 graph TB
-    A["主代理上下文<br/>50,000 tokens"]
-    B["子代理 1 上下文<br/>20,000 tokens"]
-    C["子代理 2 上下文<br/>20,000 tokens"]
-    D["子代理 3 上下文<br/>20,000 tokens"]
+    A["主代理上下文 50,000 tokens"]
+    B["子代理 1 上下文 20,000 tokens"]
+    C["子代理 2 上下文 20,000 tokens"]
+    D["子代理 3 上下文 20,000 tokens"]
 
     A -->|干净状态| B
     A -->|干净状态| C
@@ -568,12 +568,12 @@ Claude Code 从 7 个层级加载记忆，按从高到低的优先级排列：
 
 ```mermaid
 graph TD
-    A["1. 托管策略<br/>企业管理员策略"] --> B["2. 项目记忆<br/>./CLAUDE.md"]
-    B --> C["3. 项目规则<br/>.claude/rules/*.md"]
-    C --> D["4. 用户记忆<br/>~/.claude/CLAUDE.md"]
-    D --> E["5. 用户规则<br/>~/.claude/rules/*.md"]
-    E --> F["6. 本地记忆<br/>.claude/local/CLAUDE.md"]
-    F --> G["7. 自动记忆<br/>自动捕获的偏好设置"]
+    A["1. 托管策略 企业管理员策略"] --> B["2. 项目记忆 ./CLAUDE.md"]
+    B --> C["3. 项目规则 .claude/rules/*.md"]
+    C --> D["4. 用户记忆 ~/.claude/CLAUDE.md"]
+    D --> E["5. 用户规则 ~/.claude/rules/*.md"]
+    E --> F["6. 本地记忆 .claude/local/CLAUDE.md"]
+    F --> G["7. 自动记忆 自动捕获的偏好设置"]
 
     style A fill:#fce4ec,stroke:#333,color:#333
     style B fill:#e1f5fe,stroke:#333,color:#333
@@ -616,14 +616,14 @@ sequenceDiagram
     participant Editor as 文件系统
     participant Memory as CLAUDE.md
 
-    User->>Claude: "记住：使用 async/await"
-    Claude->>User: "保存到哪个记忆文件？"
+    User->>Claude: "记住:使用 async/await"
+    Claude->>User: "保存到哪个记忆文件?"
     User->>Claude: "项目记忆"
     Claude->>Editor: 打开 ~/.claude/settings.json
     Claude->>Memory: 写入 ./CLAUDE.md
     Memory-->>Claude: 文件已保存
     Claude->>Claude: 加载更新的记忆
-    Claude-->>User: "记忆已保存！"
+    Claude-->>User: "记忆已保存!"
 ```
 
 ### 实用示例
@@ -883,9 +883,9 @@ Claude：✅ 记忆已保存！
 
 ```mermaid
 graph LR
-    A["第 1 天：用户<br/>对话"] -->|24 小时| B["第 2 天：记忆<br/>合成"]
-    B -->|自动| C["记忆已更新<br/>摘要"]
-    C -->|加载到| D["第 2-N 天：<br/>新对话"]
+    A["第 1 天:用户 对话"] -->|24 小时| B["第 2 天:记忆 合成"]
+    B -->|自动| C["记忆已更新 摘要"]
+    C -->|加载到| D["第 2-N 天: 新对话"]
     D -->|添加到| E["记忆"]
     E -->|24 小时后| F["记忆刷新"]
 ```
@@ -962,11 +962,11 @@ graph TB
 
 ```mermaid
 graph TB
-    A["Claude"] -->|MCP| B["文件系统<br/>MCP 服务器"]
-    A -->|MCP| C["GitHub<br/>MCP 服务器"]
-    A -->|MCP| D["数据库<br/>MCP 服务器"]
-    A -->|MCP| E["Slack<br/>MCP 服务器"]
-    A -->|MCP| F["Google Docs<br/>MCP 服务器"]
+    A["Claude"] -->|MCP| B["文件系统 MCP 服务器"]
+    A -->|MCP| C["GitHub MCP 服务器"]
+    A -->|MCP| D["数据库 MCP 服务器"]
+    A -->|MCP| E["Slack MCP 服务器"]
+    A -->|MCP| F["Google Docs MCP 服务器"]
 
     B -->|文件 I/O| G["本地文件"]
     C -->|API| H["GitHub 仓库"]
@@ -992,7 +992,7 @@ sequenceDiagram
     Config->>Claude: 激活连接
     Claude->>Service: 测试连接
     Service-->>Claude: 认证成功
-    Claude->>User: ✅ MCP 已连接！
+    Claude->>User:  MCP 已连接!
 ```
 
 ### 可用 MCP 服务器表
@@ -1188,14 +1188,14 @@ WHERE created_at > NOW() - INTERVAL '1 day'
 
 ```mermaid
 graph TD
-    A["需要外部数据？"]
+    A["需要外部数据?"]
     A -->|否| B["使用记忆"]
-    A -->|是| C["是否频繁变化？"]
+    A -->|是| C["是否频繁变化?"]
     C -->|否/很少| B
     C -->|是/经常| D["使用 MCP"]
 
-    B -->|存储| E["偏好<br/>上下文<br/>历史"]
-    D -->|访问| F["实时 API<br/>数据库<br/>服务"]
+    B -->|存储| E["偏好 上下文 历史"]
+    D -->|访问| F["实时 API 数据库 服务"]
 
     style B fill:#e1f5ff
     style D fill:#fff9c4
@@ -1209,14 +1209,14 @@ sequenceDiagram
     participant MCP as MCP 服务器
     participant DB as 数据库
 
-    App->>MCP: 请求："SELECT * FROM users WHERE id=1"
+    App->>MCP: 请求:"SELECT * FROM users WHERE id=1"
     MCP->>DB: 执行查询
     DB-->>MCP: 结果集
     MCP-->>App: 返回解析后的数据
     App->>App: 处理结果
     App->>App: 继续任务
 
-    Note over MCP,DB: 实时访问<br/>无缓存
+    Note over MCP,DB: 实时访问 无缓存
 ```
 
 ---
@@ -2119,10 +2119,10 @@ if __name__ == '__main__':
 graph TD
     A["用户请求"] --> B["Claude 分析"]
     B -->|扫描| C["可用技能"]
-    C -->|元数据检查| D["描述匹配？"]
+    C -->|元数据检查| D["描述匹配?"]
     D -->|是| E["加载 SKILL.md"]
     D -->|否| F["尝试下一个技能"]
-    F -->|还有技能？| D
+    F -->|还有技能?| D
     F -->|没有了| G["使用通用知识"]
     E --> H["提取指令"]
     H --> I["执行技能"]
@@ -2205,7 +2205,7 @@ sequenceDiagram
     Subagents-->>Tools: 就绪
     MCPServers-->>Tools: 就绪
     Hooks-->>Tools: 就绪
-    Tools-->>Claude: 插件已安装 ✅
+    Tools-->>Claude: 插件已安装 
 ```
 
 ### 插件类型与分发
@@ -2414,9 +2414,9 @@ documentation/
 ```mermaid
 graph TB
     A["插件市场"]
-    B["官方<br/>Anthropic"]
-    C["社区<br/>市场"]
-    D["企业<br/>注册中心"]
+    B["官方 Anthropic"]
+    C["社区 市场"]
+    D["企业 注册中心"]
 
     A --> B
     A --> C
@@ -2482,14 +2482,14 @@ graph LR
 
 ```mermaid
 graph TD
-    A["我应该创建插件吗？"]
-    A -->|需要多个组件| B{"多个命令<br/>或子代理<br/>或 MCP？"}
-    B -->|是| C["✅ 创建插件"]
+    A["我应该创建插件吗?"]
+    A -->|需要多个组件| B["多个命令 或子代理 或 MCP?"]
+    B -->|是| C[" 创建插件"]
     B -->|否| D["使用单个功能"]
-    A -->|团队工作流| E{"需要与<br/>团队共享？"}
+    A -->|团队工作流| E["需要与 团队共享?"]
     E -->|是| C
     E -->|否| F["保留为本地设置"]
-    A -->|复杂设置| G{"需要自动<br/>配置？"}
+    A -->|复杂设置| G["需要自动 配置?"]
     G -->|是| C
     G -->|否| D
 ```
@@ -2607,15 +2607,15 @@ graph LR
 graph TB
     Customer["客户邮件"] -->|接收| Router["支持路由器"]
 
-    Router -->|分析| Memory["记忆<br/>客户历史"]
-    Router -->|查询| MCP1["MCP: 客户数据库<br/>过往工单"]
-    Router -->|检查| MCP2["MCP: Slack<br/>团队状态"]
+    Router -->|分析| Memory["记忆 客户历史"]
+    Router -->|查询| MCP1["MCP: 客户数据库 过往工单"]
+    Router -->|检查| MCP2["MCP: Slack 团队状态"]
 
-    Router -->|路由复杂| Sub1["子代理: 技术支持<br/>上下文: 技术问题"]
-    Router -->|路由简单| Sub2["子代理: 计费<br/>上下文: 支付问题"]
-    Router -->|路由紧急| Sub3["子代理: 升级处理<br/>上下文: 优先级处理"]
+    Router -->|路由复杂| Sub1["子代理: 技术支持 上下文: 技术问题"]
+    Router -->|路由简单| Sub2["子代理: 计费 上下文: 支付问题"]
+    Router -->|路由紧急| Sub3["子代理: 升级处理 上下文: 优先级处理"]
 
-    Sub1 -->|格式化| Skill1["技能: 响应生成器<br/>品牌语调一致"]
+    Sub1 -->|格式化| Skill1["技能: 响应生成器 品牌语调一致"]
     Sub2 -->|格式化| Skill2["技能: 响应生成器"]
     Sub3 -->|格式化| Skill3["技能: 响应生成器"]
 
@@ -2623,7 +2623,7 @@ graph TB
     Skill2 -->|生成| Output
     Skill3 -->|生成| Output
 
-    Output -->|发布| MCP3["MCP: Slack<br/>通知团队"]
+    Output -->|发布| MCP3["MCP: Slack 通知团队"]
     Output -->|发送| Reply["客户回复"]
 ```
 
@@ -2686,12 +2686,12 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Memory as 记忆<br/>CLAUDE.md
+    participant Memory as 记忆 CLAUDE.md
     participant MCP as MCP 服务器
     participant Skills as 技能
     participant SubAgent as 子代理
 
-    User->>Claude: 请求："构建认证系统"
+    User->>Claude: 请求:"构建认证系统"
     Claude->>Memory: 加载项目标准
     Memory-->>Claude: 认证标准、团队实践
     Claude->>MCP: 查询 GitHub 获取类似实现
@@ -2711,7 +2711,7 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A["新任务"] --> B{任务类型?}
+    A["新任务"] --> B[任务类型?]
 
     B -->|重复工作流| C["斜杠命令"]
     B -->|需要实时数据| D["MCP 协议"]
@@ -2719,34 +2719,34 @@ graph TD
     B -->|专业子任务| F["子代理"]
     B -->|特定领域工作| G["技能"]
 
-    C --> C1["✅ 团队快捷方式"]
-    D --> D1["✅ 实时 API 访问"]
-    E --> E1["✅ 持久化上下文"]
-    F --> F1["✅ 并行执行"]
-    G --> G1["✅ 自动调用专业知识"]
+    C --> C1[" 团队快捷方式"]
+    D --> D1[" 实时 API 访问"]
+    E --> E1[" 持久化上下文"]
+    F --> F1[" 并行执行"]
+    G --> G1[" 自动调用专业知识"]
 ```
 
 ### 选择决策树
 
 ```mermaid
 graph TD
-    Start["需要扩展 Claude？"]
+    Start["需要扩展 Claude?"]
 
-    Start -->|快速重复任务| A{"手动 or 自动？"}
+    Start -->|快速重复任务| A["手动 or 自动?"]
     A -->|手动| B["斜杠命令"]
     A -->|自动| C["技能"]
 
-    Start -->|需要外部数据| D{"实时？"}
+    Start -->|需要外部数据| D["实时?"]
     D -->|是| E["MCP 协议"]
     D -->|否/跨会话| F["记忆"]
 
-    Start -->|复杂项目| G{"多个角色？"}
+    Start -->|复杂项目| G["多个角色?"]
     G -->|是| H["子代理"]
     G -->|否| I["技能 + 记忆"]
 
     Start -->|长期上下文| J["记忆"]
-    Start -->|团队工作流| K["斜杠命令 +<br/>记忆"]
-    Start -->|全自动化| L["技能 +<br/>子代理 +<br/>MCP"]
+    Start -->|团队工作流| K["斜杠命令 + 记忆"]
+    Start -->|全自动化| L["技能 + 子代理 + MCP"]
 ```
 
 ---
