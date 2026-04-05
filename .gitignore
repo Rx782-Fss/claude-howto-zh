@@ -34,3 +34,7 @@ Thumbs.db
 # === OS 文件 ===
 .DS_Store
 Thumbs.db
+
+# === 本地工具脚本（不需要推送到GitHub） ===
+scripts/
+reference/
