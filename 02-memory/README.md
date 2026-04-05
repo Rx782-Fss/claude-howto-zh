@@ -342,7 +342,7 @@ paths: src/api/**/*.ts
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Editor as 文件系统
+    participant Editor as FileSystem
     participant Memory as CLAUDE.md
 
     User->>Claude: "记住：使用 async/await"

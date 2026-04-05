@@ -67,8 +67,8 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude
-    participant System as 系统
-    participant Skill as 技能
+    participant System as System
+    participant Skill as SkillSystem
 
     User->>Claude: "审查这段代码的安全问题"
     Claude->>System: 检查可用的技能（元数据）

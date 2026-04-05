@@ -316,14 +316,14 @@ graph TD
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant FS as 文件系统
-    participant CLI as Shell/Bash
+    participant FS as FileSystem
+    participant CLI as Shell
 
     User->>Claude: 输入 /optimize
     Claude->>FS: 搜索 .claude/skills/ 和 .claude/commands/
     FS-->>Claude: 返回 optimize/SKILL.md
     Claude->>Claude: 解析 frontmatter
-    Claude->>CLI: 执行 !`command` 替换
+    Claude->>CLI: 执行 !\`command\` 替换
     CLI-->>Claude: 命令输出
     Claude->>Claude: 替换 $ARGUMENTS
     Claude->>User: 处理提示词

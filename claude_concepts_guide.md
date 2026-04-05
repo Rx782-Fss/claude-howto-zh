@@ -184,7 +184,7 @@ tags: documentation, api
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant FS as 文件系统
+    participant FS as FileSystem
     participant CLI as Shell/Bash
 
     User->>Claude: 输入 /optimize
@@ -242,8 +242,8 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant User
-    participant MainAgent as 主代理
-    participant CodeReviewer as 代码审查者<br/>子代理
+    participant MainAgent as MainAgent
+    participant CodeReviewer as CodeReviewer<br/>子代理
     participant Context as 独立<br/>上下文窗口
 
     User->>MainAgent: "构建新的认证功能"
@@ -613,7 +613,7 @@ graph TD
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Editor as 文件系统
+    participant Editor as FileSystem
     participant Memory as CLAUDE.md
 
     User->>Claude: "记住：使用 async/await"
@@ -981,8 +981,8 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Config as 配置文件
-    participant Service as 外部服务
+    participant Config as Config文件
+    participant Service as ExternalService
 
     User->>Claude: 输入 /mcp
     Claude->>Claude: 列出可用 MCP 服务器
@@ -1207,7 +1207,7 @@ graph TD
 sequenceDiagram
     participant App as Claude
     participant MCP as MCP 服务器
-    participant DB as 数据库
+    participant DB as Database
 
     App->>MCP: 请求："SELECT * FROM users WHERE id=1"
     MCP->>DB: 执行查询
@@ -1251,8 +1251,8 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude
-    participant System as 系统
-    participant Skill as 技能
+    participant System as System
+    participant Skill as SkillSystem
 
     User->>Claude: "创建 Excel 报告"
     Claude->>System: 扫描可用技能
@@ -2185,13 +2185,13 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Plugin as 插件市场
-    participant Install as 安装
-    participant SlashCmds as 斜杠命令
-    participant Subagents as 子代理
+    participant Plugin as Plugin市场
+    participant Install as Installer
+    participant SlashCmds as SlashCommands
+    participant Subagents as Subagents
     participant MCPServers as MCP 服务器
     participant Hooks as 钩子
-    participant Tools as 已配置工具
+    participant Tools as ConfiguredTools
 
     User->>Claude: /plugin install pr-review
     Claude->>Plugin: 下载插件清单
@@ -2686,10 +2686,10 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Memory as 记忆<br/>CLAUDE.md
+    participant Memory as Memory<br/>CLAUDE.md
     participant MCP as MCP 服务器
-    participant Skills as 技能
-    participant SubAgent as 子代理
+    participant Skills as SkillSystem
+    participant SubAgent as Subagents
 
     User->>Claude: 请求："构建认证系统"
     Claude->>Memory: 加载项目标准
