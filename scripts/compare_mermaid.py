@@ -65,13 +65,17 @@ def analyze_mermaid_structure(block):
         r'(\w+)\s*--\|.*?\|\s*(\w+)',
         r'(\w+)\s*-\.\|.*?\|\s*(\w+)',
         r'(\w+)\s*->\s*(\w+)',
+        r'(\w+)\s*->>\s*(\w+)',
+        r'(\w+)\s*-->>\s*(\w+)',
         r'(\w+)\s*==>|.*?\|==>(\w+)',
         r'(\w+)\s*===\s*(\w+)',
     ]
-    
+
     for line in lines[1:]:
         line = line.strip()
-        if '-->' in line or '->' in line or '-.' in line or '==>' in line or '===' in line:
+        if not line or line.startswith('%%'):
+            continue
+        if '-->' in line or '->' in line or '-.' in line or '==>' in line or '===' in line or '->>' in line or '-->>' in line:
             for pattern in conn_patterns:
                 match = re.search(pattern, line)
                 if match:
