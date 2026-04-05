@@ -1,0 +1,54 @@
+```mermaid
+graph TB
+
+    A["Plugin Marketplace"]
+
+    B["Official<br/>anthropics/claude-plugins-official"]
+
+    C["Community<br/>Marketplace"]
+
+    D["Enterprise<br/>Private Registry"]
+
+
+
+    A --> B
+
+    A --> C
+
+    A --> D
+
+
+
+    B -->|Categories| B1["Development"]
+
+    B -->|Categories| B2["DevOps"]
+
+    B -->|Categories| B3["Documentation"]
+
+
+
+    C -->|Search| C1["DevOps Automation"]
+
+    C -->|Search| C2["Mobile Dev"]
+
+    C -->|Search| C3["Data Science"]
+
+
+
+    D -->|Internal| D1["Company Standards"]
+
+    D -->|Internal| D2["Legacy Systems"]
+
+    D -->|Internal| D3["Compliance"]
+
+
+
+    style A fill:#e1f5fe,stroke:#333,color:#333
+
+    style B fill:#e8f5e9,stroke:#333,color:#333
+
+    style C fill:#f3e5f5,stroke:#333,color:#333
+
+    style D fill:#fff3e0,stroke:#333,color:#333
+
+```

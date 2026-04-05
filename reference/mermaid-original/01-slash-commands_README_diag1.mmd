@@ -1,0 +1,26 @@
+```mermaid
+graph TD
+
+    A["User Input: /command-name"] --> B{"Command Type?"}
+
+    B -->|Built-in| C["Execute Built-in"]
+
+    B -->|Skill| D["Load SKILL.md"]
+
+    B -->|Plugin| E["Load Plugin Command"]
+
+    B -->|MCP| F["Execute MCP Prompt"]
+
+
+
+    D --> G["Parse Frontmatter"]
+
+    G --> H["Substitute Variables"]
+
+    H --> I["Execute Shell Commands"]
+
+    I --> J["Send to Claude"]
+
+    J --> K["Return Results"]
+
+```

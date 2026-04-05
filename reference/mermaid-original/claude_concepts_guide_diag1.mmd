@@ -1,0 +1,14 @@
+```mermaid
+graph TD
+
+    A["User Input: /command-name"] -->|Triggers| B["Search .claude/commands/"]
+
+    B -->|Finds| C["command-name.md"]
+
+    C -->|Loads| D["Markdown Content"]
+
+    D -->|Executes| E["Claude Processes Prompt"]
+
+    E -->|Returns| F["Result in Context"]
+
+```

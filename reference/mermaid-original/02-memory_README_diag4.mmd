@@ -1,0 +1,42 @@
+```mermaid
+graph TD
+
+    A["Claude Session Starts"] --> B["Load MEMORY.md<br/>(first 200 lines)"]
+
+    B --> C["Session Active"]
+
+    C --> D["Claude discovers<br/>patterns & insights"]
+
+    D --> E{"Write to<br/>auto memory"}
+
+    E -->|General notes| F["MEMORY.md"]
+
+    E -->|Topic-specific| G["debugging.md"]
+
+    E -->|Topic-specific| H["api-conventions.md"]
+
+    C --> I["On-demand load<br/>topic files"]
+
+    I --> C
+
+
+
+    style A fill:#e1f5fe,stroke:#333,color:#333
+
+    style B fill:#e1f5fe,stroke:#333,color:#333
+
+    style C fill:#e8f5e9,stroke:#333,color:#333
+
+    style D fill:#f3e5f5,stroke:#333,color:#333
+
+    style E fill:#fff3e0,stroke:#333,color:#333
+
+    style F fill:#fce4ec,stroke:#333,color:#333
+
+    style G fill:#fce4ec,stroke:#333,color:#333
+
+    style H fill:#fce4ec,stroke:#333,color:#333
+
+    style I fill:#f3e5f5,stroke:#333,color:#333
+
+```

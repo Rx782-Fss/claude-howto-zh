@@ -1,0 +1,24 @@
+```mermaid
+graph TD
+
+    A["User Request"] --> B["Claude Analyzes"]
+
+    B -->|Scans| C["Available Skills"]
+
+    C -->|Metadata check| D["Skill Description Match?"]
+
+    D -->|Yes| E["Load SKILL.md"]
+
+    D -->|No| F["Try next skill"]
+
+    F -->|More skills?| D
+
+    F -->|No more| G["Use general knowledge"]
+
+    E --> H["Extract Instructions"]
+
+    H --> I["Execute Skill"]
+
+    I --> J["Return Results"]
+
+```

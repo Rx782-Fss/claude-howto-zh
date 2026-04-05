@@ -1,0 +1,38 @@
+```mermaid
+graph TD
+
+    Start["Need to extend Claude?"]
+
+
+
+    Start -->|Quick repeated task| A{"Manual or Auto?"}
+
+    A -->|Manual| B["Slash Command"]
+
+    A -->|Auto| C["Skill"]
+
+
+
+    Start -->|Need external data| D{"Real-time?"}
+
+    D -->|Yes| E["MCP Protocol"]
+
+    D -->|No/Cross-session| F["Memory"]
+
+
+
+    Start -->|Complex project| G{"Multiple roles?"}
+
+    G -->|Yes| H["Subagents"]
+
+    G -->|No| I["Skills + Memory"]
+
+
+
+    Start -->|Long-term context| J["Memory"]
+
+    Start -->|Team workflow| K["Slash Command +<br/>Memory"]
+
+    Start -->|Full automation| L["Skills +<br/>Subagents +<br/>MCP"]
+
+```

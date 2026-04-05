@@ -1,0 +1,46 @@
+```mermaid
+sequenceDiagram
+
+    participant User
+
+    participant Claude as Claude Code
+
+    participant Memory as Memory<br/>CLAUDE.md
+
+    participant MCP as MCP Servers
+
+    participant Skills as Skills
+
+    participant SubAgent as Subagents
+
+
+
+    User->>Claude: Request: "Build auth system"
+
+    Claude->>Memory: Load project standards
+
+    Memory-->>Claude: Auth standards, team practices
+
+    Claude->>MCP: Query GitHub for similar implementations
+
+    MCP-->>Claude: Code examples, best practices
+
+    Claude->>Skills: Detect matching Skills
+
+    Skills-->>Claude: Security Review Skill + Testing Skill
+
+    Claude->>SubAgent: Delegate implementation
+
+    SubAgent->>SubAgent: Build feature
+
+    Claude->>Skills: Apply Security Review Skill
+
+    Skills-->>Claude: Security checklist results
+
+    Claude->>SubAgent: Delegate testing
+
+    SubAgent-->>Claude: Test results
+
+    Claude->>User: Complete system delivered
+
+```

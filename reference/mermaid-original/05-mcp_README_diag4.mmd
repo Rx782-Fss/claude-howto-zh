@@ -1,0 +1,34 @@
+```mermaid
+graph TD
+
+    A["Need external data?"]
+
+    A -->|No| B["Use Memory"]
+
+    A -->|Yes| C["Does it change frequently?"]
+
+    C -->|No/Rarely| B
+
+    C -->|Yes/Often| D["Use MCP"]
+
+
+
+    B -->|Stores| E["Preferences<br/>Context<br/>History"]
+
+    D -->|Accesses| F["Live APIs<br/>Databases<br/>Services"]
+
+
+
+    style A fill:#fff3e0,stroke:#333,color:#333
+
+    style B fill:#e1f5fe,stroke:#333,color:#333
+
+    style C fill:#fff3e0,stroke:#333,color:#333
+
+    style D fill:#f3e5f5,stroke:#333,color:#333
+
+    style E fill:#e8f5e9,stroke:#333,color:#333
+
+    style F fill:#e8f5e9,stroke:#333,color:#333
+
+```

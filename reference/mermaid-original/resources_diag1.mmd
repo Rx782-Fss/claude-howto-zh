@@ -1,0 +1,64 @@
+```mermaid
+graph TD
+
+    A[Start New Repository] --> B[Initialize Repository Structure]
+
+    B --> C[Create README, LICENSE, .gitignore]
+
+    C --> D[Create CLAUDE.md]
+
+    D --> E[Document Architecture & Guidelines]
+
+    E --> F[Install & Link Claude Code]
+
+
+
+    F --> G[Enter Plan Mode]
+
+    G --> H[Draft Feature Specification]
+
+    H --> I[Get Architecture Suggestions]
+
+    I --> J[Define Components & Modules]
+
+
+
+    J --> K[Implement Feature Chunk]
+
+    K --> L[Generate Code with Claude]
+
+    L --> M[Request Unit Tests]
+
+    M --> N[Review & Refactor]
+
+    N --> O{More Features?}
+
+    O -->|Yes| K
+
+    O -->|No| P[Update Task List in CLAUDE.md]
+
+
+
+    P --> Q[Setup CI/CD Pipeline]
+
+    Q --> R[Scaffold GitHub Actions]
+
+    R --> S[Create Deployment Scripts]
+
+    S --> T[Test Automation]
+
+    T --> U[Repository Ready]
+
+
+
+    style A fill:#e1f5ff
+
+    style G fill:#fff4e1
+
+    style K fill:#f0ffe1
+
+    style Q fill:#ffe1f5
+
+    style U fill:#90EE90
+
+```

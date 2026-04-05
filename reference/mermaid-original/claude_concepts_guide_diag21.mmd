@@ -1,0 +1,40 @@
+```mermaid
+graph TB
+
+    A["Extending Claude"]
+
+    B["Slash Commands"]
+
+    C["Subagents"]
+
+    D["Memory"]
+
+    E["MCP"]
+
+    F["Skills"]
+
+
+
+    A --> B
+
+    A --> C
+
+    A --> D
+
+    A --> E
+
+    A --> F
+
+
+
+    B -->|User-invoked| G["Quick shortcuts"]
+
+    C -->|Auto-delegated| H["Isolated contexts"]
+
+    D -->|Persistent| I["Cross-session context"]
+
+    E -->|Real-time| J["External data access"]
+
+    F -->|Auto-invoked| K["Autonomous execution"]
+
+```

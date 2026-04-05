@@ -1,0 +1,50 @@
+```mermaid
+sequenceDiagram
+
+    participant User
+
+    participant Claude as Claude Code
+
+    participant Plugin as Plugin Marketplace
+
+    participant Install as Installation
+
+    participant SlashCmds as Slash Commands
+
+    participant Subagents
+
+    participant MCPServers as MCP Servers
+
+    participant Hooks
+
+    participant Tools as Configured Tools
+
+
+
+    User->>Claude: /plugin install pr-review
+
+    Claude->>Plugin: Download plugin manifest
+
+    Plugin-->>Claude: Return plugin definition
+
+    Claude->>Install: Extract components
+
+    Install->>SlashCmds: Configure
+
+    Install->>Subagents: Configure
+
+    Install->>MCPServers: Configure
+
+    Install->>Hooks: Configure
+
+    SlashCmds-->>Tools: Ready to use
+
+    Subagents-->>Tools: Ready to use
+
+    MCPServers-->>Tools: Ready to use
+
+    Hooks-->>Tools: Ready to use
+
+    Tools-->>Claude: Plugin installed ✅
+
+```

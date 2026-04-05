@@ -1,0 +1,34 @@
+```mermaid
+graph LR
+
+    A["Session Start"] -->|Load| B["Memory (CLAUDE.md)"]
+
+    B -->|Discover| C["Available Skills"]
+
+    C -->|Register| D["Slash Commands"]
+
+    D -->|Connect| E["MCP Servers"]
+
+    E -->|Ready| F["User Interaction"]
+
+
+
+    F -->|Type /cmd| G["Slash Command"]
+
+    F -->|Request| H["Skill Auto-Invoke"]
+
+    F -->|Query| I["MCP Data"]
+
+    F -->|Complex task| J["Delegate to Subagent"]
+
+
+
+    G -->|Uses| B
+
+    H -->|Uses| B
+
+    I -->|Uses| B
+
+    J -->|Uses| B
+
+```

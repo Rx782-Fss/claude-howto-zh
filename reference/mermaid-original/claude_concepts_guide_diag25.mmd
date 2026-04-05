@@ -1,0 +1,26 @@
+```mermaid
+graph LR
+
+    A["Discover"] -->|Browse| B["Marketplace"]
+
+    B -->|Select| C["Plugin Page"]
+
+    C -->|View| D["Components"]
+
+    D -->|Install| E["/plugin install"]
+
+    E -->|Extract| F["Configure"]
+
+    F -->|Activate| G["Use"]
+
+    G -->|Check| H["Update"]
+
+    H -->|Available| G
+
+    G -->|Done| I["Disable"]
+
+    I -->|Later| J["Enable"]
+
+    J -->|Back| G
+
+```

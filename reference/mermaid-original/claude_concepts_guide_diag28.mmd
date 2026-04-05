@@ -1,0 +1,44 @@
+```mermaid
+graph TB
+
+    User["Customer Email"] -->|Receives| Router["Support Router"]
+
+
+
+    Router -->|Analyze| Memory["Memory<br/>Customer history"]
+
+    Router -->|Lookup| MCP1["MCP: Customer DB<br/>Previous tickets"]
+
+    Router -->|Check| MCP2["MCP: Slack<br/>Team status"]
+
+
+
+    Router -->|Route Complex| Sub1["Subagent: Tech Support<br/>Context: Technical issues"]
+
+    Router -->|Route Simple| Sub2["Subagent: Billing<br/>Context: Payment issues"]
+
+    Router -->|Route Urgent| Sub3["Subagent: Escalation<br/>Context: Priority handling"]
+
+
+
+    Sub1 -->|Format| Skill1["Skill: Response Generator<br/>Brand voice maintained"]
+
+    Sub2 -->|Format| Skill2["Skill: Response Generator"]
+
+    Sub3 -->|Format| Skill3["Skill: Response Generator"]
+
+
+
+    Skill1 -->|Generate| Output["Formatted Response"]
+
+    Skill2 -->|Generate| Output
+
+    Skill3 -->|Generate| Output
+
+
+
+    Output -->|Post| MCP3["MCP: Slack<br/>Notify team"]
+
+    Output -->|Send| Reply["Customer Reply"]
+
+```

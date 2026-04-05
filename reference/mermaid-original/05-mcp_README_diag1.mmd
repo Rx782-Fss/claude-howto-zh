@@ -1,0 +1,38 @@
+```mermaid
+graph TB
+
+    A["Claude"]
+
+    B["MCP Server"]
+
+    C["External Service"]
+
+
+
+    A -->|Request: list_issues| B
+
+    B -->|Query| C
+
+    C -->|Data| B
+
+    B -->|Response| A
+
+
+
+    A -->|Request: create_issue| B
+
+    B -->|Action| C
+
+    C -->|Result| B
+
+    B -->|Response| A
+
+
+
+    style A fill:#e1f5fe,stroke:#333,color:#333
+
+    style B fill:#f3e5f5,stroke:#333,color:#333
+
+    style C fill:#e8f5e9,stroke:#333,color:#333
+
+```

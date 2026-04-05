@@ -1,0 +1,44 @@
+```mermaid
+graph TB
+
+    subgraph "Level 1: Metadata (Always Loaded)"
+
+        A["YAML Frontmatter"]
+
+        A1["~100 tokens per skill"]
+
+        A2["name + description"]
+
+    end
+
+
+
+    subgraph "Level 2: Instructions (When Triggered)"
+
+        B["SKILL.md Body"]
+
+        B1["Under 5k tokens"]
+
+        B2["Workflows & guidance"]
+
+    end
+
+
+
+    subgraph "Level 3: Resources (As Needed)"
+
+        C["Bundled Files"]
+
+        C1["Effectively unlimited"]
+
+        C2["Scripts, templates, docs"]
+
+    end
+
+
+
+    A --> B
+
+    B --> C
+
+```

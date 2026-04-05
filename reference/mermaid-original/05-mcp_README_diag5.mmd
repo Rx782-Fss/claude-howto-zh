@@ -1,0 +1,28 @@
+```mermaid
+sequenceDiagram
+
+    participant App as Claude
+
+    participant MCP as MCP Server
+
+    participant DB as Database
+
+
+
+    App->>MCP: Request: "SELECT * FROM users WHERE id=1"
+
+    MCP->>DB: Execute query
+
+    DB-->>MCP: Result set
+
+    MCP-->>App: Return parsed data
+
+    App->>App: Process result
+
+    App->>App: Continue task
+
+
+
+    Note over MCP,DB: Real-time access<br/>No caching
+
+```

@@ -1,0 +1,32 @@
+```mermaid
+sequenceDiagram
+
+    participant User
+
+    participant Claude as Claude Code
+
+    participant FS as File System
+
+    participant CLI as Shell/Bash
+
+
+
+    User->>Claude: Types /optimize
+
+    Claude->>FS: Searches .claude/commands/
+
+    FS-->>Claude: Returns optimize.md
+
+    Claude->>Claude: Loads Markdown content
+
+    Claude->>User: Displays prompt context
+
+    User->>Claude: Provides code to analyze
+
+    Claude->>CLI: (May execute scripts)
+
+    CLI-->>Claude: Results
+
+    Claude->>User: Returns analysis
+
+```

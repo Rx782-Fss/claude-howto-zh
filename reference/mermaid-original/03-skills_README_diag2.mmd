@@ -1,0 +1,36 @@
+```mermaid
+sequenceDiagram
+
+    participant User
+
+    participant Claude as Claude
+
+    participant System as System
+
+    participant Skill as Skill
+
+
+
+    User->>Claude: "Review this code for security issues"
+
+    Claude->>System: Check available skills (metadata)
+
+    System-->>Claude: Skill descriptions loaded at startup
+
+    Claude->>Claude: Match request to skill description
+
+    Claude->>Skill: bash: read code-review/SKILL.md
+
+    Skill-->>Claude: Instructions loaded into context
+
+    Claude->>Claude: Determine: Need templates?
+
+    Claude->>Skill: bash: read templates/checklist.md
+
+    Skill-->>Claude: Template loaded
+
+    Claude->>Claude: Execute skill instructions
+
+    Claude->>User: Comprehensive code review
+
+```
