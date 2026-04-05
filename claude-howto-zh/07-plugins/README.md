@@ -33,15 +33,15 @@ graph TB
 
 ```mermaid
 sequenceDiagram
-    participant User as 用户
+    participant User as User
     participant Claude as Claude Code
-    participant Plugin as 插件市场
-    participant Install as 安装程序
-    participant SlashCmds as 斜杠命令
-    participant Subagents as 子代理
+    participant Plugin as PluginMarket
+    participant Install as Installer程序
+    participant SlashCmds as SlashCommands
+    participant Subagents as Subagent
     participant MCPServers as MCP 服务器
-    participant Hooks as 钩子
-    participant Tools as 已配置工具
+    participant Hooks as Hooks
+    participant Tools as Tools
 
     User->>Claude: /plugin install pr-review
     Claude->>Plugin: 下载插件清单

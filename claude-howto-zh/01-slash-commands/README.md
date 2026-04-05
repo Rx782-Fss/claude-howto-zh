@@ -316,7 +316,7 @@ graph TD
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant FS as 文件系统
+    participant FS as FileSystem
     participant CLI as Shell/Bash
 
     User->>Claude: 输入 /optimize
