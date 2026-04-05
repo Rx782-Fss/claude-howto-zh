@@ -36,9 +36,6 @@ graph TB
     C -->|Result| B
     B -->|Response| A
 
-    style A fill:#e1f5fe,stroke:#333,color:#333
-    style B fill:#f3e5f5,stroke:#333,color:#333
-    style C fill:#e8f5e9,stroke:#333,color:#333
 ```
 
 ## MCP 生态系统
@@ -57,17 +54,6 @@ graph TB
     E -->|Messages| J["Slack Workspace"]
     F -->|Docs| K["Google Drive"]
 
-    style A fill:#e1f5fe,stroke:#333,color:#333
-    style B fill:#f3e5f5,stroke:#333,color:#333
-    style C fill:#f3e5f5,stroke:#333,color:#333
-    style D fill:#f3e5f5,stroke:#333,color:#333
-    style E fill:#f3e5f5,stroke:#333,color:#333
-    style F fill:#f3e5f5,stroke:#333,color:#333
-    style G fill:#e8f5e9,stroke:#333,color:#333
-    style H fill:#e8f5e9,stroke:#333,color:#333
-    style I fill:#e8f5e9,stroke:#333,color:#333
-    style J fill:#e8f5e9,stroke:#333,color:#333
-    style K fill:#e8f5e9,stroke:#333,color:#333
 ```
 
 ## MCP 安装方法
@@ -565,12 +551,6 @@ graph TD
     B -->|Stores| E["Preferences Context History"]
     D -->|Accesses| F["Live APIs Databases Services"]
 
-    style A fill:#fff3e0,stroke:#333,color:#333
-    style B fill:#e1f5fe,stroke:#333,color:#333
-    style C fill:#fff3e0,stroke:#333,color:#333
-    style D fill:#f3e5f5,stroke:#333,color:#333
-    style E fill:#e8f5e9,stroke:#333,color:#333
-    style F fill:#e8f5e9,stroke:#333,color:#333
 ```
 
 ## 请求/响应模式
@@ -751,8 +731,6 @@ graph LR
     A -->|"Tool Call: updateRecord (re-sends full transcript)"| B
     B -->|"Confirmation"| A
 
-    style A fill:#ffcdd2,stroke:#333,color:#333
-    style B fill:#f3e5f5,stroke:#333,color:#333
 ```
 
 ### 解决方案:作为代码 API 的 MCP 工具
@@ -766,9 +744,6 @@ graph LR
     C -->|"Data stays in execution env"| B
     B -->|"Only final result (minimal tokens)"| A
 
-    style A fill:#c8e6c9,stroke:#333,color:#333
-    style B fill:#e1f5fe,stroke:#333,color:#333
-    style C fill:#f3e5f5,stroke:#333,color:#333
 ```
 
 #### 工作原理

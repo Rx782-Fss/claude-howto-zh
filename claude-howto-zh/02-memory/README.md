@@ -270,16 +270,6 @@ graph TD
     B -->|imports| H["@docs/architecture.md"]
     H -->|imports| I["@docs/api-standards.md"]
 
-    style A fill:#fce4ec,stroke:#333,color:#333
-    style A2 fill:#fce4ec,stroke:#333,color:#333
-    style B fill:#e1f5fe,stroke:#333,color:#333
-    style C fill:#e1f5fe,stroke:#333,color:#333
-    style D fill:#f3e5f5,stroke:#333,color:#333
-    style E fill:#f3e5f5,stroke:#333,color:#333
-    style F fill:#e8f5e9,stroke:#333,color:#333
-    style G fill:#fff3e0,stroke:#333,color:#333
-    style H fill:#e1f5fe,stroke:#333,color:#333
-    style I fill:#e1f5fe,stroke:#333,color:#333
 ```
 
 ## 使用 `claudeMdExcludes` 排除 CLAUDE.md 文件
@@ -440,15 +430,6 @@ graph TD
     C --> I["On-demand load topic files"]
     I --> C
 
-    style A fill:#e1f5fe,stroke:#333,color:#333
-    style B fill:#e1f5fe,stroke:#333,color:#333
-    style C fill:#e8f5e9,stroke:#333,color:#333
-    style D fill:#f3e5f5,stroke:#333,color:#333
-    style E fill:#fff3e0,stroke:#333,color:#333
-    style F fill:#fce4ec,stroke:#333,color:#333
-    style G fill:#fce4ec,stroke:#333,color:#333
-    style H fill:#fce4ec,stroke:#333,color:#333
-    style I fill:#f3e5e9,stroke:#333,color:#333
 ```
 
 ### 自动记忆目录结构

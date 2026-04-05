@@ -165,7 +165,6 @@ _**全部技巧**_
 | **Chrome Integration(浏览器集成)** | 使用无头 Chromium 进行浏览器自动化 | [Advanced Features(高级功能)](09-advanced-features/) |
 | **Keyboard Customization(键盘定制)** | 定制快捷键,包括组合键序列 | [Advanced Features(高级功能)](09-advanced-features/) |
 
-
 ```mermaid
 graph TD
 
@@ -179,8 +178,6 @@ graph TD
 
     E --> F[Install & Link Claude Code]
 
-
-
     F --> G[Enter Plan Mode]
 
     G --> H[Draft Feature Specification]
@@ -188,8 +185,6 @@ graph TD
     H --> I[Get Architecture Suggestions]
 
     I --> J[Define Components & Modules]
-
-
 
     J --> K[Implement Feature Chunk]
 
@@ -205,8 +200,6 @@ graph TD
 
     O -->|No| P[Update Task List in CLAUDE.md]
 
-
-
     P --> Q[Setup CI/CD Pipeline]
 
     Q --> R[Scaffold GitHub Actions]
@@ -217,21 +210,7 @@ graph TD
 
     T --> U[Repository Ready]
 
-
-
-    style A fill:#e1f5ff
-
-    style G fill:#fff4e1
-
-    style K fill:#f0ffe1
-
-    style Q fill:#ffe1f5
-
-    style U fill:#90EE90
-
 ```
-
-
 
 ```mermaid
 graph TD
@@ -250,8 +229,6 @@ graph TD
 
     F --> G
 
-
-
     G --> H[Identify Task Type]
 
     H --> I[Task Category]
@@ -264,8 +241,6 @@ graph TD
 
     I -->|Migration| M[Create Migration Plan]
 
-
-
     J --> N[Set Explicit Boundaries]
 
     K --> N
@@ -273,8 +248,6 @@ graph TD
     L --> N
 
     M --> N
-
-
 
     N --> O[Multiple Features]
 
@@ -288,8 +261,6 @@ graph TD
 
     Q --> S
 
-
-
     S --> T[Setup Team Automation]
 
     T --> U[Sync .claude/commands/]
@@ -300,27 +271,11 @@ graph TD
 
     W --> X[Share Session Context with Team]
 
-
-
     X --> Y[More Tasks]
 
     Y -->|Yes| H
 
     Y -->|No| Z[Workflow Complete]
-
-
-
-    style A fill:#e1f5ff
-
-    style C fill:#ffecec
-
-    style D fill:#fff4e1
-
-    style P fill:#f0ffe1
-
-    style T fill:#ffe1f5
-
-    style Z fill:#90EE90
 
 ```
 

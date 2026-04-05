@@ -27,8 +27,6 @@ graph TD
     A["选择课程"] --> B["选择时机:课前/课中/课后"]
     B --> C["5 轮回答 10 道题"]
     C --> D["评分并查看反馈"]
-    style A fill:#4CAF50,color:#fff
-    style D fill:#2196F3,color:#fff
 ```
 
 ## 使用方法

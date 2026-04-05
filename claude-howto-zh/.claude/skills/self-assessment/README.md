@@ -34,8 +34,6 @@ graph TD
     B --> C["计算各主题熟练度"]
     C --> D["生成个性化学习路径"]
     D --> E["开始学习或深入钻研"]
-    style A fill:#4CAF50,color:#fff
-    style E fill:#2196F3,color:#fff
 ```
 
 ## 评估模式

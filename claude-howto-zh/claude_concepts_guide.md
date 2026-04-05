@@ -518,10 +518,6 @@ graph TB
     C -->|仅结果| A
     D -->|仅结果| A
 
-    style A fill:#e1f5ff
-    style B fill:#fff9c4
-    style C fill:#fff9c4
-    style D fill:#fff9c4
 ```
 
 ### 何时使用子代理
@@ -568,20 +564,13 @@ Claude Code 从 7 个层级加载记忆,按从高到低的优先级排列:
 
 ```mermaid
 graph TD
-    A["1. 托管策略 企业管理员策略"] --> B["2. 项目记忆 ./CLAUDE.md"]
-    B --> C["3. 项目规则 .claude/rules/*.md"]
-    C --> D["4. 用户记忆 ~/.claude/CLAUDE.md"]
-    D --> E["5. 用户规则 ~/.claude/rules/*.md"]
-    E --> F["6. 本地记忆 .claude/local/CLAUDE.md"]
-    F --> G["7. 自动记忆 自动捕获的偏好设置"]
+    A["① 托管策略 企业管理员策略"] --> B["② 项目记忆 ./CLAUDE.md"]
+    B --> C["③ 项目规则 .claude/rules/*.md"]
+    C --> D["④ 用户记忆 ~/.claude/CLAUDE.md"]
+    D --> E["⑤ 用户规则 ~/.claude/rules/*.md"]
+    E --> F["⑥ 本地记忆 .claude/local/CLAUDE.md"]
+    F --> G["⑦ 自动记忆 自动捕获的偏好设置"]
 
-    style A fill:#fce4ec,stroke:#333,color:#333
-    style B fill:#e1f5fe,stroke:#333,color:#333
-    style C fill:#e1f5fe,stroke:#333,color:#333
-    style D fill:#f3e5f5,stroke:#333,color:#333
-    style E fill:#f3e5f5,stroke:#333,color:#333
-    style F fill:#e8f5e9,stroke:#333,color:#333
-    style G fill:#fff3e0,stroke:#333,color:#333
 ```
 
 ### 记忆位置表
@@ -1197,8 +1186,6 @@ graph TD
     B -->|存储| E["偏好 上下文 历史"]
     D -->|访问| F["实时 API 数据库 服务"]
 
-    style B fill:#e1f5ff
-    style D fill:#fff9c4
 ```
 
 ### 请求/响应模式
@@ -1539,7 +1526,6 @@ class ComplexityAnalyzer:
             'avg_line_length': round(sum(len(l) for l in self.lines) / len(self.lines), 2) if self.lines else 0
         }
 
-
 def compare_files(before_file: str, after_file: str) -> None:
     """比较两个代码版本之间的复杂度指标。"""
 
@@ -1600,7 +1586,6 @@ def compare_files(before_file: str, after_file: str) -> None:
         print("  ➡️  Complexity unchanged")
 
     print("=" * 60)
-
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
@@ -2086,7 +2071,6 @@ class APIDocExtractor(ast.NodeVisitor):
             return ast.unparse(node.returns)
         return "Any"
 
-
 def generate_markdown_docs(endpoints: List[Dict]) -> str:
     """从端点生成 Markdown 文档。"""
     docs = "# API Documentation\n\n"
@@ -2099,7 +2083,6 @@ def generate_markdown_docs(endpoints: List[Dict]) -> str:
         docs += "---\n\n"
 
     return docs
-
 
 if __name__ == '__main__':
     import sys

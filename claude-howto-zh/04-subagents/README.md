@@ -450,10 +450,6 @@ graph LR
     B -->|updates| M
     M -->|loads into| C["Subagent Session 3"]
 
-    style A fill:#e1f5fe,stroke:#333,color:#333
-    style B fill:#e1f5fe,stroke:#333,color:#333
-    style C fill:#e1f5fe,stroke:#333,color:#333
-    style M fill:#f3e5f5,stroke:#333,color:#333
 ```
 
 ---
@@ -515,11 +511,6 @@ graph TB
     WT -->|no changes| Clean["Auto-cleaned"]
     WT -->|has changes| Return["Returns worktree path and branch"]
 
-    style Main fill:#e1f5fe,stroke:#333,color:#333
-    style Sub fill:#f3e5f5,stroke:#333,color:#333
-    style WT fill:#e8f5e9,stroke:#333,color:#333
-    style Clean fill:#fff3e0,stroke:#333,color:#333
-    style Return fill:#fff3e0,stroke:#333,color:#333
 ```
 
 - 子代理在自己的 git worktree 和单独分支上运行
@@ -667,12 +658,6 @@ graph TB
     T2 -->|updates status| TaskList
     T3 -->|updates status| TaskList
 
-    style Lead fill:#e1f5fe,stroke:#333,color:#333
-    style TaskList fill:#fff9c4,stroke:#333,color:#333
-    style Mailbox fill:#f3e5f5,stroke:#333,color:#333
-    style T1 fill:#e8f5e9,stroke:#333,color:#333
-    style T2 fill:#e8f5e9,stroke:#333,color:#333
-    style T3 fill:#e8f5e9,stroke:#333,color:#333
 ```
 
 **核心组件**:
@@ -797,10 +782,6 @@ graph TB
     C -->|Results only| A
     D -->|Results only| A
 
-    style A fill:#e1f5fe
-    style B fill:#fff9c4
-    style C fill:#fff9c4
-    style D fill:#fff9c4
 ```
 
 ### 要点

@@ -76,13 +76,6 @@ graph TD
     L1 --> L2
     L2 --> L3
 
-    style Q fill:#6A1B9A,color:#fff,stroke:#9C27B0,stroke-width:2px
-    style A fill:#2E7D32,color:#fff
-    style B fill:#2E7D32,color:#fff
-    style C fill:#1565C0,color:#fff
-    style D fill:#F57C00,color:#fff
-    style E fill:#C62828,color:#fff
-    style F fill:#B71C1C,color:#fff
 ```
 
 **颜色说明:**

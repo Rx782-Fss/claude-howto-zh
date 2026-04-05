@@ -441,10 +441,6 @@ graph TB
     D -->|内部| D2["遗留系统"]
     D -->|内部| D3["合规要求"]
 
-    style A fill:#e1f5fe,stroke:#333,color:#333
-    style B fill:#e8f5e9,stroke:#333,color:#333
-    style C fill:#f3e5f5,stroke:#333,color:#333
-    style D fill:#fff3e0,stroke:#333,color:#333
 ```
 
 ### 市场配置
