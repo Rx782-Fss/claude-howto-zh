@@ -639,7 +639,7 @@ claude --plugin-dir ./plugin-a --plugin-dir ./plugin-b
 ```mermaid
 graph TD
     A["我应该创建插件吗?"]
-    A -->|需要多组件| B["需要多个命令<br/>或子代理 或 MCP?"]
+    A -->|需要多组件| B["需要多个命令 或子代理 或 MCP?"]
     B -->|是| C["[OK] 创建插件"]
     B -->|否| D["使用独立功能"]
     A -->|团队工作流| E["需要与 团队分享?"]

@@ -221,11 +221,11 @@ sequenceDiagram
 
 ```mermaid
 graph TB
-    User["👤 用户"]
-    Main["🎯 主代理 (协调者)"]
-    Reviewer["🔍 代码审查者 子代理"]
+    User[" 用户"]
+    Main["[OK] 主代理 (协调者)"]
+    Reviewer["[OK] 代码审查者 子代理"]
     Tester["[OK] 测试工程师 子代理"]
-    Docs["📝 文档编写 子代理"]
+    Docs[" 文档编写 子代理"]
 
     User -->|请求| Main
     Main -->|委托| Reviewer
@@ -243,7 +243,7 @@ graph TB
 sequenceDiagram
     participant User
     participant MainAgent as MainAgent
-    participant CodeReviewer as CodeReviewer<br/>子代理
+    participant CodeReviewer as CodeReviewer 子代理
     participant Context as IsolatedContext
 
     User->>MainAgent: "构建新的认证功能"
@@ -616,14 +616,14 @@ sequenceDiagram
     participant Editor as FileSystem
     participant Memory as CLAUDE.md
 
-    User->>Claude: "记住：使用 async/await"
+    User->>Claude: "记住:使用 async/await"
     Claude->>User: "保存到哪个记忆文件?"
     User->>Claude: "项目记忆"
     Claude->>Editor: 打开 ~/.claude/settings.json
     Claude->>Memory: 写入 ./CLAUDE.md
     Memory-->>Claude: 文件已保存
     Claude->>Claude: 加载更新的记忆
-    Claude-->>User: "记忆已保存！"
+    Claude-->>User: "记忆已保存!"
 ```
 
 ### 实用示例
@@ -883,9 +883,9 @@ Claude：✅ 记忆已保存！
 
 ```mermaid
 graph LR
-    A["第 1 天：用户 对话"] -->|24 小时| B["第 2 天：记忆 合成"]
+    A["第 1 天:用户 对话"] -->|24 小时| B["第 2 天:记忆 合成"]
     B -->|自动| C["记忆已更新 摘要"]
-    C -->|加载到| D["第 2-N 天： 新对话"]
+    C -->|加载到| D["第 2-N 天: 新对话"]
     D -->|添加到| E["记忆"]
     E -->|24 小时后| F["记忆刷新"]
 ```
@@ -992,7 +992,7 @@ sequenceDiagram
     Config->>Claude: 激活连接
     Claude->>Service: 测试连接
     Service-->>Claude: 认证成功
-    Claude->>User: [OK] MCP 已连接！
+    Claude->>User: [OK] MCP 已连接!
 ```
 
 ### 可用 MCP 服务器表
@@ -1194,8 +1194,8 @@ graph TD
     C -->|否/很少| B
     C -->|是/经常| D["使用 MCP"]
 
-    B -->|存储| E["偏好<br/>上下文 历史"]
-    D -->|访问| F["实时 API<br/>数据库 服务"]
+    B -->|存储| E["偏好 上下文 历史"]
+    D -->|访问| F["实时 API 数据库 服务"]
 
     style B fill:#e1f5ff
     style D fill:#fff9c4
@@ -1209,14 +1209,14 @@ sequenceDiagram
     participant MCP as MCP 服务器
     participant DB as Database
 
-    App->>MCP: 请求："SELECT * FROM users WHERE id=1"
+    App->>MCP: 请求:"SELECT * FROM users WHERE id=1"
     MCP->>DB: 执行查询
     DB-->>MCP: 结果集
     MCP-->>App: 返回解析后的数据
     App->>App: 处理结果
     App->>App: 继续任务
 
-    Note over MCP,DB: 实时访问<br/>无缓存
+    Note over MCP,DB: 实时访问 无缓存
 ```
 
 ---
@@ -2483,7 +2483,7 @@ graph LR
 ```mermaid
 graph TD
     A["我应该创建插件吗?"]
-    A -->|需要多个组件| B["多个命令<br/>或子代理 或 MCP?"]
+    A -->|需要多个组件| B["多个命令 或子代理 或 MCP?"]
     B -->|是| C["[OK] 创建插件"]
     B -->|否| D["使用单个功能"]
     A -->|团队工作流| E["需要与 团队共享?"]
@@ -2686,12 +2686,12 @@ graph TB
 sequenceDiagram
     participant User
     participant Claude as Claude Code
-    participant Memory as Memory<br/>CLAUDE.md
+    participant Memory as Memory CLAUDE.md
     participant MCP as MCP 服务器
     participant Skills as SkillSystem
     participant SubAgent as Subagents
 
-    User->>Claude: 请求："构建认证系统"
+    User->>Claude: 请求:"构建认证系统"
     Claude->>Memory: 加载项目标准
     Memory-->>Claude: 认证标准、团队实践
     Claude->>MCP: 查询 GitHub 获取类似实现
@@ -2746,7 +2746,7 @@ graph TD
 
     Start -->|长期上下文| J["记忆"]
     Start -->|团队工作流| K["斜杠命令 + 记忆"]
-    Start -->|全自动化| L["技能 +<br/>子代理 + MCP"]
+    Start -->|全自动化| L["技能 + 子代理 + MCP"]
 ```
 
 ---

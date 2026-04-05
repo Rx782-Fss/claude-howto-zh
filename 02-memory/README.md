@@ -345,14 +345,14 @@ sequenceDiagram
     participant Editor as FileSystem
     participant Memory as CLAUDE.md
 
-    User->>Claude: "记住：使用 async/await"
+    User->>Claude: "记住:使用 async/await"
     Claude->>User: "要保存到哪个记忆文件?"
     User->>Claude: "项目记忆"
     Claude->>Editor: 打开 ~/.claude/settings.json
     Claude->>Memory: 写入 ./CLAUDE.md
     Memory-->>Claude: 文件已保存
     Claude->>Claude: 加载更新后的记忆
-    Claude-->>User: "记忆已保存！"
+    Claude-->>User: "记忆已保存!"
 ```
 
 ## Auto Memory（自动记忆）
