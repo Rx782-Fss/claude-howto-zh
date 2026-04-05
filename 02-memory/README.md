@@ -169,10 +169,10 @@ graph TB
     C["记忆系统"]
     D["记忆存储"]
 
-    B -->|用户提供信息| C
-    C -->|每24小时合成| D
-    D -->|自动加载| A
-    A -->|使用上下文| C
+    B -->"用户提供信息" C
+    C -->"每24小时合成" D
+    D -->"自动加载" A
+    A -->"使用上下文" C
 ```
 
 ## Claude Code 中的记忆层级
@@ -216,7 +216,7 @@ Claude 按以下顺序搜索记忆文件，先找到的位置优先级更高：
 
 ```mermaid
 graph TD
-    A["托管策略<br/>/Library/.../ClaudeCode/CLAUDE.md"] -->|最高优先级| A2["托管扩展配置<br/>managed-settings.d/"]
+    A["托管策略<br/>/Library/.../ClaudeCode/CLAUDE.md"] -->"最高优先级" A2["托管扩展配置<br/>managed-settings.d/"]
     A2 --> B["项目记忆<br/>./CLAUDE.md"]
     B --> C["项目规则<br/>./.claude/rules/*.md"]
     C --> D["用户记忆<br/>~/.claude/CLAUDE.md"]
@@ -224,8 +224,8 @@ graph TD
     E --> F["本地项目记忆<br/>./CLAUDE.local.md"]
     F --> G["自动记忆<br/>~/.claude/projects/.../memory/"]
 
-    B -->|导入| H["@docs/architecture.md"]
-    H -->|导入| I["@docs/api-standards.md"]
+    B -->"导入" H["@docs/architecture.md"]
+    H -->"导入" I["@docs/api-standards.md"]
 
     style A fill:#fce4ec,stroke:#333,color:#333
     style A2 fill:#fce4ec,stroke:#333,color:#333
@@ -375,9 +375,9 @@ graph TD
     B --> C["会话活跃中"]
     C --> D["Claude 发现<br/>模式与洞察"]
     D --> E{"写入<br/>自动记忆"}
-    E -->|通用笔记| F["MEMORY.md"]
-    E -->|特定主题| G["debugging.md"]
-    E -->|特定主题| H["api-conventions.md"]
+    E -->"通用笔记" F["MEMORY.md"]
+    E -->"特定主题" G["debugging.md"]
+    E -->"特定主题" H["api-conventions.md"]
     C --> I["按需加载<br/>主题文件"]
     I --> C
 
