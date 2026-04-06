@@ -1,5 +1,7 @@
 # Hướng Dẫn Claude Code
 
+🌐 **Language / Ngôn ngữ:** [English](../README.md) | [Tiếng Việt](README.md)
+
 > **Làm chủ Claude Code trong một cuối tuần**
 
 Đây là bản tiếng Việt của tài liệu [Claude Code How-To Guide](../README.md).
