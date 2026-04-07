@@ -10,7 +10,7 @@ cp -r resources/ /path/to/your/website/
 cp resources/favicons/* /path/to/your/website/public/
 ```
 
-## 添加到 HTML（复制粘贴）
+## 添加到 HTML(复制粘贴)
 
 ```html
 <!-- Favicon -->
@@ -34,7 +34,7 @@ cp resources/favicons/* /path/to/your/website/public/
 
 ## 图标设计含义
 
-**指南针配代码括号**：
+**指南针配代码括号**:
 - 指南针环 = 导航、结构化学习路径
 - 绿色北针 = 方向、进步、指引
 - 黑色南针 = 扎根、稳固基础

@@ -74,18 +74,7 @@
 
 ### 文档同步
 
-- 所有变更已同步至 Obsidian 知识库（11/11 文件）
-
----
-
-## v2.2.0 — 2026-03-26
-
-### Bug 修复
-
-- 移除失效的市场链接,修复 CI 链接检查失败问题 (3fdf0d6)
-- 将 `sandboxed` 和 `pycache` 添加到 cSpell 字典 (dc64618)
-
-**完整变更日志**: https://github.com/Rx782-Fss/claude-howto-zh/compare/v2.1.1...v2.2.0
+- 所有变更已同步至 Obsidian 知识库（13/13 文件）
 
 ---
 **最后更新**: 2026 年 4 月 7 日

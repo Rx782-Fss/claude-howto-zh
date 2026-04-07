@@ -3,22 +3,22 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code 示例 — 完整索引
+# Claude Code 示例 -- 完整索引
 
 本文档提供按功能类型组织的所有示例文件的完整索引。
 
 ## 汇总统计
 
-- **总文件数**：100+ 个文件
-- **分类数**：10 个功能类别
-- **插件**：3 个完整插件
-- **技能**：6 个完整技能
-- **钩子**：8 个示例钩子
-- **即用状态**：所有示例
+- **总文件数**:100+ 个文件
+- **分类数**:10 个功能类别
+- **插件**:3 个完整插件
+- **技能**:6 个完整技能
+- **钩子**:8 个示例钩子
+- **即用状态**:所有示例
 
 ---
 
-## 01. 斜杠命令（10 个文件）
+## 01. 斜杠命令(10 个文件)
 
 用户调用的常用工作流快捷命令。
 
@@ -35,13 +35,13 @@
 | `pr-slash-command.png` | 截图示例 | 视觉参考 |
 | `README.md` | 文档 | 安装和使用指南 |
 
-**安装路径**：`.claude/commands/`
+**安装路径**:`.claude/commands/`
 
-**用法**：`/optimize`、`/pr`、`/generate-api-docs`、`/commit`、`/setup-ci-cd`、`/push-all`、`/unit-test-expand`、`/doc-refactor`
+**用法**:`/optimize`、`/pr`、`/generate-api-docs`、`/commit`、`/setup-ci-cd`、`/push-all`、`/unit-test-expand`、`/doc-refactor`
 
 ---
 
-## 02. 记忆（6 个文件）
+## 02. 记忆(6 个文件)
 
 持久化上下文和项目标准。
 
@@ -50,21 +50,21 @@
 | `project-CLAUDE.md` | 团队项目标准 | 项目级 | `./CLAUDE.md` |
 | `directory-api-CLAUDE.md` | API 特定规则 | 目录级 | `./src/api/CLAUDE.md` |
 | `personal-CLAUDE.md` | 个人偏好 | 用户级 | `~/.claude/CLAUDE.md` |
-| `memory-saved.png` | 截图：记忆已保存 | - | 视觉参考 |
-| `memory-ask-claude.png` | 截图：询问 Claude | - | 视觉参考 |
+| `memory-saved.png` | 截图:记忆已保存 | - | 视觉参考 |
+| `memory-ask-claude.png` | 截图:询问 Claude | - | 视觉参考 |
 | `README.md` | 文档 | - | 参考资料 |
 
-**安装方式**：复制到对应位置
+**安装方式**:复制到对应位置
 
-**用法**：由 Claude 自动加载
+**用法**:由 Claude 自动加载
 
 ---
 
-## 03. 技能（28 个文件）
+## 03. 技能(28 个文件)
 
-自动调用的能力，包含脚本和模板。
+自动调用的能力,包含脚本和模板。
 
-### 代码审查技能（5 个文件）
+### 代码审查技能(5 个文件)
 ```
 code-review/
 ├── SKILL.md                          # 技能定义
@@ -76,13 +76,13 @@ code-review/
     └── finding-template.md           # 问题记录模板
 ```
 
-**用途**：全面的代码审查，含安全、性能和质量分析
+**用途**:全面的代码审查,含安全、性能和质量分析
 
-**自动触发时机**：审查代码时
+**自动触发时机**:审查代码时
 
 ---
 
-### 品牌语调技能（4 个文件）
+### 品牌语调技能(4 个文件)
 ```
 brand-voice/
 ├── SKILL.md                          # 技能定义
@@ -92,26 +92,26 @@ brand-voice/
 └── tone-examples.md                  # 语调示例消息
 ```
 
-**用途**：确保沟通中的品牌语调一致性
+**用途**:确保沟通中的品牌语调一致性
 
-**自动触发时机**：创建营销文案时
+**自动触发时机**:创建营销文案时
 
 ---
 
-### 文档生成器技能（2 个文件）
+### 文档生成器技能(2 个文件)
 ```
 doc-generator/
 ├── SKILL.md                          # 技能定义
 └── generate-docs.py                  # Python 文档提取器
 ```
 
-**用途**：从源代码生成全面的 API 文档
+**用途**:从源代码生成全面的 API 文档
 
-**自动触发时机**：创建/更新 API 文档时
+**自动触发时机**:创建/更新 API 文档时
 
 ---
 
-### 重构技能（5 个文件）
+### 重构技能(5 个文件)
 ```
 refactor/
 ├── SKILL.md                          # 技能定义
@@ -125,23 +125,23 @@ refactor/
     └── refactoring-plan.md           # 重构计划模板
 ```
 
-**用途**：系统化代码重构，含复杂度分析
+**用途**:系统化代码重构,含复杂度分析
 
-**自动触发时机**：重构代码时
+**自动触发时机**:重构代码时
 
 ---
 
-### CLAUDE.md 管理技能（1 个文件）
+### CLAUDE.md 管理技能(1 个文件)
 ```
 claude-md/
 └── SKILL.md                          # 技能定义
 ```
 
-**用途**：管理和优化 CLAUDE.md 文件
+**用途**:管理和优化 CLAUDE.md 文件
 
 ---
 
-### 博客草稿技能（3 个文件）
+### 博客草稿技能(3 个文件)
 ```
 blog-draft/
 ├── SKILL.md                          # 技能定义
@@ -150,15 +150,15 @@ blog-draft/
     └── outline-template.md           # 博客大纲模板
 ```
 
-**用途**：以一致的结构起草博客文章
+**用途**:以一致的结构起草博客文章
 
-此外还有：`README.md` — 技能概览和使用指南
+此外还有:`README.md` -- 技能概览和使用指南
 
-**安装路径**：`~/.claude/skills/` 或 `.claude/skills/`
+**安装路径**:`~/.claude/skills/` 或 `.claude/skills/`
 
 ---
 
-## 04. 子代理（9 个文件）
+## 04. 子代理(9 个文件)
 
 具有自定义能力的专业化 AI 助手。
 
@@ -167,20 +167,20 @@ blog-draft/
 | `code-reviewer.md` | 代码质量分析 | read, grep, diff, lint_runner | 全面审查 |
 | `test-engineer.md` | 测试覆盖率分析 | read, write, bash, grep | 测试自动化 |
 | `documentation-writer.md` | 文档创建 | read, write, grep | 文档生成 |
-| `secure-reviewer.md` | 安全审查（只读）| read, grep | 安全审计 |
+| `secure-reviewer.md` | 安全审查(只读)| read, grep | 安全审计 |
 | `implementation-agent.md` | 完整实现 | read, write, bash, grep, edit, glob | 功能开发 |
 | `debugger.md` | 调试专家 | read, bash, grep | Bug 调查 |
 | `data-scientist.md` | 数据分析专家 | read, write, bash | 数据工作流 |
 | `clean-code-reviewer.md` | 代码整洁标准 | read, grep | 代码质量 |
 | `README.md` | 文档 | - | 安装和使用指南 |
 
-**安装路径**：`.claude/agents/`
+**安装路径**:`.claude/agents/`
 
-**用法**：由主代理自动委派
+**用法**:由主代理自动委派
 
 ---
 
-## 05. MCP 协议（5 个文件）
+## 05. MCP 协议(5 个文件)
 
 外部工具和 API 集成。
 
@@ -192,15 +192,15 @@ blog-draft/
 | `multi-mcp.json` | 多服务器 | GitHub + DB + Slack | 完整集成 |
 | `README.md` | 文档 | - | 安装和使用指南 |
 
-**安装路径**：`.mcp.json`（项目级）或 `~/.claude.json`（用户级）
+**安装路径**:`.mcp.json`(项目级)或 `~/.claude.json`(用户级)
 
-**用法**：`/mcp__github__list_prs` 等
+**用法**:`/mcp__github__list_prs` 等
 
 ---
 
-## 06. 钩子（9 个文件）
+## 06. 钩子(9 个文件)
 
-事件驱动的自动化脚本，自动执行。
+事件驱动的自动化脚本,自动执行。
 
 | 文件 | 描述 | 事件 | 用途 |
 |------|------|------|------|
@@ -214,23 +214,23 @@ blog-draft/
 | `context-tracker-tiktoken.py` | 基于 Token 的上下文追踪 | PostToolUse | 精确 Token 计数 |
 | `README.md` | 文档 | - | 安装和使用指南 |
 
-**安装路径**：在 `~/.claude/settings.json` 中配置
+**安装路径**:在 `~/.claude/settings.json` 中配置
 
-**用法**：在设置中配置，自动执行
+**用法**:在设置中配置,自动执行
 
-**钩子类型**（4 种类型，25 个事件）：
-- 工具钩子：PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest
-- 会话钩子：SessionStart, SessionEnd, Stop, StopFailure, SubagentStart, SubagentStop
-- 任务钩子：UserPromptSubmit, TaskCompleted, TaskCreated, TeammateIdle
-- 生命周期钩子：ConfigChange, CwdChanged, FileChanged, PreCompact, PostCompact, WorktreeCreate, WorktreeRemove, Notification, InstructionsLoaded, Elicitation, ElicitationResult
+**钩子类型**(4 种类型,25 个事件):
+- 工具钩子:PreToolUse, PostToolUse, PostToolUseFailure, PermissionRequest
+- 会话钩子:SessionStart, SessionEnd, Stop, StopFailure, SubagentStart, SubagentStop
+- 任务钩子:UserPromptSubmit, TaskCompleted, TaskCreated, TeammateIdle
+- 生命周期钩子:ConfigChange, CwdChanged, FileChanged, PreCompact, PostCompact, WorktreeCreate, WorktreeRemove, Notification, InstructionsLoaded, Elicitation, ElicitationResult
 
 ---
 
-## 07. 插件（3 个完整插件，40 个文件）
+## 07. 插件(3 个完整插件,40 个文件)
 
 打包的功能集合。
 
-### PR 审查插件（10 个文件）
+### PR 审查插件(10 个文件)
 ```
 pr-review/
 ├── .claude-plugin/
@@ -250,15 +250,15 @@ pr-review/
 └── README.md                         # 插件文档
 ```
 
-**功能**：安全分析、测试覆盖率、性能影响评估
+**功能**:安全分析、测试覆盖率、性能影响评估
 
-**命令**：`/review-pr`、`/check-security`、`/check-tests`
+**命令**:`/review-pr`、`/check-security`、`/check-tests`
 
-**安装**：`/plugin install pr-review`
+**安装**:`/plugin install pr-review`
 
 ---
 
-### DevOps 自动化插件（15 个文件）
+### DevOps 自动化插件(15 个文件)
 ```
 devops-automation/
 ├── .claude-plugin/
@@ -284,15 +284,15 @@ devops-automation/
 └── README.md                         # 插件文档
 ```
 
-**功能**：Kubernetes 部署、回滚、监控、事件响应
+**功能**:Kubernetes 部署、回滚、监控、事件响应
 
-**命令**：`/deploy`、`/rollback`、`/status`、`/incident`
+**命令**:`/deploy`、`/rollback`、`/status`、`/incident`
 
-**安装**：`/plugin install devops-automation`
+**安装**:`/plugin install devops-automation`
 
 ---
 
-### 文档插件（14 个文件）
+### 文档插件(14 个文件)
 ```
 documentation/
 ├── .claude-plugin/
@@ -315,17 +315,17 @@ documentation/
 └── README.md                         # 插件文档
 ```
 
-**功能**：API 文档、README 生成、文档同步、验证
+**功能**:API 文档、README 生成、文档同步、验证
 
-**命令**：`/generate-api-docs`、`/generate-readme`、`/sync-docs`、`/validate-docs`
+**命令**:`/generate-api-docs`、`/generate-readme`、`/sync-docs`、`/validate-docs`
 
-**安装**：`/plugin install documentation`
+**安装**:`/plugin install documentation`
 
-此外还有：`README.md` — 插件概览和使用指南
+此外还有:`README.md` -- 插件概览和使用指南
 
 ---
 
-## 08. 检查点与回退（2 个文件）
+## 08. 检查点与回退(2 个文件)
 
 保存对话状态并探索替代方案。
 
@@ -334,21 +334,21 @@ documentation/
 | `README.md` | 文档 | 全面的检查点指南 |
 | `checkpoint-examples.md` | 真实案例 | 数据库迁移、性能优化、UI 迭代、调试 |
 
-**核心概念**：
-- **检查点（Checkpoint）**：对话状态的快照
-- **回退（Rewind）**：返回到之前的检查点
-- **分支点（Branch Point）**：探索多种方案
+**核心概念**:
+- **检查点(Checkpoint)**:对话状态的快照
+- **回退(Rewind)**:返回到之前的检查点
+- **分支点(Branch Point)**:探索多种方案
 
-**用法**：
+**用法**:
 ```
 # 每次用户输入时自动创建检查点
-# 要回退：按 Esc 键两次或使用：
+# 要回退:按 Esc 键两次或使用:
 /rewind
-# 然后选择：恢复代码和对话、仅恢复对话、仅恢复代码、
+# 然后选择:恢复代码和对话、仅恢复对话、仅恢复代码、
 # 从此处摘要、或取消
 ```
 
-**使用场景**：
+**使用场景**:
 - 尝试不同的实现方式
 - 从错误中恢复
 - 安全实验
@@ -357,7 +357,7 @@ documentation/
 
 ---
 
-## 09. 高级功能（3 个文件）
+## 09. 高级功能(3 个文件)
 
 用于复杂工作流的高级能力。
 
@@ -367,7 +367,7 @@ documentation/
 | `config-examples.json` | 配置示例 | 10+ 种特定场景的配置 |
 | `planning-mode-examples.md` | 规划模式示例 | REST API、数据库迁移、重构 |
 
-**涵盖的高级功能**：
+**涵盖的高级功能**:
 
 ### 规划模式
 - 创建详细的实施计划
@@ -385,14 +385,14 @@ documentation/
 - 任务管理和监控
 
 ### 权限模式
-- **default**：对有风险的操作请求批准
-- **acceptEdits**：自动接受文件编辑，其他操作请求批准
-- **plan**：只读分析，不做修改
-- **auto**：自动批准安全操作，对有风险操作进行提示
-- **dontAsk**：接受除有风险操作外的所有操作
-- **bypassPermissions**：接受所有操作（需要 `--dangerously-skip-permissions`）
+- **default**:对有风险的操作请求批准
+- **acceptEdits**:自动接受文件编辑,其他操作请求批准
+- **plan**:只读分析,不做修改
+- **auto**:自动批准安全操作,对有风险操作进行提示
+- **dontAsk**:接受除有风险操作外的所有操作
+- **bypassPermissions**:接受所有操作(需要 `--dangerously-skip-permissions`)
 
-### 无头模式（`claude -p`）
+### 无头模式(`claude -p`)
 - CI/CD 集成
 - 自动化任务执行
 - 批处理
@@ -404,7 +404,7 @@ documentation/
 
 ---
 
-## 10. CLI 使用（1 个文件）
+## 10. CLI 使用(1 个文件)
 
 命令行界面使用模式和参考。
 
@@ -412,17 +412,17 @@ documentation/
 |------|------|------|
 | `README.md` | CLI 文档 | 标志、选项和使用模式 |
 
-**核心 CLI 功能**：
-- `claude` — 启动交互式会话
-- `claude -p "prompt"` — 无头/非交互式模式
-- `claude web` — 启动 Web 会话
-- `claude --model` — 选择模型（Sonnet 4.6、Opus 4.6）
-- `claude --permission-mode` — 设置权限模式
-- `claude --remote` — 通过 WebSocket 启用远程控制
+**核心 CLI 功能**:
+- `claude` -- 启动交互式会话
+- `claude -p "prompt"` -- 无头/非交互式模式
+- `claude web` -- 启动 Web 会话
+- `claude --model` -- 选择模型(Sonnet 4.6、Opus 4.6)
+- `claude --permission-mode` -- 设置权限模式
+- `claude --remote` -- 通过 WebSocket 启用远程控制
 
 ---
 
-## 文档文件（13 个文件）
+## 文档文件(13 个文件)
 
 | 文件 | 位置 | 描述 |
 |------|------|------|
@@ -461,7 +461,7 @@ cp -r 03-skills/code-review ~/.claude/skills/
 
 ### DevOps 与部署
 ```bash
-# 安装插件（包含一切）
+# 安装插件(包含一切)
 /plugin install devops-automation
 ```
 
@@ -494,7 +494,7 @@ cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 export GITHUB_TOKEN="your_token"
 export DATABASE_URL="postgresql://..."
 
-# 安装 MCP 配置（项目级）
+# 安装 MCP 配置(项目级)
 cp 05-mcp/multi-mcp.json .mcp.json
 ```
 
@@ -505,14 +505,14 @@ mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
 
-# 在设置中配置钩子（~/.claude/settings.json）
+# 在设置中配置钩子(~/.claude/settings.json)
 # 参见 06-hooks/README.md
 ```
 
 ### 安全实验
 ```bash
 # 每次用户输入时自动创建检查点
-# 要回退：按 Esc+Esc 或使用 /rewind
+# 要回退:按 Esc+Esc 或使用 /rewind
 # 然后从回退菜单中选择要恢复的内容
 
 # 详细示例参见 08-checkpoints/README.md
@@ -527,7 +527,7 @@ chmod +x ~/.claude/hooks/*.sh
 /plan Implement feature X
 
 # 使用权限模式
-claude --permission-mode plan          # 用于代码审查（只读）
+claude --permission-mode plan          # 用于代码审查(只读)
 claude --permission-mode acceptEdits   # 自动接受编辑
 claude --permission-mode auto          # 自动批准安全操作
 
@@ -561,26 +561,26 @@ Run tests in background
 
 ## 学习路径
 
-### 入门阶段（第 1 周）
+### 入门阶段(第 1 周)
 1. ✅ 阅读 `README.md`
 2. ✅ 安装 1-2 个斜杠命令
 3. ✅ 创建项目记忆文件
 4. ✅ 尝试基本命令
 
-### 进阶阶段（第 2-3 周）
+### 进阶阶段(第 2-3 周)
 1. ✅ 设置 GitHub MCP
 2. ✅ 安装一个子代理
 3. ✅ 尝试委派任务
 4. ✅ 安装一个技能
 
-### 高级阶段（第 4 周+）
+### 高级阶段(第 4 周+)
 1. ✅ 安装完整插件
 2. ✅ 创建自定义斜杠命令
 3. ✅ 创建自定义子代理
 4. ✅ 创建自定义技能
 5. ✅ 构建你自己的插件
 
-### 专家阶段（第 5 周+）
+### 专家阶段(第 5 周+)
 1. ✅ 设置钩子实现自动化
 2. ✅ 使用检查点进行实验
 3. ✅ 配置规划模式
@@ -593,45 +593,45 @@ Run tests in background
 ## 按关键词搜索
 
 ### 性能相关
-- `01-slash-commands/optimize.md` — 性能分析
-- `04-subagents/code-reviewer.md` — 性能审查
-- `03-skills/code-review/` — 性能指标
-- `07-plugins/pr-review/agents/performance-analyzer.md` — 性能专家
+- `01-slash-commands/optimize.md` -- 性能分析
+- `04-subagents/code-reviewer.md` -- 性能审查
+- `03-skills/code-review/` -- 性能指标
+- `07-plugins/pr-review/agents/performance-analyzer.md` -- 性能专家
 
 ### 安全相关
-- `04-subagents/secure-reviewer.md` — 安全审查
-- `03-skills/code-review/` — 安全分析
-- `07-plugins/pr-review/` — 安全检查
+- `04-subagents/secure-reviewer.md` -- 安全审查
+- `03-skills/code-review/` -- 安全分析
+- `07-plugins/pr-review/` -- 安全检查
 
 ### 测试相关
-- `04-subagents/test-engineer.md` — 测试工程师
-- `07-plugins/pr-review/commands/check-tests.md` — 测试覆盖率
+- `04-subagents/test-engineer.md` -- 测试工程师
+- `07-plugins/pr-review/commands/check-tests.md` -- 测试覆盖率
 
 ### 文档相关
-- `01-slash-commands/generate-api-docs.md` — API 文档命令
-- `04-subagents/documentation-writer.md` — 文档编写代理
-- `03-skills/doc-generator/` — 文档生成器技能
-- `07-plugins/documentation/` — 完整文档插件
+- `01-slash-commands/generate-api-docs.md` -- API 文档命令
+- `04-subagents/documentation-writer.md` -- 文档编写代理
+- `03-skills/doc-generator/` -- 文档生成器技能
+- `07-plugins/documentation/` -- 完整文档插件
 
 ### 部署相关
-- `07-plugins/devops-automation/` — 完整 DevOps 方案
+- `07-plugins/devops-automation/` -- 完整 DevOps 方案
 
 ### 自动化相关
-- `06-hooks/` — 事件驱动自动化
-- `06-hooks/pre-commit.sh` — 提交前自动化
-- `06-hooks/format-code.sh` — 自动格式化
-- `09-advanced-features/` — CI/CD 用的无头模式
+- `06-hooks/` -- 事件驱动自动化
+- `06-hooks/pre-commit.sh` -- 提交前自动化
+- `06-hooks/format-code.sh` -- 自动格式化
+- `09-advanced-features/` -- CI/CD 用的无头模式
 
 ### 实验相关
-- `08-checkpoints/` — 利用回退的安全实验
-- `08-checkpoints/checkpoint-examples.md` — 真实案例
+- `08-checkpoints/` -- 利用回退的安全实验
+- `08-checkpoints/checkpoint-examples.md` -- 真实案例
 
 ### 规划相关
-- `09-advanced-features/planning-mode-examples.md` — 规划模式示例
-- `09-advanced-features/README.md` — 扩展思考
+- `09-advanced-features/planning-mode-examples.md` -- 规划模式示例
+- `09-advanced-features/README.md` -- 扩展思考
 
 ### 配置相关
-- `09-advanced-features/config-examples.json` — 配置示例
+- `09-advanced-features/config-examples.json` -- 配置示例
 
 ---
 
@@ -648,7 +648,7 @@ Run tests in background
 
 ## 如何贡献
 
-想添加更多示例？遵循以下结构：
+想添加更多示例?遵循以下结构:
 1. 创建适当的子目录
 2. 包含带使用说明的 README.md
 3. 遵循命名规范
@@ -657,9 +657,9 @@ Run tests in background
 
 ---
 
-**最后更新时间**：2026 年 3 月
-**示例总数**：100+ 个文件
-**分类数**：10 个功能类别
-**钩子数**：8 个自动化脚本
-**配置示例**：10+ 种场景
-**可用状态**：全部就绪
+**最后更新时间**:2026 年 3 月
+**示例总数**:100+ 个文件
+**分类数**:10 个功能类别
+**钩子数**:8 个自动化脚本
+**配置示例**:10+ 种场景
+**可用状态**:全部就绪

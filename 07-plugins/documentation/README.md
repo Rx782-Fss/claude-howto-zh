@@ -3,7 +3,7 @@
   <img alt="Claude How To" src="../../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# 文档插件（Documentation Plugin）
+# 文档插件(Documentation Plugin)
 
 为你的项目提供全面的文档生成和维护功能。
 
@@ -23,24 +23,24 @@
 
 ## 包含内容
 
-### 斜杠命令（Slash Commands）
-- `/generate-api-docs` — 生成 API 文档
-- `/generate-readme` — 创建或更新 README
-- `/sync-docs` — 同步文档与代码变更
-- `/validate-docs` — 验证文档
+### 斜杠命令(Slash Commands)
+- `/generate-api-docs` -- 生成 API 文档
+- `/generate-readme` -- 创建或更新 README
+- `/sync-docs` -- 同步文档与代码变更
+- `/validate-docs` -- 验证文档
 
-### 子代理（Subagents）
-- `api-documenter` — API 文档专家
-- `code-commentator` — 代码注释改进专家
-- `example-generator` — 示例代码创建专家
+### 子代理(Subagents)
+- `api-documenter` -- API 文档专家
+- `code-commentator` -- 代码注释改进专家
+- `example-generator` -- 示例代码创建专家
 
-### 模板（Templates）
-- `api-endpoint.md` — API 端点文档模板
-- `function-docs.md` — 函数文档模板
-- `adr-template.md` — 架构决策记录（ADR）模板
+### 模板(Templates)
+- `api-endpoint.md` -- API 端点文档模板
+- `function-docs.md` -- 函数文档模板
+- `adr-template.md` -- 架构决策记录(ADR)模板
 
 ### MCP 服务器
-- GitHub 集成，用于文档同步
+- GitHub 集成,用于文档同步
 
 ## 使用方法
 
@@ -67,7 +67,7 @@
 ## 要求
 
 - Claude Code 1.0+
-- GitHub 访问权限（可选）
+- GitHub 访问权限(可选)
 
 ## 示例工作流
 
@@ -83,13 +83,13 @@ Claude:
 6. 生成完整的 Markdown 文档
 7. 包含 curl、JavaScript 和 Python 示例
 
-结果：
+结果:
 ✅ API 文档已生成
-📄 已创建文件：
+📄 已创建文件:
    - docs/api/users.md
    - docs/api/auth.md
    - docs/api/products.md
-📊 覆盖率：23/23 个端点已记录文档
+📊 覆盖率:23/23 个端点已记录文档
 ```
 
 ## 模板使用说明
@@ -105,7 +105,7 @@ Claude:
 
 ## 配置
 
-设置 GitHub Token 以启用文档同步功能：
+设置 GitHub Token 以启用文档同步功能:
 ```bash
 export GITHUB_TOKEN="your_github_token"
 ```

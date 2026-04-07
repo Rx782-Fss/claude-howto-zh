@@ -7,39 +7,39 @@ allowed-tools: Read, Glob, Grep, Write
 
 # 生成 API 文档
 
-为指定的 API 或模块生成完整的 API 文档：
+为指定的 API 或模块生成完整的 API 文档:
 
 ## 工作流程
 
 ### 1. 分析目标
 
-**确定范围：**
-- 用户指定了特定文件/目录？→ 聚焦该区域
-- 未指定？→ 扫描项目中的 API 定义（路由、控制器、handler）
+**确定范围:**
+- 用户指定了特定文件/目录?→ 聚焦该区域
+- 未指定?→ 扫描项目中的 API 定义(路由、控制器、handler)
 
-**检测框架/协议：**
-- REST API（Express/FastAPI/Flask/Gin 等）
+**检测框架/协议:**
+- REST API(Express/FastAPI/Flask/Gin 等)
 - GraphQL
 - gRPC
 - WebSocket
 
 ### 2. 收集信息
 
-**从代码中提取：**
-- 端点定义（路径、方法）
-- 请求/响应模型（类型定义、schema）
+**从代码中提取:**
+- 端点定义(路径、方法)
+- 请求/响应模型(类型定义、schema)
 - 认证方式
 - 错误码和错误处理
 - 速率限制配置
 
 ### 3. 生成文档
 
-**输出格式**（根据用户偏好）：
-- OpenAPI/Swagger 规范（YAML/JSON）
+**输出格式**(根据用户偏好):
+- OpenAPI/Swagger 规范(YAML/JSON)
 - Markdown API 参考
 - JSDoc/TSDoc 注释注入
 
-**文档结构**：
+**文档结构**:
 ```markdown
 # [API 名称] API 文档
 
@@ -59,15 +59,15 @@ allowed-tools: Read, Glob, Grep, Write
 ### [端点名称]
 **`[METHOD] /path`**
 
-**描述**：[接口功能说明]
+**描述**:[接口功能说明]
 
-**请求参数**：
+**请求参数**:
 
 | 参数名 | 类型 | 必填 | 说明 |
 |--------|------|------|------|
 | param1 | string | 是 | 参数说明 |
 
-**响应示例**：
+**响应示例**:
 ```json
 {
   "code": 200,
@@ -76,7 +76,7 @@ allowed-tools: Read, Glob, Grep, Write
 }
 ```
 
-**错误码**：
+**错误码**:
 
 | 错误码 | 说明 |
 |--------|------|
@@ -92,4 +92,4 @@ allowed-tools: Read, Glob, Grep, Write
 - [ ] 示例数据有效
 - [ ] 错误码覆盖全面
 
-> 💡 **中文开发者提示**：生成的文档默认使用中文编写。如果团队使用英文文档，请在命令后注明"使用英文输出"。此命令可与 doc-generator 技能结合使用。
+> 💡 **中文开发者提示**:生成的文档默认使用中文编写。如果团队使用英文文档,请在命令后注明"使用英文输出"。此命令可与 doc-generator 技能结合使用。

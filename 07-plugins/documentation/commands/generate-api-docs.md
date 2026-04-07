@@ -5,7 +5,7 @@ description: 从源代码生成全面的 API 文档
 
 # API 文档生成器
 
-生成完整的 API 文档：
+生成完整的 API 文档:
 
 1. 扫描 API 端点
 2. 提取函数签名和 JSDoc 注释

@@ -1,6 +1,6 @@
 ---
 name: api-documentation-generator
-description: 从源代码生成全面、准确的 API 文档。用于创建或更新 API 文档、生成 OpenAPI 规范，或当用户提及 API 文档、接口端点、文档时使用。
+description: 从源代码生成全面、准确的 API 文档。用于创建或更新 API 文档、生成 OpenAPI 规范,或当用户提及 API 文档、接口端点、文档时使用。
 ---
 
 # API 文档生成器技能

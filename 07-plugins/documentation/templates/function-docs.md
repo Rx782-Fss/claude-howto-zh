@@ -1,4 +1,4 @@
-# 函数：`functionName`
+# 函数:`functionName`
 
 ## 简介
 简要描述此函数的功能。
@@ -16,13 +16,13 @@ function functionName(param1: Type1, param2: Type2): ReturnType
 | param2 | Type2 | 否 | param2 的描述 |
 
 ## 返回值
-**类型**：`ReturnType`
+**类型**:`ReturnType`
 
 返回值的描述。
 
 ## 异常
-- `Error`：当输入无效时抛出
-- `TypeError`：当传入错误类型时抛出
+- `Error`:当输入无效时抛出
+- `TypeError`:当传入错误类型时抛出
 
 ## 示例
 
