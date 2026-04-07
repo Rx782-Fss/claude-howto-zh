@@ -1115,7 +1115,6 @@ graph TD
 - [Hooks Guide](../06-hooks/) -- 关于事件驱动自动化
 
 ---
-
-*Last updated: March 2026*
-
-*本指南涵盖 Claude Code 的完整子代理配置、委派模式和最佳实践。*
+**最后更新**: 2026 年 4 月
+**Claude Code 版本**: 2.1+
+**兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5

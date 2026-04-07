@@ -1084,3 +1084,8 @@ export GITHUB_TOKEN="your_token"
 - [Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) -- Anthropic's engineering blog on solving context bloat
 - [Claude Code CLI Reference](https://code.claude.com/docs/en/cli-reference)
 - [Claude API Documentation](https://docs.anthropic.com)
+
+---
+**最后更新**: 2026 年 4 月
+**Claude Code 版本**: 2.1+
+**兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5

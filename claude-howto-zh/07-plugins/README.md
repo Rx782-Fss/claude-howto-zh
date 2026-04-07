@@ -937,3 +937,8 @@ claude --plugin-dir ./my-plugin --plugin-dir ./another-plugin
 - [MCP 服务器参考](https://modelcontextprotocol.io/)
 - [子代理配置指南](../04-subagents/README.md)
 - [钩子系统参考](../06-hooks/README.md)
+
+---
+**最后更新**: 2026 年 4 月
+**Claude Code 版本**: 2.1+
+**兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5
