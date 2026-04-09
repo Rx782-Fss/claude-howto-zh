@@ -939,6 +939,6 @@ claude --plugin-dir ./my-plugin --plugin-dir ./another-plugin
 - [钩子系统参考](../06-hooks/README.md)
 
 ---
-**最后更新**: 2026 年 4 月
-**Claude Code 版本**: 2.1+
+**最后更新: 2026 年 4 月 9 日
+**Claude Code 版本: 2.1.97
 **兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5

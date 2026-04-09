@@ -96,12 +96,12 @@
 
 ---
 
-## 深受 5,900+ 开发者信赖
+## 深受 21,800+ 开发者信赖
 
-- **5,900+ GitHub Stars**----来自日常使用 Claude Code 的开发者们
-- **690+ Forks**----各团队正在将此指南适配到自己的工作流中
-- **积极维护**----与每次 Claude Code 发布同步更新(最新:v2.2.0,2026 年 3 月)
-- **社区驱动**----来自开发者们分享的真实配置贡献
+- **21,800+ GitHub Stars**——来自日常使用 Claude Code 的开发者们
+- **2,585+ Forks**——各团队正在将此指南适配到自己的工作流中
+- **积极维护**——与每次 Claude Code 发布同步更新（最新：v2.3.0，2026 年 4 月）
+- **社区驱动**——来自开发者们分享的真实配置贡献
 
 [![Star History Chart](https://api.star-history.com/svg?repos=luongnv89/claude-howto&type=Date)](https://star-history.com/#luongnv89/claude-howto&Date)
 

@@ -1,5 +1,20 @@
 # 更新日志(Changelog)
 
+## v2.3.1 — 2026-04-09
+
+### 文档更新
+
+- 跟进官方 v2.3.0 后续 6 个 commit 的所有变更
+- 全量 Footer 更新：版本号 2.1+ → 2.1.97，日期统一为 2026 年 4 月 9 日（18 个文件）
+- README：GitHub 指标更新至 21,800+ stars / 2,585+ forks，移除贡献者表格
+- 02-memory：`#` 前缀快捷记忆标记为废弃，引导用户使用 `/memory` 或对话方式
+- 05-mcp：移除 WebSocket Transport 章节（已从官方文档移除）
+- QUICK_REFERENCE：Hooks 事件数 25→26，移除 WebSocket MCP 引用
+
+**完整变更日志**: https://github.com/Rx782-Fss/claude-howto-zh/compare/v2.3.0...v2.3.1
+
+---
+
 ## v2.3.0 — 2026-04-07
 
 ### 新功能

@@ -118,7 +118,7 @@ claude -r "session"    # 按名称/ID 恢复会话
 | **技能** | `.claude/skills/*/SKILL.md` | 自动调用 |
 | **子代理** | `.claude/agents/*.md` | 自动委派 |
 | **MCP** | `.mcp.json`(项目级)或 `~/.claude.json`(用户级)| `/mcp__server__action` |
-| **钩子(25 个事件)** | `~/.claude/hooks/*.sh` | 事件触发(4 种类型)|
+| **钩子(26 个事件)** | `~/.claude/hooks/*.sh` | 事件触发(4 种类型)|
 | **插件** | 通过 `/plugin install` | 打包所有功能 |
 | **检查点** | 内置功能 | `Esc+Esc` 或 `/rewind` |
 | **规划模式** | 内置功能 | `/plan <任务>` |

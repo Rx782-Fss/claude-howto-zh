@@ -91,14 +91,6 @@ Server-Sent Events 传输已被弃用,推荐使用 `http`,但仍支持:
 claude mcp add --transport sse legacy-server https://example.com/sse
 ```
 
-### WebSocket 传输
-
-用于持久化双向连接的 WebSocket 传输:
-
-```bash
-claude mcp add --transport ws realtime-server wss://example.com/mcp
-```
-
 ### Windows 特殊说明
 
 在原生 Windows(非 WSL)上,对 npx 命令使用 `cmd /c`:
@@ -1086,6 +1078,6 @@ export GITHUB_TOKEN="your_token"
 - [Claude API Documentation](https://docs.anthropic.com)
 
 ---
-**最后更新**: 2026 年 4 月
-**Claude Code 版本**: 2.1+
+**最后更新: 2026 年 4 月 9 日
+**Claude Code 版本: 2.1.97
 **兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5

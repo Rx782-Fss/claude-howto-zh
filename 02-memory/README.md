@@ -25,10 +25,12 @@ Claude Code 中的 Memory 提供跨多个会话和对话的持久化上下文。
 |------|------|------|----------|
 | `/init` | 初始化项目记忆 | `/init` | 开始新项目,首次设置 CLAUDE.md |
 | `/memory` | 在编辑器中编辑记忆文件 | `/memory` | 大规模更新、重新组织、审查内容 |
-| `#` 前缀 | 快速单行记忆添加 | `# Your rule here` | 在对话中添加快速规则 |
-| `# new rule into memory` | 显式记忆添加 | `# new rule into memory<br/>Your detailed rule` | 添加复杂的多行规则 |
-| `# remember this` | 自然语言记忆 | `# remember this<br/>Your instruction` | 对话式记忆更新 |
+| ~~`#` 前缀~~ | ~~快速单行记忆添加~~ | ~~`# Your rule here`~~ | ~~已废弃~~ |
+| ~~`# new rule into memory`~~ | ~~显式记忆添加~~ | ~~已废弃~~ | ~~已废弃~~ |
+| ~~`# remember this`~~ | ~~自然语言记忆~~ | ~~已废弃~~ | ~~已废弃~~ |
 | `@path/to/file` | 导入外部内容 | `@README.md` 或 `@docs/api.md` | 在 CLAUDE.md 中引用现有文档 |
+
+> **注意**：`#` 前缀快捷记忆功能已**废弃**。请使用 `/memory` 命令直接编辑记忆文件，或在对话中要求 Claude 记住内容（例如："记住我们总是使用 TypeScript strict mode"）。
 
 ## 快速入门:初始化记忆
 
