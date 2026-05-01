@@ -2,11 +2,12 @@
 
 > **项目**: claude-howto 中文翻译版
 > **原始仓库**: https://github.com/luongnv89/claude-howto
-> **维护对象**: 当前 Git 仓库内的英文原文与 `claude-howto-zh/` 中文镜像
-> **维护边界**: 只操作本仓库；不要同步任何仓库外文档目录
-> **最后整理**: 2026-04-17
-> **当前版本标记**: 以 `claude-howto-zh/.version` 为准
-> **当前文件数**: 以仓库内实时统计为准；本文快照基于 2026-04-17 校对
+> **GitHub 地址**: https://github.com/Rx782-Fss/claude-howto-zh
+> **维护对象**: 根目录中文翻译文档（单目录模式）
+> **维护边界**: 只操作本仓库根目录；不要同步任何仓库外文档目录
+> **最后整理**: 2026-05-01
+> **当前版本标记**: 以 `.version` 文件为准
+> **当前文件数**: 以仓库内实时统计为准
 
 ---
 
@@ -16,48 +17,48 @@
 - 若本文档中的静态数字与仓库当前状态冲突，**以文件系统、`git status` 和脚本输出为准**。
 - 所有路径默认相对于仓库根目录。
 - 维护任务只包括：
-  - 同步上游英文仓库到 `claude-howto-zh/`
-  - 修正文档、脚本、链接和版本标记
-  - 保持翻译内容与仓库结构一致
+  - 翻译和修正根目录下的文档
+  - 修正文档中的链接和版本标记
+  - 保持翻译内容与上游原版结构一致（仅限核心文件）
 - 维护任务**不包括**：
   - 操作任何外部知识库或仓库外文档目录
   - 将本仓库内容导出到仓库外的文档系统
-- 目录约定补充：
-  - 根目录 `scripts/` 视为**本地维护工具目录**，默认不上传 GitHub。
-  - `claude-howto-zh/` 是上游仓库 `luongnv89/claude-howto` 的中文镜像，默认应与上游保持相同结构。
-  - 因此不要主动删除 `claude-howto-zh/` 中上游对应的脚本、配置、资源或模板文件。
+  - 重建已删除的 `claude-howto-zh/` 镜像目录
+- 目录约定：
+  - 根目录即为工作区，所有翻译内容在此维护
+  - `scripts/` 视为**本地维护工具目录**，默认不上传 GitHub
+  - `reference/` 为本地参考资料，不上传 GitHub
+  - `translator.py` 为本地开发工具，已在 .gitignore 排除
 
 ---
 
 ## 二、目录位置
 
-> **所有路径均为相对于项目根目录（仓库根目录）的相对路径。项目可自由挪动，不影响使用。**
+> **所有路径均为相对于项目根目录（仓库根目录）的相对路径。**
 
 | 项目 | 相对路径 | 说明 |
 |------|---------|------|
-| **项目根目录** | `./` | 即 `tre/` 所在位置 |
-| **翻译输出** | `./claude-howto-zh/` | 中文镜像目录 |
-| **更新脚本** | `./scripts/update_translation.sh` | 本地维护脚本；默认不上传 GitHub |
-| **版本标记** | `./claude-howto-zh/.version` | 当前对应的原版 tag |
-| **源码临时目录** | `/tmp/claude-howto-src/` | 下载的原版源码（系统临时） |
-
-> 源码位于 `/tmp/` 下，系统重启后可能丢失。运行 `./scripts/update_translation.sh fetch` 可重新下载。
+| **项目根目录** | `./` | 即仓库根目录 |
+| **翻译输出** | `./` | 中文翻译直接在根目录 |
+| **版本标记** | `./.version` | 当前对应的原版 tag |
+| **本地脚本** | `./scripts/` | 本地维护脚本；默认不上传 GitHub |
+| **参考资料** | `./reference/` | 本地参考文档；默认不上传 GitHub |
 
 ---
 
 ## 三、AI 执行原则
 
-1. **先读取，再修改**：先运行 `git status`、`rg`、`find` 或 `./scripts/update_translation.sh diff`，不要凭记忆操作。
-2. **只在仓库内行动**：不要假设存在外部文档系统，不要写入仓库外目录。
-3. **以增量更新为主**：优先翻译变化部分，避免无必要的整篇重写。
+1. **先读取，再修改**：先运行 `git status`、`rg`、`find`，不要凭记忆操作。
+2. **只在仓库内行动**：不要假设存在外部文档系统或镜像目录。
+3. **以增量更新为主**：优先翻译变化部分，避免不必要的整篇重写。
 4. **保留结构稳定性**：目录层级、文件名、代码块和链接结构应与上游保持一致。
-5. **修改后自检**：至少检查 `git diff --stat` 和相关 `rg` 搜索结果，确认没有遗留旧术语、旧版本号或失效路径。
+5. **修改后自检**：至少检查 `git diff --stat` 和相关 `rg` 搜索结果。
 
 ---
 
 ## 四、翻译规范（必须严格遵守）
 
-### 2.1 翻译范围
+### 4.1 翻译范围
 
 - **翻译内容**：教程/文档的正文、说明文字、注释、描述
 - **不翻译内容**：
@@ -67,7 +68,7 @@
   - Mermaid 图表的代码块语法关键字（`graph TD`、`flowchart` 等）
   - URL 链接、版本号、技术标识符
 
-### 2.2 术语规则
+### 4.2 术语规则
 
 - **专业术语首次出现时**：保留英文 + 中文注释，例如：`Slash Commands（斜杠命令）`
 - **后续出现**：可直接使用中文或英文，保持上下文一致
@@ -86,7 +87,7 @@
 | Permission Modes | 权限模式 |
 | LSP | 语言服务器协议 |
 
-### 2.3 各文件类型的具体处理方式
+### 4.3 各文件类型的具体处理方式
 
 #### Markdown (.md) 文件
 - 标题、正文、列表、表格内容 → **全部翻译**
@@ -98,211 +99,249 @@
 #### Python (.py) 文件
 - docstring（`"""..."""`）→ **翻译**
 - 行内注释（`# ...`）→ **翻译**
-- 函数/变量/类名 → **不翻译**
 - 代码逻辑 → **不翻译**
-- print/log 字符串中面向用户的提示信息 → **可翻译**
+- 变量名/函数名 → **不翻译**
 
-#### Shell (.sh) 文件
-- `#` 注释行 → **翻译**
-- echo/print 中面向用户的字符串 → **可翻译**
-- 命令本身 → **不翻译**
+#### Shell (.sh) 脚本
+- 注释行（`# ...`）→ **翻译**
+- echo/print 的提示信息 → **翻译**
+- 命令逻辑 → **不翻译**
 
-#### JavaScript (.js) 文件
-- `//` 注释 → **翻译**
-- `/* */` 注释 → **翻译**
-- console.log 中面向用户的信息 → **可翻译**
-- 代码逻辑 → **不翻译**
-
-#### JSON (.json) / YAML (.yml) 文件
-- `description`、`comment`、`title` 等 value → **翻译**
-- key 名、配置值、布尔值 → **不翻译**
-
-#### 纯文本 (.txt) 文件
-- 模板内容、说明文字 → **按上下文判断是否翻译**
+#### JSON/YAML 配置文件
+- `description`、`comment`、`name` 等 value → **翻译**
+- key 名 → **不翻译**
+- 配置值（URL、版本号等）→ **不翻译**
 
 ---
 
-## 五、中文镜像文件清单
+## 五、版本管理
 
-### 5.1 按模块统计
+### 5.1 版本号标记
 
-| # | 模块 | 目录 | 文件数 | 状态 |
-|---|------|------|--------|------|
-| 1 | Slash Commands | `01-slash-commands/` | 10 | ✅ 完成 |
-| 2 | Memory | `02-memory/` | 6 | ✅ 完成 |
-| 3 | Skills | `03-skills/` | 22 | ✅ 完成 |
-| 4 | Subagents | `04-subagents/` | 10 | ✅ 完成 |
-| 5 | MCP | `05-mcp/` | 5 | ✅ 完成 |
-| 6 | Hooks | `06-hooks/` | 9 | ✅ 完成 |
-| 7 | Plugins | `07-plugins/` | 39 | ✅ 完成 |
-| 8 | Checkpoints | `08-checkpoints/` | 2 | ✅ 完成 |
-| 9 | Advanced Features | `09-advanced-features/` | 4 | ✅ 完成 |
-| 10 | CLI Reference | `10-cli/` | 1 | ✅ 完成 |
-| 11 | .claude/skills/ | `.claude/skills/` | 5 | ✅ 完成 |
-| 12 | .github/ | `.github/` | 8 | ✅ 完成 |
-| 13 | docs/ | `docs/` | 2 | ✅ 完成 |
-| 14 | resources/ | `resources/` | 14 | ✅ 完成 |
-| 15 | prompts/ | `prompts/` | 1 | ✅ 完成 |
-| 16 | scripts/ | `scripts/` | 1 | ✅ 完成 |
-| 17 | 根目录文档 | `(root)` | 14 | ✅ 完成 |
-| | **合计（不含 `.version`）** | | **153** | **✅ 100%** |
+- 当前版本号存储在 `.version` 文件中
+- 格式：`vX.Y.Z`（例如 `v2.3.2`）
+- 对应上游仓库的 tag 版本
 
-> 如果你怀疑数字已过时，执行：
->
-> ```bash
-> find claude-howto-zh -type f ! -name '.version' | wc -l
-> ```
+### 5.2 版本同步检查清单
 
-### 5.2 已排除的内容（不需要翻译）
+修改版本号时，必须同时更新以下文件：
 
-| 内容 | 原因 |
-|------|------|
-| `slides/*.pdf` | PDF 幻灯片，非文本内容 |
-| `.gitignore`, `.cspell.json`, `.markdownlint.json` | 开发工具配置文件 |
-| `.pre-commit-config.yaml` | Git 预提交钩子配置 |
-| `LICENSE` | 许可证文件，通常不翻译 |
-| `coverage.xml` | 测试覆盖率报告 |
-| `pyproject.toml`, `requirements*.txt` | Python 项目依赖配置 |
-| `scripts/build_epub.py`, `scripts/check_*.py` | 构建和检查脚本（仅保留了 README.md 翻译） |
-| `scripts/tests/` | 测试代码 |
-| `.github/workflows/*.yml` | CI/CD 工作流配置 |
-| `.github/FUNDING.yml` | 资助配置 |
-| `.github/markdown-link-check-config.json` | 链接检查配置 |
-| `assets/logo/` | V2 版旧 Logo（已被 V3 替代） |
-| 图片文件 (*.png, *.svg) | 二进制资源文件（原样保留） |
-| `03-skills/.gitignore` | 技能模块内部 gitignore |
+```bash
+# 1. 检查当前版本
+cat .version
+
+# 2. 更新 .version
+echo "vX.Y.Z" > .version
+
+# 3. 搜索需要更新的位置
+rg -n "当前版本|最后更新|最新|v[0-9]+\.[0-9]+" README.md CHANGELOG.md RELEASE_NOTES.md QUICK_REFERENCE.md
+
+# 4. 更新 README.md 中的 badge
+# 5. 更新 CHANGELOG.md 添加新条目
+# 6. 更新 RELEASE_NOTES.md
+```
+
+### 5.3 常见版本号位置
+
+| 文件 | 位置 | 格式示例 |
+|------|------|----------|
+| `.version` | 文件内容 | `v2.3.2` |
+| `README.md` | Badge URL | `badge/v2.3.2` |
+| `README.md` | 页脚 | `Version 2.1.119` |
+| `CHANGELOG.md` | 标题 | `## v2.3.2` |
+| `RELEASE_NOTES.md` | 标题 | `## v2.3.2` |
 
 ---
 
-## 六、后续更新操作手册（给未来 AI 的完整工作流）
+## 六、质量检查
 
-### 6.1 工具链
+### 6.1 翻译完成后自检
 
-| 工具 | 路径 | 用途 |
-|------|------|------|
-| **更新脚本** | `./scripts/update_translation.sh` | 检测版本、下载源码、对比差异 |
-| **翻译项目** | `./claude-howto-zh` | 中文翻译主目录 |
-| **版本标记** | `claude-howto-zh/.version` | 记录当前翻译对应的原版 tag |
-
-### 6.2 一键更新流程
+完成任何翻译任务后，执行以下检查：
 
 ```bash
-# 完整流程：检查 → 下载 → 对比
-./scripts/update_translation.sh full
-
-# 或分步执行：
-./scripts/update_translation.sh check   # 仅检查新版本
-./scripts/update_translation.sh fetch    # 下载最新源码
-./scripts/update_translation.sh diff     # 生成差异报告
-```
-
-### 6.3 更新操作步骤（完整 SOP）
-
-当 `update_translation.sh check` 报告有新版本时，按以下顺序执行：
-
-#### Step 1 — 运行差异检测
-
-```bash
-./scripts/update_translation.sh full
-```
-
-输出会告诉你：
-- 📁 **新增文件** → 需要全新翻译的文件列表
-- ✏️ **修改文件** → 需要增量更新的文件列表 + diff 统计
-- 🗑️ **删除文件** → 需要从翻译版中清理的文件
-
-#### Step 2 — 处理新增文件
-
-对每个新增文件：
-1. 阅读英文原文，理解内容
-2. 按照「四、翻译规范」进行翻译
-3. 放入 `claude-howto-zh/` 对应目录
-4. 勾选质量检查清单（6.5 节）
-
-#### Step 3 — 处理修改文件
-
-对每个修改文件：
-1. 执行 `diff <源文件> <翻译文件>` 查看具体变更
-2. 仅翻译**新增或变更的部分**
-3. 保持已有翻译不变
-4. 如果变更量大（>30%），考虑全文重新翻译
-
-#### Step 4 — 清理删除文件
-
-从 `claude-howto-zh/` 中删除已不存在的文件。
-
-#### Step 5 — 更新版本标记
-
-```bash
-echo "vX.Y.Z" > ./claude-howto-zh/.version
-```
-
-#### Step 6 — 仓库内自检
-
-```bash
-# 查看本次改动范围
+# 1. 检查文件变更统计
 git diff --stat
 
-# 确认仓库中不再出现仓库外同步说明
-rg -n "仓库外|外部文档系统|外部知识库" TRANSLATION-STATUS.md claude-howto-zh/RELEASE_NOTES.md
+# 2. 搜索可能的遗留英文（排除代码块）
+rg -n "[A-Z]{3,}" <translated-file>.md | head -20
+
+# 3. 检查链接有效性
+rg -n "\[.*\]\(.*\)" <translated-file>.md | head -20
+
+# 4. 统计中文占比
+python3 -c "
+import re
+with open('<translated-file>.md', 'r') as f:
+    content = f.read()
+cn = len(re.findall(r'[\u4e00-\u9fff]', content))
+total = len(content)
+print(f'中文占比: {cn/total*100:.1f}%')
+"
 ```
 
-### 6.4 差异处理策略速查
+### 6.2 翻译质量标准
 
-| 差异类型 | 判定标准 | 操作 |
-|----------|---------|------|
-| **新增** | 源有、译版无 | 全新翻译 |
-| **小改** | diff 变更 < 10 行 | 增量翻译变更部分 |
-| **中改** | diff 变更 10-50 行 | 增量翻译 + 审查上下文连贯性 |
-| **大改** | diff 变更 > 50 行 或 >30% | 全文重译 |
-| **删除** | 译版有、源无 | 从中文镜像中删除 |
-| **重命名** | 文件路径变化 | 同步重命名 |
+| 文档类型 | 中文占比目标 | 说明 |
+|----------|------------|------|
+| 纯理论文档 | 30-50% | 如 08-checkpoints, LEARNING-ROADMAP |
+| 平衡型文档 | 15-25% | 如 02-memory, 04-subagents |
+| 代码密集型 | 10-18% | 如 06-hooks, 07-plugins |
+| 配置参考 | 8-15% | 如 05-mcp, 10-cli |
 
-### 6.5 翻译质量检查清单
+> 注：代码块保留英文是正确做法，低占比不代表翻译不全。
 
-每个文件翻译完成后，确认以下要点：
+### 6.3 常见问题排查
 
-- [ ] 专业术语首次出现有中文注释
-- [ ] Mermaid 图表中的文本已翻译
-- [ ] 代码块内注释已翻译（代码本身未动）
-- [ ] JSON 的 description 字段已翻译
-- [ ] `> 💡` 提示框格式保留且已翻译
-- [ ] 文档结构（标题层级、列表、表格）与原文一致
-- [ ] 无遗漏的英文段落
-- [ ] 中文表达自然流畅
-- [ ] 版本号、日期和统计信息没有引入新的冲突
-- [ ] 链接和相对路径没有因目录变化而失效
+#### 问题 1：翻译后格式错乱
 
----
+**原因**：Markdown 语法被误改  
+**解决**：检查代码块围栏、表格对齐、列表缩进
 
-## 七、关键文件索引
+#### 问题 2：链接失效
 
-| 文件 | 说明 | 重要程度 |
-|------|------|----------|
-| `README.md` | 项目主入口文档 | ⭐⭐⭐ |
-| `INDEX.md` | 完整文件索引（~500行） | ⭐⭐⭐ |
-| `QUICK_REFERENCE.md` | 快速参考卡（~506行） | ⭐⭐⭐ |
-| `CATALOG.md` | 学习目录 | ⭐⭐⭐ |
-| `LEARNING-ROADMAP.md` | 学习路线图 | ⭐⭐⭐ |
-| `CHANGELOG.md` | 版本更新日志 | ⭐⭐ |
-| `scripts/update_translation.sh` | 本地翻译差异检测与同步脚本（默认不上传 GitHub） | ⭐⭐⭐ |
-| `07-plugins/README.md` | 插件架构总览（943行，最大单文件） | ⭐⭐⭐ |
-| `.claude/skills/self-assessment/SKILL.md` | 自我评估技能定义 | ⭐⭐ |
-| `.claude/skills/lesson-quiz/SKILL.md` | 课程测验技能定义 | ⭐⭐ |
+**原因**：路径未更新或使用了旧镜像路径  
+**解决**：将 `claude-howto-zh/xxx` 改为 `xxx`（根目录相对路径）
+
+#### 问题 3：版本号不一致
+
+**原因**：漏更新某个文件  
+**解决**：使用上述"版本同步检查清单"
 
 ---
 
-## 八、注意事项
+## 七、上游同步流程
 
-1. **不要重复翻译已有文件**：当前中文镜像共有 153 个已跟踪文件（不含 `.version`）。更新时只处理**差异部分**。
-2. **保留原文结构**：目录层次、文件命名、Markdown 格式必须与源项目一致。
-3. **图片资源**：所有 `.png` 和 `.svg` 文件从原样复制，不做任何修改。
-4. **二进制文件排除**：`slides/` 目录下的 PDF 不在翻译范围内。
-5. **一致性**：同一术语在整个项目中应保持一致的翻译。
-6. **无外部同步**：不要再创建、读取或同步任何仓库外文档目录。
-7. **本地维护脚本不上云**：根目录 `scripts/` 默认保持本地，不作为 GitHub 发布内容。
-8. **GitHub 与上游同构**：`claude-howto-zh/` 默认应保留上游仓库对应的文档、脚本、配置、资源与模板文件。
+当上游仓库 (`luongnv89/claude-howto`) 有更新时：
+
+### 7.1 同步步骤
+
+```bash
+# 1. 获取上游更新
+git fetch upstream
+
+# 2. 查看上游新增了什么
+git log HEAD..upstream/main --oneline
+
+# 3. 查看具体文件变更
+git diff HEAD..upstream/main --stat
+
+# 4. 选择性合并核心文件（忽略其他语言版本）
+# 只关注根目录下的 10 个模块 + 辅助文档
+
+# 5. 翻译新增或修改的内容
+
+# 6. 更新版本号
+echo "vX.Y.Z" > .version
+
+# 7. 提交并推送
+git add .
+git commit -m "sync: 上游 vX.Y.Z 更新翻译"
+git push origin main
+```
+
+### 7.2 应该同步的内容
+
+✅ **需要同步：**
+- 10 个模块的 README.md 更新
+- 新增的核心功能文档
+- 重要配置文件变更
+- 安全修复相关文档
+
+❌ **不需要同步：**
+- `ja/`, `uk/`, `vi/`, `zh/` 其他语言版本
+- `scripts/` 构建工具
+- `slides/` 幻灯片 PDF
+- `.github/workflows/` CI/CD 配置
+- 测试文件和覆盖率报告
 
 ---
 
-*本文档面向 AI 维护代理整理，用于跨会话接续维护。*
+## 八、发布流程
+
+### 8.1 创建新版本
+
+```bash
+# 1. 完成所有翻译和质量检查
+
+# 2. 更新版本号
+echo "vX.Y.Z" > .version
+
+# 3. 更新 RELEASE_NOTES.md
+
+# 4. 提交所有更改
+git add .
+git commit -m "feat: vX.Y.Z 翻译更新"
+
+# 5. 创建 Git 标签
+git tag -a vX.Y.Z -m "vX.Y.Z: 版本说明"
+
+# 6. 推送代码和标签
+git push origin main --tags
+
+# 7. 创建 GitHub Release（通过 API 或网页界面）
+```
+
+### 8.2 Release 描述模板
+
+参见 `RELEASE_NOTES.md` 或使用 `/tmp/release-body.md` 模板。
+
+---
+
+## 九、项目特色说明
+
+本项目采用**单目录精简模式**，不同于传统的镜像模式：
+
+### 9.1 与旧版镜像模式的区别
+
+| 方面 | 旧模式（已废弃） | 当前模式 ✅ |
+|------|----------------|-----------|
+| 工作区 | 根目录 + `claude-howto-zh/` 镜像 | 仅根目录 |
+| 维护复杂度 | 高（需同步两份） | 低（单一份） |
+| 仓库大小 | ~23MB | ~21MB |
+| 文件数量 | ~260+ | ~160 |
+| 易用性 | 用户困惑用哪个目录 | 清晰明确 |
+
+### 9.2 为什么删除镜像目录
+
+- 冗余：与根目录 100% 重复
+- 混淆：用户不知道应该用哪个
+- 维护负担：每次要同步两份
+- 不在上游：官方仓库无此结构
+
+---
+
+## 十、快速参考
+
+### 常用命令速查
+
+```bash
+# 查看仓库状态
+git status --short
+
+# 统计文件数
+find . -type f ! -path './.git/*' | wc -l
+
+# 查找特定内容
+rg -n "关键词" *.md
+
+# 检查版本一致性
+rg -n "v[0-9]+\.[0-9]+" .version README.md CHANGELOG.md RELEASE_NOTES.md
+
+# 检查中文翻译质量
+python3 << 'EOF'
+import re, os
+for f in ['README.md', 'CHANGELOG.md']:
+    if os.path.exists(f):
+        with open(f) as fh:
+            c = fh.read()
+        cn = len(re.findall(r'[\u4e00-\u9fff]', c))
+        print(f"{f}: {cn/len(c)*100:.1f}% 中文")
+EOF
+```
+
+---
+
+**最后更新**: 2026-05-01
+**适用版本**: v2.3.2+
+**维护者**: AI Agent + 人工审核
