@@ -41,6 +41,8 @@ Thumbs.db
 
 # --- 本地维护脚本 ---
 /scripts/
+!/scripts/release.sh
+!/scripts/rebuild-releases.sh
 /reference/
 translator.py
 
