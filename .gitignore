@@ -55,5 +55,9 @@ CLAUDE.md
 # --- 翻译状态追踪（仅本地参考） ---
 TRANSLATION-STATUS.md
 
-# --- 版本标记（可选：如果需要在 GitHub 显示版本可注释掉此行）---
-# .version
+# --- 版本标记 ---
+.version
+
+# --- 本地规划文档 ---
+/docs/ROADMAP-*.md
+/docs/TASKS-*.md
