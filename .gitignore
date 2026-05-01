@@ -49,6 +49,9 @@ translator.py
 # --- AI 维护指南（仅本地 AI 使用） ---
 CLAUDE.md
 
+# --- Prompts 模板（仅本地使用） ---
+/prompts/
+
 # --- 翻译状态追踪（仅本地参考） ---
 TRANSLATION-STATUS.md
 
