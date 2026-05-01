@@ -111,13 +111,15 @@ done
 
 echo ""
 
-# Step 4: 创建新 Releases
-echo -e "${BLUE}[步骤 4/4] 创建新 Releases...${NC}"
+# Step 4: 创建新 Releases（按时间正序：先旧版本后新版本）
+# 重要：GitHub 会将 published_at 最新的 Release 标记为 "Latest"
+echo -e "${BLUE}[步骤 4/4] 创建新 Releases (按时间顺序: 旧→新)...${NC}"
 echo ""
 
 CREATED_COUNT=0
 
-for VERSION in "${VERSIONS[@]}"; do
+# 反转数组顺序：从 v2.0.0 到 v2.3.2
+for VERSION in $(printf '%s\n' "${VERSIONS[@]}" | tac); do
     TAG_NAME="$VERSION"
     RELEASE_NAME="Release $VERSION"  # 简洁的标题！
     BODY="${VERSION_CONTENTS[$VERSION]}"
