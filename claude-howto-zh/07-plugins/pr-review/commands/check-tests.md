@@ -1,6 +1,6 @@
 ---
-name: Test Coverage Check
-description: 验证测试覆盖率和质量
+name: 测试 Coverage Check
+描述: 验证测试覆盖率和质量
 ---
 
 # 测试覆盖率检查

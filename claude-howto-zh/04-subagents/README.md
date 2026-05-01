@@ -3,78 +3,78 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Subagents(子代理)-- 完整参考指南
+# 子代理（子代理） - 完整参考指南 指南
 
-Subagents 是 Claude Code 可以委派任务给它的专用 AI 助手。每个子代理都有特定用途,使用独立于主对话的上下文窗口,并可配置特定的工具和自定义系统提示词。
+子代理（子代理） are specialized AI assistants that Claude Code can delegate tasks to. Each 子代理 has a specific purpose, uses its own 上下文窗口 separate from the main conversation, and can be configured with specific tools and a 自定义 系统提示词.
 
 ## 目录
 
 1. [概览](#概览)
-2. [核心优势](#核心优势)
-3. [文件位置](#文件位置)
+2. [核心优势](#key-benefits)
+3. [文件位置](#file-locations)
 4. [配置](#配置)
-5. [内置子代理](#内置子代理)
-6. [管理子代理](#管理子代理)
-7. [使用子代理](#使用子代理)
-8. [可恢复代理](#可恢复代理)
-9. [链式子代理](#链式子代理)
-10. [子代理持久化记忆](#子代理持久化记忆)
-11. [后台子代理](#后台子代理)
-12. [Worktree 隔离](#worktree-隔离)
-13. [限制可生成的子代理](#限制可生成的子代理)
-14. [`claude agents` CLI 命令](#claude-agents-cli-命令)
-15. [Agent Teams(实验性)](#agent-teams实验性)
-16. [插件子代理安全](#插件子代理安全)
+5. [内置 子代理（子代理）](#内置-子代理（子代理）)
+6. [管理 子代理（子代理）](#管理-子代理（子代理）)
+7. [使用 子代理（子代理）](#使用-子代理（子代理）)
+8. [Resumable Agents](#resumable-agents)
+9. [Chaining 子代理（子代理）](#chaining-子代理（子代理）)
+10. [Persistent 记忆 for 子代理（子代理）](#persistent-记忆-for-子代理（子代理）)
+11. [Background 子代理（子代理）](#background-子代理（子代理）)
+12. [Worktree Isolation](#worktree-isolation)
+13. [Restrict Spawnable 子代理（子代理）](#restrict-spawnable-子代理（子代理）)
+14. [`claude agents` CLI Command](#claude-agents-CLI-command)
+15. [代理团队 (Experimental)](#代理-teams-experimental)
+16. [插件 子代理 安全性](#插件-子代理-安全性)
 17. [架构](#架构)
-18. [上下文管理](#上下文管理)
-19. [何时使用子代理](#何时使用子代理)
-20. [最佳实践](#最佳实践)
-21. [本文件夹中的示例子代理](#本文件夹中的示例子代理)
-22. [安装说明](#安装说明)
-23. [相关概念](#相关概念)
+18. [Context Management](#context-management)
+19. [何时使用 子代理（子代理）](#when-to-use-子代理（子代理）)
+20. [最佳实践](#best-practices)
+21. [示例 子代理（子代理） in This Folder](#示例-子代理（子代理）-in-this-folder)
+22. [安装 Instructions](#安装-instructions)
+23. [相关概念](#related-concepts)
 
 ---
 
 ## 概览
 
-Subagents 通过以下方式实现 Claude Code 中的委派式任务执行:
+子代理（子代理） 启用 delegated task execution in Claude Code by:
 
-- 创建具有**独立上下文窗口**的隔离 AI 助手
-- 提供用于**专业化能力的定制系统提示词**
-- 强制执行**工具访问控制**以限制能力
-- 防止复杂任务造成的**上下文污染**
-- 实现**多个专业任务的并行执行**
+- 创建 **isolated AI assistants** with separate context windows
+- Providing **customized system prompts** for specialized expertise
+- Enforcing **tool access control** to limit capabilities
+- Preventing **context pollution** from complex tasks
+- Enabling **parallel execution** of multiple specialized tasks
 
-每个子代理以干净的状态独立运行,仅接收其任务所需的特定上下文,然后将结果返回给主代理进行综合。
+Each 子代理 operates independently with a clean slate, receiving only the specific context necessary for their task, then returning results to the main 代理 for synthesis.
 
-**快速开始**:使用 `/agents` 命令以交互方式创建、查看、编辑和管理你的子代理。
+**Quick Start**: Use the `/agents` command to create, view, edit, and manage your subagents interactively.
 
 ---
 
 ## 核心优势
 
-| 优势 | 说明 |
-|------|------|
-| **上下文隔离** | 在独立的上下文中运行,避免污染主对话 |
-| **专业化能力** | 针对特定领域微调,成功率更高 |
-| **可复用性** | 跨不同项目使用并与团队共享 |
-| **灵活权限** | 不同子代理类型可配置不同的工具访问级别 |
-| **可扩展性** | 多个代理可同时处理不同方面的工作 |
+|  | Benefit | 描述 |  |
+|  | --------- | ------------- |  |
+|  | **Context preservation** | Operates in separate context, preventing pollution of main conversation |  |
+|  | **Specialized expertise** | Fine-tuned for specific domains with higher success rates |  |
+|  | **Reusability** | Use across different projects and share with teams |  |
+|  | **Flexible permissions** | Different tool access levels for different 子代理 types |  |
+|  | **可扩展性** | Multiple agents work on different aspects simultaneously |  |
 
 ---
 
 ## 文件位置
 
-子代理文件可存储在多个位置,对应不同的作用域:
+子代理 files can be stored in multiple locations with different scopes:
 
-| 优先级 | 类型 | 位置 | 作用域 |
-|--------|------|--------|-------|
-| 1(最高) | **CLI 定义** | 通过 `--agents` 标志(JSON 格式) | 仅当前会话 |
-| 2 | **项目子代理** | `.claude/agents/` | 当前项目 |
-| 3 | **用户子代理** | `~/.claude/agents/` | 所有项目 |
-| 4(最低) | **插件代理** | 插件的 `agents/` 目录 | 通过插件 |
+|  | Priority | 类型 | 位置 | 作用域 |  |
+|  | ---------- | ------ | ---------- | ------- |  |
+|  | 1 (highest) | **CLI-defined** | Via `--agents` flag (JSON) | Session only |  |
+|  | 2 | **项目 子代理（子代理）** | `.claude/agents/` | Current 项目 |  |
+|  | 3 | **用户 子代理（子代理）** | `~/.claude/agents/` | All projects |  |
+|  | 4 (lowest) | **插件 agents** | 插件 `agents/` directory | Via 插件 |  |
 
-当存在重名时,高优先级的源优先。
+When duplicate names exist, higher-priority sources take precedence.
 
 ---
 
@@ -82,25 +82,25 @@ Subagents 通过以下方式实现 Claude Code 中的委派式任务执行:
 
 ### 文件格式
 
-子代理通过 YAML frontmatter 定义元数据,后跟 Markdown 格式的系统提示词:
+子代理（子代理） are defined in YAML frontmatter followed by the 系统提示词 in Markdown:
 
 ```yaml
 ---
 name: your-sub-agent-name
-description: 该子代理被调用场景的描述
-tools: tool1, tool2, tool3  # 可选 - 省略时继承所有工具
-disallowedTools: tool4  # 可选 - 明确禁止的工具
-model: sonnet  # 可选 - sonnet, opus, haiku, 或继承当前模型
-permissionMode: default  # 可选 - 权限模式
-maxTurns: 20  # 可选 - 限制代理轮次
-skills: skill1, skill2  # 可选 - 预加载到上下文的技能
-mcpServers: server1  # 可选 - 使其可用的 MCP 服务器
-memory: user  # 可选 - 持久化记忆范围(user, project, local)
-background: false  # 可选 - 作为后台任务运行
-effort: high  # 可选 - 推理努力级别(low, medium, high, max)
-isolation: worktree  # 可选 - git worktree 隔离
-initialPrompt: "Start by analyzing the codebase"  # 可选 - 自动提交的第一轮
-hooks:  # 可选 - 组件级钩子
+description: Description of when this subagent should be invoked
+tools: tool1, tool2, tool3  #  可选 - inherits all tools if omitted
+disallowedTools: tool4  #  可选 - explicitly disallowed tools
+model: sonnet  #  可选 - sonnet, opus, haiku, or inherit
+permissionMode: default  #  可选 - 权限模式
+maxTurns: 20  #  可选 - limit agentic turns
+skills: skill1, skill2  #  可选 - 技能 to preload into context
+mcpServers: server1  #  可选 - MCP servers to make available
+memory: user  #  可选 - persistent 记忆 作用域 (用户, 项目, local)
+background: false  #  可选 - run as 后台任务
+effort: high  #  可选 - reasoning effort (low, medium, high, max)
+isolation: worktree  #  可选 - git worktree isolation
+initialPrompt: "Start by analyzing the codebase"  #  可选 - auto-submitted first turn
+hooks:  #  可选 - component-scoped 钩子
   PreToolUse:
     - matcher: "Bash"
       hooks:
@@ -108,61 +108,102 @@ hooks:  # 可选 - 组件级钩子
           command: "./scripts/security-check.sh"
 ---
 
-你的子代理的系统提示词写在这里。可以是多段内容,
-应明确定义子代理的角色、能力和解决问题的方法。
+Your subagent's system prompt goes here. This can be multiple paragraphs
+and should clearly define the subagent's role, capabilities, and approach
+to solving problems.
 ```
 
-### 配置字段说明
+### 配置 Fields
 
-| 字段 | 必填 | 说明 |
-|------|------|------|
-| `name` | 是 | 唯一标识符(小写字母和连字符) |
-| `description` | 是 | 功能的自然语言描述。包含 "use PROACTIVELY" 以鼓励自动调用 |
-| `tools` | 否 | 特定工具的逗号分隔列表。省略则继承所有工具。支持 `Agent(agent_name)` 语法来限制可生成的子代理 |
-| `disallowedTools` | 否 | 子代理不得使用的工具的逗号分隔列表 |
-| `model` | 否 | 使用的模型:`sonnet`、`opus`、`haiku`、完整模型 ID 或 `inherit`。默认为配置的子代理模型 |
-| `permissionMode` | 否 | `default`、`acceptEdits`、`dontAsk`、`bypassPermissions`、`plan` |
-| `maxTurns` | 否 | 子代理可执行的最大代理轮次数 |
-| `skills` | 否 | 预加载技能的逗号分隔列表。在启动时将完整技能内容注入子代理上下文 |
-| `mcpServers` | 否 | 对子代理可用的 MCP 服务器 |
-| `hooks` | 否 | 组件级钩子(PreToolUse, PostToolUse, Stop) |
-| `memory` | 否 | 持久化记忆目录范围:`user`、`project` 或 `local` |
-| `background` | 否 | 设为 `true` 使此子代理始终作为后台任务运行 |
-| `effort` | 否 | 推理努力级别:`low`、`medium`、`high` 或 `max` |
-| `isolation` | 否 | 设为 `worktree` 以给予子代理自己的 git worktree |
-| `initialPrompt` | 否 | 当子代理作为主代理运行时自动提交的第一轮 |
+|  | Field | 必需 | 描述 |  |
+|  | ------- | ---------- | ------------- |  |
+|  | `name` | Yes | Unique identifier (lowercase letters and hyphens) |  |
+|  | `描述` | Yes | Natural language 描述 of purpose. Include "use PROACTIVELY" to encourage automatic invocation |  |
+|  | `tools` | No | Comma-separated list of specific tools. Omit to inherit all tools. Supports `代理(agent_name)` syntax to restrict spawnable 子代理（子代理） |  |
+|  | `disallowedTools` | No | Comma-separated list of tools the 子代理 must not use |  |
+|  | `model` | No | Model to use: `sonnet`, `opus`, `haiku`, full model ID, or `inherit`. Defaults to configured 子代理 model |  |
+|  | `permissionMode` | No | `默认`, `acceptEdits`, `dontAsk`, `bypassPermissions`, `plan` |  |
+|  | `maxTurns` | No | Maximum number of agentic turns the 子代理 can take |  |
+|  | `技能` | No | Comma-separated list of 技能 to preload. Injects full 技能 content into the 子代理's context at startup |  |
+|  | `mcpServers` | No | MCP servers to make available to the 子代理 |  |
+|  | `钩子` | No | Component-scoped 钩子 (PreToolUse, PostToolUse, 停止) |  |
+|  | `记忆` | No | Persistent 记忆 directory 作用域: `用户`, `项目`, or `local` |  |
+|  | `background` | No | Set to `true` to always run this 子代理 as a 后台任务 |  |
+|  | `effort` | No | Reasoning effort level: `low`, `medium`, `high`, or `max` |  |
+|  | `isolation` | No | Set to `worktree` to give the 子代理 its own git worktree |  |
+|  | `initialPrompt` | No | Auto-submitted first turn when the 子代理 runs as the main 代理 |  |
 
-### 工具配置选项
+### Main-Thread 代理 Frontmatter Honoring (v2.1.117+/v2.1.119+)
 
-**选项 1:继承所有工具(省略该字段)**
+When an 代理 is invoked as the main-thread 代理 (via `claude --代理 <name>` or `--print` mode), these frontmatter fields are honored:
+
+|  | Field | 版本 | Notes |  |
+|  | ------- | --------- | ------- |  |
+|  | `mcpServers` | v2.1.117+ | Loaded when 代理 is invoked as main-thread 代理 via `claude --代理 <name>` |  |
+|  | `permissionMode` | v2.1.119+ | Honored for 内置 agents via `--代理 <name>` |  |
+|  | `tools` / `disallowedTools` | v2.1.119+ | Honored in `--print` mode (non-interactive/scripted 使用方法) |  |
+
+**Example — agent with `mcpServers` and `permissionMode`:**
+
+```yaml
+---
+name: secure-researcher
+description: Research agent with scoped MCP access and restricted permissions
+permissionMode: acceptEdits
+mcpServers:
+  notion:
+    type: http
+    url: https://mcp.notion.com/mcp
+  github:
+    type: http
+    url: https://api.github.com/mcp
+tools: Read, Grep, Glob
+---
+
+You are a research agent. You may query Notion and GitHub through the
+configured MCP servers, and read local files, but you cannot write or
+execute commands outside of accepted edits.
+```
+
+Run with:
+
+```bash
+claude --agent secure-researcher
+```
+
+### Tool 配置 Options
+
+**Option 1: Inherit All Tools (omit the field)**
 ```yaml
 ---
 name: full-access-agent
-description: 拥有所有可用工具的代理
+description: Agent with all available tools
 ---
 ```
 
-**选项 2:指定单个工具**
+**Option 2: Specify Individual Tools**
 ```yaml
 ---
 name: limited-agent
-description: 仅拥有特定工具的代理
+description: Agent with specific tools only
 tools: Read, Grep, Glob, Bash
 ---
 ```
 
-**选项 3:条件性工具访问**
+> **Note on Glob/Grep (v2.1.113+):** On native macOS/Linux builds, Glob and Grep are provided as `bfs`/`ugrep` through the Bash tool rather than as separate tools. Windows and npm-JS builds still expose them as standalone tools. Authors can still reference Glob/Grep in `allowedTools`; the backend substitution is transparent.
+
+**Option 3: Conditional Tool Access**
 ```yaml
 ---
 name: conditional-agent
-description: 具有过滤工具访问的代理
+description: Agent with filtered tool access
 tools: Read, Bash(npm:*), Bash(test:*)
 ---
 ```
 
-### 基于 CLI 的配置
+### CLI-Based 配置
 
-使用 `--agents` 标志配合 JSON 格式为单个会话定义子代理:
+Define 子代理（子代理） for a single session 使用 the `--agents` flag with JSON 格式:
 
 ```bash
 claude --agents '{
@@ -175,7 +216,7 @@ claude --agents '{
 }'
 ```
 
-**`--agents` 标志的 JSON 格式:**
+**JSON Format for `--agents` flag:**
 
 ```json
 {
@@ -188,118 +229,118 @@ claude --agents '{
 }
 ```
 
-**代理定义的优先级:**
+**Priority of Agent Definitions:**
 
-代理定义按以下优先级顺序加载(首次匹配生效):
-1. **CLI 定义** -- `--agents` 标志(仅当前会话,JSON)
-2. **项目级** -- `.claude/agents/`(当前项目)
-3. **用户级** -- `~/.claude/agents/`(所有项目)
-4. **插件级** -- 插件的 `agents/` 目录
+代理 definitions are loaded with this priority order (first match wins):
+1. **CLI-defined** - `--agents` flag (session only, JSON)
+2. **项目-level** - `.claude/agents/` (current 项目)
+3. **用户-level** - `~/.claude/agents/` (all projects)
+4. **插件-level** - 插件 `agents/` directory
 
-这允许 CLI 定义在单个会话中覆盖所有其他源。
+This allows CLI definitions to override all other sources for a single session.
 
 ---
 
-## 内置子代理
+## 内置 子代理（子代理）
 
-Claude Code 包含多个始终可用的内置子代理:
+Claude Code includes several 内置 子代理（子代理） that are always available:
 
-| 代理 | 模型 | 用途 |
-|------|------|------|
-| **general-purpose** | 继承 | 复杂的多步骤任务 |
-| **Plan** | 继承 | Plan 模式下的研究工作 |
-| **Explore** | Haiku | 只读代码库探索(快速/中等/非常彻底) |
-| **Bash** | 继承 | 在独立上下文中执行终端命令 |
-| **statusline-setup** | Sonnet | 配置状态栏 |
-| **Claude Code Guide** | Haiku | 回答 Claude Code 功能问题 |
+|  | 代理 | Model | Purpose |  |
+|  | ------- | ------- | --------- |  |
+|  | **general-purpose** | Inherits | Complex, multi-step tasks |  |
+|  | **Plan** | Inherits | Research for plan mode |  |
+|  | **Explore** | Haiku | Read-only codebase exploration (quick/medium/very thorough) |  |
+|  | **Bash** | Inherits | Terminal commands in separate context |  |
+|  | **statusline-设置** | Sonnet | 配置 status line |  |
+|  | **Claude Code 指南** | Haiku | Answer Claude Code 功能 questions |  |
 
-### 通用子代理
+### General-Purpose 子代理
 
-| 属性 | 值 |
-|------|-----|
-| **模型** | 继承父代理 |
-| **工具** | 所有工具 |
-| **用途** | 复杂研究任务、多步骤操作、代码修改 |
+|  | Property | Value |  |
+|  | ---------- | ------- |  |
+|  | **Model** | Inherits from parent |  |
+|  | **Tools** | All tools |  |
+|  | **Purpose** | Complex research tasks, multi-step operations, code modifications |  |
 
-**使用时机**:需要同时进行探索和修改且涉及复杂推理的任务。
+**When used**: Tasks requiring both exploration and modification with complex reasoning.
 
 ### Plan 子代理
 
-| 属性 | 值 |
-|------|-----|
-| **模型** | 继承父代理 |
-| **工具** | Read, Glob, Grep, Bash |
-| **用途** | 在 plan 模式中自动用于研究代码库 |
+|  | Property | Value |  |
+|  | ---------- | ------- |  |
+|  | **Model** | Inherits from parent |  |
+|  | **Tools** | Read, Glob, Grep, Bash |  |
+|  | **Purpose** | Used automatically in plan mode to research codebase |  |
 
-**使用时机**:当 Claude 需要在呈现计划之前理解代码库时。
+**When used**: When Claude needs to understand the codebase before presenting a plan.
 
 ### Explore 子代理
 
-| 属性 | 值 |
-|------|-----|
-| **模型** | Haiku(快速、低延迟) |
-| **模式** | 严格只读 |
-| **工具** | Glob, Grep, Read, Bash(仅只读命令) |
-| **用途** | 快速代码库搜索和分析 |
+|  | Property | Value |  |
+|  | ---------- | ------- |  |
+|  | **Model** | Haiku (fast, low-latency) |  |
+|  | **Mode** | Strictly read-only |  |
+|  | **Tools** | Glob, Grep, Read, Bash (read-only commands only) |  |
+|  | **Purpose** | Fast codebase searching and analysis |  |
 
-**使用时机**:在不做修改的情况下搜索或理解代码时。
+**When used**: When searching/understanding code without making changes.
 
-**探索深度级别** -- 指定探索的深度:
-- **"quick"** -- 快速搜索,最小探索度,适合查找特定模式
-- **"medium"** -- 中等探索度,平衡速度和完整性,默认方法
-- **"very thorough"** -- 跨多个位置和命名规范的全面分析,可能耗时较长
+**Thoroughness Levels** - Specify the depth of exploration:
+- **"quick"** - Fast searches with minimal exploration, good for finding specific patterns
+- **"medium"** - Moderate exploration, balanced speed and thoroughness, 默认 approach
+- **"very thorough"** - Comprehensive analysis across multiple locations and naming conventions, may take longer
 
 ### Bash 子代理
 
-| 属性 | 值 |
-|------|-----|
-| **模型** | 继承父代理 |
-| **工具** | Bash |
-| **用途** | 在独立的上下文窗口中执行终端命令 |
+|  | Property | Value |  |
+|  | ---------- | ------- |  |
+|  | **Model** | Inherits from parent |  |
+|  | **Tools** | Bash |  |
+|  | **Purpose** | Execute terminal commands in a separate 上下文窗口 |  |
 
-**使用时机**:当运行的 shell 命令受益于隔离的上下文时。
+**When used**: When running shell commands that benefit from isolated context.
 
-### Statusline Setup 子代理
+### Statusline 设置 子代理
 
-| 属性 | 值 |
-|------|-----|
-| **模型** | Sonnet |
-| **工具** | Read, Write, Bash |
-| **用途** | 配置 Claude Code 状态栏显示 |
+|  | Property | Value |  |
+|  | ---------- | ------- |  |
+|  | **Model** | Sonnet |  |
+|  | **Tools** | Read, Write, Bash |  |
+|  | **Purpose** | 配置 the Claude Code status line display |  |
 
-**使用时机**:在设置或自定义状态栏时。
+**When used**: When setting up or customizing the status line.
 
-### Claude Code Guide 子代理
+### Claude Code 指南 子代理
 
-| 属性 | 值 |
-|------|-----|
-| **模型** | Haiku(快速、低延迟) |
-| **工具** | 只读 |
-| **用途** | 回答关于 Claude Code 功能和用法的问题 |
+|  | Property | Value |  |
+|  | ---------- | ------- |  |
+|  | **Model** | Haiku (fast, low-latency) |  |
+|  | **Tools** | Read-only |  |
+|  | **Purpose** | Answer questions about Claude Code features and 使用方法 |  |
 
-**使用时机**:当用户询问 Claude Code 如何工作或如何使用特定功能时。
+**When used**: When users ask questions about how Claude Code works or how to use specific features.
 
 ---
 
-## 管理子代理
+## 管理 子代理（子代理）
 
-### 使用 `/agents` 命令(推荐)
+### 使用 the `/agents` Command (Recommended)
 
 ```bash
 /agents
 ```
 
-这提供了一个交互式菜单用于:
-- 查看所有可用子代理(内置、用户和项目级)
-- 通过引导设置创建新子代理
-- 编辑现有自定义子代理和工具访问权限
-- 删除自定义子代理
-- 查看存在重名时哪些子代理处于活跃状态
+This provides an interactive menu to:
+- View all available 子代理（子代理） (内置, 用户, and 项目)
+- 创建 new 子代理（子代理） with guided 设置
+- Edit existing 自定义 子代理（子代理） and tool access
+- Delete 自定义 子代理（子代理）
+- See which 子代理（子代理） are active when duplicates exist
 
-### 直接文件管理
+### Direct File Management
 
 ```bash
-# 创建项目子代理
+#  创建 a 项目 子代理
 mkdir -p .claude/agents
 cat > .claude/agents/test-runner.md << 'EOF'
 ---
@@ -312,22 +353,22 @@ run the appropriate tests. If tests fail, analyze the failures and fix
 them while preserving the original test intent.
 EOF
 
-# 创建用户子代理(在所有项目中可用)
+#  创建 a 用户 子代理 (available in all projects)
 mkdir -p ~/.claude/agents
 ```
 
 ---
 
-## 使用子代理
+## 使用 子代理（子代理）
 
-### 自动委派
+### Automatic Delegation
 
-Claude 根据以下因素主动委派任务:
-- 你请求中的任务描述
-- 子代理配置中的 `description` 字段
-- 当前上下文和可用工具
+Claude proactively delegates tasks based on:
+- Task 描述 in your request
+- The `描述` field in 子代理 configurations
+- Current context and available tools
 
-要鼓励主动使用,在 `description` 字段中包含 "use PROACTIVELY" 或 "MUST BE USED":
+To encourage proactive use, include "use PROACTIVELY" or "MUST BE USED" in your `描述` field:
 
 ```yaml
 ---
@@ -336,9 +377,9 @@ description: Expert code review specialist. Use PROACTIVELY after writing or mod
 ---
 ```
 
-### 显式调用
+### Explicit Invocation
 
-你可以显式请求特定的子代理:
+You can explicitly request a specific 子代理:
 
 ```
 > Use the test-runner subagent to fix failing tests
@@ -346,31 +387,31 @@ description: Expert code review specialist. Use PROACTIVELY after writing or mod
 > Ask the debugger subagent to investigate this error
 ```
 
-### @提及调用
+### @-Mention Invocation
 
-使用 `@` 前缀保证调用特定子代理(绕过自动委派启发式规则):
+Use the `@` prefix to guarantee a specific 子代理 is invoked (bypasses automatic delegation heuristics):
 
 ```
 > @"code-reviewer (agent)" review the auth module
 ```
 
-### 会话级代理
+### Session-Wide 代理
 
-使用特定代理作为主代理运行整个会话:
+Run an entire session 使用 a specific 代理 as the main 代理:
 
 ```bash
-# 通过 CLI 标志
+#  Via CLI flag
 claude --agent code-reviewer
 
-# 通过 settings.json
+#  Via settings.JSON
 {
   "agent": "code-reviewer"
 }
 ```
 
-### 列出可用代理
+### Listing Available Agents
 
-使用 `claude agents` 命令列出所有来源中已配置的代理:
+Use the `claude agents` command to list all configured agents from all sources:
 
 ```bash
 claude agents
@@ -378,58 +419,58 @@ claude agents
 
 ---
 
-## 可恢复代理
+## Resumable Agents
 
-子代理可以继续之前的对话,完整保留上下文:
+子代理（子代理） can continue previous conversations with full context preserved:
 
 ```bash
-# 初始调用
+#  Initial invocation
 > Use the code-analyzer agent to start reviewing the authentication module
-# 返回 agentId: "abc123"
+#  Returns agentId: "abc123"
 
-# 之后恢复代理
+#  Resume the 代理 later
 > Resume agent abc123 and now analyze the authorization logic as well
 ```
 
-**适用场景**:
-- 跨多个会话的长时间研究
-- 迭代优化而不丢失上下文
-- 维持上下文的多步骤工作流
+**Use cases**:
+- Long-running research across multiple sessions
+- Iterative refinement without losing context
+- Multi-step workflows maintaining context
 
 ---
 
-## 链式子代理
+## Chaining 子代理（子代理）
 
-按顺序执行多个子代理:
+Execute multiple 子代理（子代理） in sequence:
 
 ```bash
 > First use the code-analyzer subagent to find performance issues,
   then use the optimizer subagent to fix them
 ```
 
-这支持复杂的工作流,其中一个子代理的输出可以传递给另一个。
+This enables complex workflows where the output of one 子代理 feeds into another.
 
 ---
 
-## 子代理持久化记忆
+## Persistent 记忆 for 子代理（子代理）
 
-`memory` 字段为子代理提供一个跨对话持久化的目录。这使子代理能够随时间积累知识,存储笔记、发现和跨会话持续的上下文。
+The `记忆` field gives 子代理（子代理） a persistent directory that survives across conversations. This allows 子代理（子代理） to 构建 up knowledge over time, storing notes, findings, and context that persist between sessions.
 
-### 记忆范围
+### 记忆 Scopes
 
-| 范围 | 目录 | 使用场景 |
-|------|------|----------|
-| `user` | `~/.claude/agent-memory/<name>/` | 跨所有项目的个人笔记和偏好 |
-| `project` | `.claude/agent-memory/<name>/` | 与团队共享的项目特定知识 |
-| `local` | `.claude/agent-memory-local/<name>/` | 不提交到版本控制的本地项目知识 |
+|  | 作用域 | Directory | Use Case |  |
+|  | ------- | ----------- | ---------- |  |
+|  | `用户` | `~/.claude/代理-记忆/<name>/` | Personal notes and preferences across all projects |  |
+|  | `项目` | `.claude/代理-记忆/<name>/` | 项目-specific knowledge shared with the 团队 |  |
+|  | `local` | `.claude/代理-记忆-local/<name>/` | Local 项目 knowledge not committed to 版本 control |  |
 
-### 工作原理
+### How It Works
 
-- 记忆目录中 `MEMORY.md` 的前 200 行会自动加载到子代理的系统提示词中
-- `Read`、`Write` 和 `Edit` 工具会自动启用,供子代理管理其记忆文件
-- 子代理可以根据需要在其记忆目录中创建额外文件
+- The first 200 lines of `记忆.md` in the 记忆 directory are automatically loaded into the 子代理's 系统提示词
+- The `Read`, `Write`, and `Edit` tools are automatically enabled for the 子代理 to manage its 记忆 files
+- The 子代理 can 创建 additional files in its 记忆 directory as needed
 
-### 示例配置
+### 示例 配置
 
 ```yaml
 ---
@@ -445,22 +486,26 @@ Check your MEMORY.md file at the start of each session to recall previous contex
 
 ```mermaid
 graph LR
-    A["Subagent Session 1"] -->|writes| M["MEMORY.md (persistent)"]
-    M -->|loads into| B["Subagent Session 2"]
+    A["Subagent<br/>Session 1"] -->|writes| M["MEMORY.md<br/>(persistent)"]
+    M -->|loads into| B["Subagent<br/>Session 2"]
     B -->|updates| M
-    M -->|loads into| C["Subagent Session 3"]
+    M -->|loads into| C["Subagent<br/>Session 3"]
 
+    style A fill:# e1f5fe,stroke:#333,color:#333
+    style B fill:# e1f5fe,stroke:#333,color:#333
+    style C fill:# e1f5fe,stroke:#333,color:#333
+    style M fill:# f3e5f5,stroke:#333,color:#333
 ```
 
 ---
 
-## 后台子代理
+## Background 子代理（子代理）
 
-子代理可以在后台运行,释放主对话以处理其他任务。
+子代理（子代理） can run in the background, freeing up the main conversation for other tasks.
 
 ### 配置
 
-在 frontmatter 中设置 `background: true` 使此子代理始终作为后台任务运行:
+Set `background: true` in the frontmatter to always run the 子代理 as a 后台任务:
 
 ```yaml
 ---
@@ -470,16 +515,16 @@ description: Performs long-running analysis tasks in the background
 ---
 ```
 
-### 键盘快捷键
+### Keyboard Shortcuts
 
-| 快捷键 | 操作 |
-|--------|------|
-| `Ctrl+B` | 将当前运行的子代理任务转入后台 |
-| `Ctrl+F` | 终止所有后台代理(按两次确认) |
+|  | Shortcut | Action |  |
+|  | ---------- | -------- |  |
+|  | `Ctrl+B` | Background a currently running 子代理 task |  |
+|  | `Ctrl+F` | Kill all background agents (press twice to confirm) |  |
 
-### 禁用后台任务
+### Disabling Background Tasks
 
-设置环境变量以完全禁用后台任务支持:
+Set the environment variable to 禁用 后台任务 支持 entirely:
 
 ```bash
 export CLAUDE_CODE_DISABLE_BACKGROUND_TASKS=1
@@ -487,9 +532,9 @@ export CLAUDE_CODE_DISABLE_BACKGROUND_TASKS=1
 
 ---
 
-## Worktree 隔离
+## Worktree Isolation
 
-`isolation: worktree` 设置给予子代理自己的 git worktree,使其能够独立进行修改而不影响主工作树。
+The `isolation: worktree` setting gives a 子代理 its own git worktree, allowing it to make changes independently without affecting the main working tree.
 
 ### 配置
 
@@ -502,28 +547,72 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 ```
 
-### 工作原理
+### How It Works
 
 ```mermaid
 graph TB
-    Main["Main Working Tree"] -->|spawns| Sub["Subagent with Isolated Worktree"]
-    Sub -->|makes changes in| WT["Separate Git Worktree + Branch"]
+    Main["Main Working Tree"] -->|spawns| Sub["Subagent with<br/>Isolated Worktree"]
+    Sub -->|makes changes in| WT["Separate Git<br/>Worktree + Branch"]
     WT -->|no changes| Clean["Auto-cleaned"]
-    WT -->|has changes| Return["Returns worktree path and branch"]
+    WT -->|has changes| Return["Returns worktree<br/>path and branch"]
 
+    style Main fill:# e1f5fe,stroke:#333,color:#333
+    style Sub fill:# f3e5f5,stroke:#333,color:#333
+    style WT fill:# e8f5e9,stroke:#333,color:#333
+    style Clean fill:# fff3e0,stroke:#333,color:#333
+    style Return fill:# fff3e0,stroke:#333,color:#333
 ```
 
-- 子代理在自己的 git worktree 和单独分支上运行
-- 如果子代理未做任何修改,worktree 会自动清理
-- 如果存在修改,worktree 路径和分支名称会返回给主代理以供审查或合并
+- The 子代理 operates in its own git worktree on a separate 分支
+- If the 子代理 makes no changes, the worktree is automatically cleaned up
+- If changes exist, the worktree path and 分支 name are returned to the main 代理 for review or merging
 
 ---
 
-## 限制可生成的子代理
+## Forked 子代理（子代理）
 
-你可以通过在 `tools` 字段中使用 `Agent(agent_type)` 语法来控制给定子代理被允许生成哪些子代理。这提供了一种白名单机制来指定可用于委派的子代理。
+Forked 子代理（子代理） (`context: fork`) inherit the parent 代理's full conversation context at the moment of forking, rather than starting with a clean slate. This is useful for exploring alternative paths without losing the work done so far.
 
-> **注意**:在 v2.1.63 中,`Task` 工具被重命名为 `Agent`。现有的 `Task(...)` 引用仍可作为别名使用。
+> **Availability**: GA in v2.1.117. On external builds (non-first-party distributions), set `CLAUDE_CODE_FORK_SUBAGENT=1` to enable forking.
+
+### 配置
+
+```yaml
+---
+name: alternative-explorer
+description: Explore an alternative implementation path while preserving parent context
+context: fork
+tools: Read, Edit, Bash, Grep, Glob
+---
+
+You are a forked subagent. You inherit the parent's full conversation and
+may explore an alternative approach. Return your findings and the parent
+will decide whether to adopt them.
+```
+
+### Enabling on External Builds
+
+```bash
+export CLAUDE_CODE_FORK_SUBAGENT=1
+claude
+```
+
+### 何时使用 Fork vs Clean Context
+
+|  | Scenario | `context: fork` | Clean context (默认) |  |
+|  | ---------- | ----------------- | ------------------------- |  |
+|  | Explore alternative implementations | Yes | No (would lose context) |  |
+|  | Long research with existing context | Yes | No |  |
+|  | Independent specialized task | No | Yes |  |
+|  | Avoiding context pollution | No | Yes |  |
+
+---
+
+## Restrict Spawnable 子代理（子代理）
+
+You can control which 子代理（子代理） a given 子代理 is allowed to spawn by 使用 the `代理(agent_type)` syntax in the `tools` field. This provides a way to allowlist specific 子代理（子代理） for delegation.
+
+> **Note**: In v2.1.63, the `Task` tool was renamed to `Agent`. Existing `Task(...)` references still work as aliases.
 
 ### 示例
 
@@ -538,51 +627,53 @@ You are a coordinator agent. You can delegate work to the "worker" and
 "researcher" subagents only. Use Read and Bash for your own exploration.
 ```
 
-在此示例中,`coordinator` 子代理只能生成 `worker` 和 `researcher` 子代理。它不能生成任何其他子代理,即使它们在其他地方有定义。
+In this 示例, the `coordinator` 子代理 can only spawn the `worker` and `researcher` 子代理（子代理）. It cannot spawn any other 子代理（子代理）, even if they are defined elsewhere.
 
 ---
 
-## `claude agents` CLI 命令
+## `claude agents` CLI Command
 
-`claude agents` 命令按源分组列出所有已配置的代理(内置、用户级、项目级):
+The `claude agents` command lists all configured agents grouped by source (内置, 用户-level, 项目-level):
 
 ```bash
 claude agents
 ```
 
-此命令:
-- 显示来自所有源的可用代理
-- 按源位置对代理进行分组
-- 当高优先级的代理遮蔽了低优先级的同名代理时指示**覆盖**情况(例如,与用户级代理同名的项目级代理)
+This command:
+- Shows all available agents from all sources
+- Groups agents by their source 位置
+- Indicates **overrides** when an 代理 at a higher priority level shadows one at a lower level (e.g., a 项目-level 代理 with the same name as a 用户-level 代理)
 
 ---
 
-## Agent Teams(实验性)
+## 代理团队 (Experimental)
 
-Agent Teams 协调多个协同工作的 Claude Code 实例来完成复杂任务。与子代理(委派子任务并返回结果)不同,团队成员拥有自己的上下文并直接通过共享邮箱系统通信。
+代理团队 coordinate multiple Claude Code instances working together on complex tasks. Unlike 子代理（子代理） (which are delegated subtasks returning results), teammates work independently with their own context windows and can message each other directly through a shared mailbox system.
 
-> **注意**:Agent Teams 是实验性功能,需要 Claude Code v2.1.32+。使用前需先启用。
+> **Official Documentation**: [code.claude.com/docs/en/agent-teams](https://code.claude.com/docs/en/agent-teams)
 
-### 子代理 vs Agent Teams
+> **Note**: Agent Teams is experimental and disabled by default. Requires Claude Code v2.1.32+. Enable it before use.
 
-| 方面 | 子代理 | Agent Teams |
-|------|--------|-------------|
-| **委派模式** | 父代理委派子任务,等待结果 | 团队负责人分配工作,团队成员独立执行 |
-| **上下文** | 每个子任务获得全新上下文,结果经提炼后返回 | 每个团队成员维护自己持久的上下文 |
-| **协调方式** | 串行或并行,由父代理管理 | 共享任务列表,带自动依赖管理 |
-| **通信方式** | 仅返回值 | 通过邮箱进行代理间消息传递 |
-| **会话恢复** | 支持 | 进程内 teammate 不支持 |
-| **适用场景** | 聚焦的、明确定义的子任务 | 需要并行处理的大型多文件项目 |
+### 子代理（子代理） vs 代理团队
 
-### 启用 Agent Teams
+|  | Aspect | 子代理（子代理） | 代理团队 |  |
+|  | -------- | ----------- | ------------- |  |
+|  | **Delegation model** | Parent delegates subtask, waits for result | 团队 lead coordinates work, teammates execute independently |  |
+|  | **Context** | Fresh context per subtask, results distilled back | Each teammate maintains its own persistent 上下文窗口 |  |
+|  | **Coordination** | Sequential or parallel, managed by parent | Shared task list with automatic dependency management |  |
+|  | **Communication** | Results returned to parent only (no inter-代理 messaging) | Teammates can message each other directly via mailbox |  |
+|  | **Session resumption** | Supported | Not supported with in-process teammates |  |
+|  | **Best for** | Focused, well-defined subtasks | Complex work requiring inter-代理 communication and parallel execution |  |
 
-设置环境变量或将其添加到你的 `settings.json`:
+### Enabling 代理团队
+
+Set the environment variable or add it to your `settings.JSON`:
 
 ```bash
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 ```
 
-或在 `settings.json` 中:
+Or in `settings.JSON`:
 
 ```json
 {
@@ -592,32 +683,32 @@ export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 }
 ```
 
-### 启动团队
+### Starting a 团队
 
-一旦启用,在你的提示词中要求 Claude 与 teammates 协作:
+Once enabled, ask Claude to work with teammates in your prompt:
 
 ```
-User: Build the authentication module. Use a team -- one teammate for the API endpoints,
+User: Build the authentication module. Use a team — one teammate for the API endpoints,
       one for the database schema, and one for the test suite.
 ```
 
-Claude 将创建团队、分配任务并自动协调工作。
+Claude will 创建 the 团队, assign tasks, and coordinate the work automatically.
 
-### 显示模式
+### Display modes
 
-控制 teammate 活动的显示方式:
+Control how teammate activity is displayed:
 
-| 模式 | 标志 | 说明 |
-|------|------|------|
-| **Auto** | `--teammate-mode auto` | 自动选择最适合你终端的显示模式 |
-| **In-process** | `--teammate-mode in-process` | 在当前终端内联显示 teammate 输出(默认) |
-| **Split-panes** | `--teammate-mode tmux` | 在单独的 tmux 或 iTerm2 面板中打开每个 teammate |
+|  | Mode | Flag | 描述 |  |
+|  | ------ | ------ | ------------- |  |
+|  | **Auto** | `--teammate-mode auto` | Automatically chooses the best display mode for your terminal |  |
+|  | **In-process** (默认) | `--teammate-mode in-process` | Shows teammate output inline in the current terminal |  |
+|  | **Split-panes** | `--teammate-mode tmux` | Opens each teammate in a separate tmux or iTerm2 pane |  |
 
 ```bash
 claude --teammate-mode tmux
 ```
 
-你也可以在 `settings.json` 中设置显示模式:
+You can also set the display mode in `settings.JSON`:
 
 ```json
 {
@@ -625,26 +716,26 @@ claude --teammate-mode tmux
 }
 ```
 
-> **注意**:分屏模式需要 tmux 或 iTerm2。在 VS Code 终端、Windows Terminal 或 Ghostty 中不可用。
+> **Note**: Split-pane mode requires tmux or iTerm2. It is not available in VS Code terminal, Windows Terminal, or Ghostty.
 
-### 导航
+### Navigation
 
-在分屏模式下使用 `Shift+Down` 在 teammates 之间导航。
+Use `Shift+Down` to navigate between teammates in split-pane mode.
 
-### 团队配置
+### 团队 配置
 
-团队配置存储在 `~/.claude/teams/{team-name}/config.json`。
+团队 configurations are stored at `~/.claude/teams/{团队-name}/config.JSON`.
 
 ### 架构
 
 ```mermaid
 graph TB
-    Lead["Team Lead (Coordinator)"]
-    TaskList["Shared Task List (Dependencies)"]
-    Mailbox["Mailbox (Messages)"]
-    T1["Teammate 1 (Own Context)"]
-    T2["Teammate 2 (Own Context)"]
-    T3["Teammate 3 (Own Context)"]
+    Lead["Team Lead<br/>(Coordinator)"]
+    TaskList["Shared Task List<br/>(Dependencies)"]
+    Mailbox["Mailbox<br/>(Messages)"]
+    T1["Teammate 1<br/>(Own Context)"]
+    T2["Teammate 2<br/>(Own Context)"]
+    T3["Teammate 3<br/>(Own Context)"]
 
     Lead -->|assigns tasks| TaskList
     Lead -->|sends messages| Mailbox
@@ -658,80 +749,86 @@ graph TB
     T2 -->|updates status| TaskList
     T3 -->|updates status| TaskList
 
+    style Lead fill:# e1f5fe,stroke:#333,color:#333
+    style TaskList fill:# fff9c4,stroke:#333,color:#333
+    style Mailbox fill:# f3e5f5,stroke:#333,color:#333
+    style T1 fill:# e8f5e9,stroke:#333,color:#333
+    style T2 fill:# e8f5e9,stroke:#333,color:#333
+    style T3 fill:# e8f5e9,stroke:#333,color:#333
 ```
 
-**核心组件**:
+**Key components**:
 
-- **Team Lead**:创建团队、分配任务并进行协调的主 Claude Code 会话
-- **Shared Task List**:带自动依赖跟踪的同步任务列表
-- **Mailbox**:用于 teammates 通信状态和协调的代理间消息系统
-- **Teammates**:独立的 Claude Code 实例,各自拥有自己的上下文窗口
+- **团队 Lead**: The main Claude Code session that creates the 团队, assigns tasks, and coordinates
+- **Shared Task List**: A synchronized list of tasks with automatic dependency tracking
+- **Mailbox**: An inter-代理 messaging system for teammates to communicate status and coordinate
+- **Teammates**: Independent Claude Code instances, each with their own 上下文窗口
 
-### 任务分配和消息传递
+### Task assignment and messaging
 
-团队负责人将工作分解为任务并分配给 teammates。共享任务列表负责处理:
+The 团队 lead breaks work into tasks and assigns them to teammates. The shared task list handles:
 
-- **自动依赖管理** -- 任务等待其依赖项完成
-- **状态跟踪** -- teammates 在工作时更新任务状态
-- **代理间消息传递** -- teammates 通过邮箱发送消息进行协调(例如:"数据库架构已就绪,你可以开始编写查询了")
+- **Automatic dependency management** — tasks wait for their dependencies to complete
+- **Status tracking** — teammates 更新 task status as they work
+- **Inter-代理 messaging** — teammates send messages via the mailbox for coordination (e.g., "Database 模式 is ready, you can 启动 writing queries")
 
-### 计划审批工作流
+### Plan approval workflow
 
-对于复杂任务,团队负责人会在 teammates 开始工作之前创建执行计划。用户审查并批准该计划,确保在进行任何代码更改之前团队的方法符合预期。
+For complex tasks, the 团队 lead creates an execution plan before teammates begin work. The 用户 reviews and approves the plan, ensuring the 团队's approach aligns with expectations before any code changes are made.
 
-### 团队的 Hook 事件
+### 钩子 events for teams
 
-Agent Teams 引入了两个额外的 [hook 事件](../06-hooks/):
+代理团队 introduce two additional [钩子 events](../06-钩子/):
 
-| 事件 | 触发时机 | 使用场景 |
-|------|----------|----------|
-| `TeammateIdle` | Teammate 完成当前任务且无待办工作 | 触发通知、分配后续任务 |
-| `TaskCompleted` | 共享任务列表中的任务标记为完成 | 运行验证、更新仪表板、链接后续工作 |
+|  | Event | Fires When | Use Case |  |
+|  | ------- | ----------- | ---------- |  |
+|  | `TeammateIdle` | A teammate finishes its current task and has no pending work | Trigger notifications, assign follow-up tasks |  |
+|  | `TaskCompleted` | A task in the shared task list is marked complete | Run validation, 更新 dashboards, chain dependent work |  |
 
 ### 最佳实践
 
-- **团队规模**:保持团队在 3-5 个 teammates 以达到最佳协调效果
-- **任务粒度**:将工作分解为每个 5-15 分钟的任务 -- 小到足以并行化,大到有意义
-- **避免文件冲突**:将不同的文件或目录分配给不同的 teammates 以防止合并冲突
-- **从简单开始**:第一个团队使用 in-process 模式;熟悉后再切换到分屏模式
-- **清晰的任务描述**:提供具体、可操作的任务描述,以便 teammates 能够独立工作
+- **团队 size**: Keep teams at 3-5 teammates for optimal coordination
+- **Task sizing**: Break work into tasks that take 5-15 minutes each — small enough to parallelize, large enough to be meaningful
+- **Avoid file conflicts**: Assign different files or directories to different teammates to prevent merge conflicts
+- **启动 simple**: Use in-process mode for your first 团队; switch to split-panes once comfortable
+- **Clear task descriptions**: Provide specific, actionable task descriptions so teammates can work independently
 
-### 局限性
+### Limitations
 
-- **实验性**:功能行为可能在未来的版本中发生变化
-- **无法恢复会话**:进程内的 teammates 在会话结束后无法恢复
-- **每会话一个团队**:无法在单个会话中创建嵌套团队或多个团队
-- **固定领导角色**:团队负责人角色无法转移给 teammate
-- **分屏限制**:需要 tmux/iTerm2;在 VS Code 终端、Windows Terminal 或 Ghostty 中不可用
-- **无跨会话团队**:Teammates 仅存在于当前会话内
+- **Experimental**: 功能 behavior may change in future releases
+- **No session resumption**: In-process teammates cannot be resumed after a session ends
+- **One 团队 per session**: Cannot 创建 nested teams or multiple teams in a single session
+- **Fixed leadership**: The 团队 lead role cannot be transferred to a teammate
+- **Split-pane restrictions**: tmux/iTerm2 必需; not available in VS Code terminal, Windows Terminal, or Ghostty
+- **No cross-session teams**: Teammates exist only within the current session
 
-> **警告**:Agent Teams 是实验性功能。请先用非关键工作进行测试,并监控 teammate 协调是否出现意外行为。
+> **Warning**: Agent Teams is experimental. Test with non-critical work first and monitor teammate coordination for unexpected behavior.
 
 ---
 
-## 插件子代理安全
+## 插件 子代理 安全性
 
-插件提供的子代理出于安全考虑具有受限的 frontmatter 能力。以下字段在插件子代理定义中**不允许**使用:
+插件-provided 子代理（子代理） have restricted frontmatter capabilities for 安全性. The following fields are **not allowed** in 插件 子代理 definitions:
 
-- `hooks` -- 无法定义生命周期钩子
-- `mcpServers` -- 无法配置 MCP 服务器
-- `permissionMode` -- 无法覆盖权限设置
+- `钩子` - Cannot define lifecycle 钩子
+- `mcpServers` - Cannot 配置 MCP servers
+- `permissionMode` - Cannot override permission settings
 
-这可以防止插件通过子代理钩子提升权限或执行任意命令。
+This prevents 插件 from escalating privileges or executing arbitrary commands through 子代理 钩子.
 
 ---
 
 ## 架构
 
-### 高层架构
+### High-Level 架构
 
 ```mermaid
 graph TB
     User["User"]
-    Main["Main Agent (Coordinator)"]
-    Reviewer["Code Reviewer Subagent"]
-    Tester["Test Engineer Subagent"]
-    Docs["Documentation Subagent"]
+    Main["Main Agent<br/>(Coordinator)"]
+    Reviewer["Code Reviewer<br/>Subagent"]
+    Tester["Test Engineer<br/>Subagent"]
+    Docs["Documentation<br/>Subagent"]
 
     User -->|asks| Main
     Main -->|delegates| Reviewer
@@ -743,14 +840,14 @@ graph TB
     Main -->|synthesizes| User
 ```
 
-### 子代理生命周期
+### 子代理 Lifecycle
 
 ```mermaid
 sequenceDiagram
     participant User
     participant MainAgent as Main Agent
-    participant CodeReviewer as Code Reviewer Subagent
-    participant Context as Separate Context Window
+    participant CodeReviewer as Code Reviewer<br/>Subagent
+    participant Context as Separate<br/>Context Window
 
     User->>MainAgent: "Build new auth feature"
     MainAgent->>MainAgent: Analyze task
@@ -765,14 +862,14 @@ sequenceDiagram
 
 ---
 
-## 上下文管理
+## Context Management
 
 ```mermaid
 graph TB
-    A["Main Agent Context 50,000 tokens"]
-    B["Subagent 1 Context 20,000 tokens"]
-    C["Subagent 2 Context 20,000 tokens"]
-    D["Subagent 3 Context 20,000 tokens"]
+    A["Main Agent Context<br/>50,000 tokens"]
+    B["Subagent 1 Context<br/>20,000 tokens"]
+    C["Subagent 2 Context<br/>20,000 tokens"]
+    D["Subagent 3 Context<br/>20,000 tokens"]
 
     A -->|Clean slate| B
     A -->|Clean slate| C
@@ -782,69 +879,73 @@ graph TB
     C -->|Results only| A
     D -->|Results only| A
 
+    style A fill:# e1f5fe
+    style B fill:# fff9c4
+    style C fill:# fff9c4
+    style D fill:# fff9c4
 ```
 
-### 要点
+### Key Points
 
-- 每个子代理获得一个**全新的上下文窗口**,不包含主对话历史
-- 只有**相关上下文**会被传递给子代理以完成其特定任务
-- 结果会被**提炼**后返回给主代理
-- 这防止了长项目中的**上下文 token 耗尽**
+- Each 子代理 gets a **fresh 上下文窗口** without the main conversation history
+- Only the **relevant context** is passed to the 子代理 for their specific task
+- Results are **distilled** back to the main 代理
+- This prevents **context token exhaustion** on long projects
 
-### 性能考量
+### 性能 Considerations
 
-- **上下文效率** -- 代理保护主上下文,支持更长的会话
-- **延迟** -- 子代理从空白状态启动,可能会增加收集初始上下文的延迟
+- **Context efficiency** - Agents preserve main context, enabling longer sessions
+- **Latency** - 子代理（子代理） 启动 with clean slate and may add latency gathering initial context
 
-### 关键行为
+### Key Behaviors
 
-- **禁止嵌套生成** -- 子代理不能生成其他子代理
-- **后台权限** -- 后台子代理自动拒绝任何未预先批准的权限请求
-- **后台化** -- 按 `Ctrl+B` 将当前运行的任务转入后台
-- **转录记录** -- 子代理转录记录存储在 `~/.claude/projects/{project}/{sessionId}/subagents/agent-{agentId}.jsonl`
-- **自动压缩** -- 子代理上下文在约 95% 容量时自动压缩(可通过 `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` 环境变量覆盖)
+- **No nested spawning** - 子代理（子代理） cannot spawn other 子代理（子代理）
+- **Background permissions** - Background 子代理（子代理） auto-deny any permissions that are not pre-approved
+- **Backgrounding** - Press `Ctrl+B` to background a currently running task
+- **Transcripts** - 子代理 transcripts are stored at `~/.claude/projects/{项目}/{sessionId}/子代理（子代理）/代理-{agentId}.jsonl`
+- **Auto-compaction** - 子代理 context auto-compacts at ~95% capacity (override with `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` environment variable)
 
 ---
 
-## 何时使用子代理
+## 何时使用 子代理（子代理）
 
-| 场景 | 是否使用子代理 | 原因 |
-|------|--------------|------|
-| 包含许多步骤的复杂功能 | 是 | 分离关注点,防止上下文污染 |
-| 快速代码审查 | 否 | 不必要的开销 |
-| 并行任务执行 | 是 | 每个子代理有自己的上下文 |
-| 需要专业化能力 | 是 | 自定义系统提示词 |
-| 长时间分析 | 是 | 防止主上下文耗尽 |
-| 单个任务 | 否 | 不必要地增加延迟 |
+|  | Scenario | Use 子代理 | Why |  |
+|  | ---------- | -------------- | ----- |  |
+|  | Complex 功能 with many steps | Yes | Separate concerns, prevent context pollution |  |
+|  | Quick code review | No | Unnecessary overhead |  |
+|  | Parallel task execution | Yes | Each 子代理 has own context |  |
+|  | Specialized expertise needed | Yes | 自定义 system prompts |  |
+|  | Long-running analysis | Yes | Prevents main context exhaustion |  |
+|  | Single task | No | Adds latency unnecessarily |  |
 
 ---
 
 ## 最佳实践
 
-### 设计原则
+### 设计 Principles
 
-**应该做的:**
-- 从 Claude 生成的代理开始 -- 先用 Claude 生成初始子代理,然后迭代定制
-- 设计聚焦的子代理 -- 单一、明确的职责而不是包揽一切
-- 编写详细的提示词 -- 包含具体指令、示例和约束
-- 限制工具访问 -- 只授予子代理目的所需的必要工具
-- 版本控制 -- 将项目子代理纳入版本控制以支持团队协作
+**Do:**
+- 启动 with Claude-generated agents - Generate initial 子代理 with Claude, then iterate to customize
+- 设计 focused 子代理（子代理） - Single, clear responsibilities rather than one doing everything
+- Write detailed prompts - Include specific instructions, 示例, and constraints
+- Limit tool access - Grant only necessary tools for the 子代理's purpose
+- 版本 control - Check 项目 子代理（子代理） into 版本 control for 团队 collaboration
 
-**不应该做的:**
-- 创建角色重叠的子代理
-- 给予子代理不必要的工具访问权限
-- 为简单的单步骤任务使用子代理
-- 在一个子代理的提示词中混合关注点
-- 忘记传递必要的上下文
+**Don't:**
+- 创建 overlapping 子代理（子代理） with same roles
+- Give 子代理（子代理） unnecessary tool access
+- Use 子代理（子代理） for simple, single-step tasks
+- Mix concerns in one 子代理's prompt
+- Forget to pass necessary context
 
-### 系统提示词最佳实践
+### 系统提示词 最佳实践
 
-1. **明确指定角色**
+1. **Be Specific About Role**
    ```
    You are an expert code reviewer specializing in [specific areas]
    ```
 
-2. **清晰定义优先级**
+2. **Define Priorities Clearly**
    ```
    Review priorities (in order):
    1. Security Issues
@@ -852,12 +953,12 @@ graph TB
    3. Code Quality
    ```
 
-3. **指定输出格式**
+3. **Specify Output 格式**
    ```
    For each issue provide: Severity, Category, Location, Description, Fix, Impact
    ```
 
-4. **包含操作步骤**
+4. **Include Action Steps**
    ```
    When invoked:
    1. Run git diff to see recent changes
@@ -865,191 +966,191 @@ graph TB
    3. Begin review immediately
    ```
 
-### 工具访问策略
+### Tool Access Strategy
 
-1. **从严格开始**:最初只提供必要的工具
-2. **按需扩展**:仅在需求提出时添加工具
-3. **尽可能只读**:对分析类代理使用 Read/Grep
-4. **沙箱执行**:将 Bash 命令限制为特定模式
+1. **启动 Restrictive**: Begin with only essential tools
+2. **Expand Only When Needed**: Add tools as 系统要求 demand
+3. **Read-Only When Possible**: Use Read/Grep for analysis agents
+4. **Sandboxed Execution**: Limit Bash commands to specific patterns
 
 ---
 
-## 本文件夹中的示例子代理
+## 示例 子代理（子代理） in This Folder
 
-本文件夹包含即开即用的示例子代理:
+This folder contains ready-to-use 示例 子代理（子代理）:
 
 ### 1. Code Reviewer (`code-reviewer.md`)
 
-**用途**:全面的代码质量和可维护性分析
+**Purpose**: Comprehensive code quality and maintainability analysis
 
-**工具**:Read, Grep, Glob, Bash
+**Tools**: Read, Grep, Glob, Bash
 
-**专长**:
-- 安全漏洞检测
-- 性能优化识别
-- 代码可维护性评估
-- 测试覆盖率分析
+**Specialization**:
+- 安全性 vulnerability detection
+- 性能 optimization identification
+- Code 可维护性 assessment
+- 测试 coverage analysis
 
-**使用场景**:当你需要专注于质量和安全的自动化代码审查时
-
----
-
-### 2. Test Engineer (`test-engineer.md`)
-
-**用途**:测试策略、覆盖率分析和自动化测试
-
-**工具**:Read, Write, Bash, Grep
-
-**专长**:
-- 单元测试创建
-- 集成测试设计
-- 边缘情况识别
-- 覆盖率分析(目标 >80%)
-
-**使用场景**:当你需要全面的测试套件创建或覆盖率分析时
+**Use When**: You need automated code reviews with focus on quality and security
 
 ---
 
-### 3. Documentation Writer (`documentation-writer.md`)
+### 2. 测试 Engineer (`测试-engineer.md`)
 
-**用途**:技术文档、API 文档和用户指南
+**Purpose**: Test strategy, coverage analysis, and automated testing
 
-**工具**:Read, Write, Grep
+**Tools**: Read, Write, Bash, Grep
 
-**专长**:
-- API 端点文档
-- 用户指南创建
-- 架构文档
-- 代码注释改进
+**Specialization**:
+- Unit 测试 creation
+- 集成 测试 设计
+- Edge case identification
+- Coverage analysis (>80% target)
 
-**使用场景**:当你需要创建或更新项目文档时
+**Use When**: You need comprehensive test suite creation or coverage analysis
+
+---
+
+### 3. 文档 Writer (`文档-writer.md`)
+
+**Purpose**: Technical documentation, API docs, and user guides
+
+**Tools**: Read, Write, Grep
+
+**Specialization**:
+- API endpoint 文档
+- 用户 指南 creation
+- 架构 文档
+- Code comment 改进
+
+**Use When**: You need to create or update project documentation
 
 ---
 
 ### 4. Secure Reviewer (`secure-reviewer.md`)
 
-**用途**:具有最小权限的安全聚焦代码审查
+**Purpose**: Security-focused code review with minimal permissions
 
-**工具**:Read, Grep
+**Tools**: Read, Grep
 
-**专长**:
-- 安全漏洞检测
-- 身份验证/授权问题
-- 数据暴露风险
-- 注入攻击识别
+**Specialization**:
+- 安全性 vulnerability detection
+- Authentication/authorization issues
+- Data exposure risks
+- Injection attack identification
 
-**使用场景**:当你需要在没有修改能力的情况下进行安全审计时
+**Use When**: You need security audits without modification capabilities
 
 ---
 
-### 5. Implementation Agent (`implementation-agent.md`)
+### 5. Implementation 代理 (`implementation-代理.md`)
 
-**用途**:功能开发的完整实现能力
+**Purpose**: Full implementation capabilities for feature development
 
-**工具**:Read, Write, Edit, Bash, Grep, Glob
+**Tools**: Read, Write, Edit, Bash, Grep, Glob
 
-**专长**:
-- 功能实现
-- 代码生成
-- 构建和测试执行
-- 代码库修改
+**Specialization**:
+- 功能 implementation
+- Code generation
+- 构建 and 测试 execution
+- Codebase modification
 
-**使用场景**:当你需要一个端到端实现功能的子代理时
+**Use When**: You need a subagent to implement features end-to-end
 
 ---
 
 ### 6. Debugger (`debugger.md`)
 
-**用途**:针对错误、测试失败和异常行为的调试专家
+**Purpose**: Debugging specialist for errors, test failures, and unexpected behavior
 
-**工具**:Read, Edit, Bash, Grep, Glob
+**Tools**: Read, Edit, Bash, Grep, Glob
 
-**专长**:
-- 根因分析
-- 错误调查
-- 测试失败解决
-- 最小修复实施
+**Specialization**:
+- Root cause analysis
+- Error investigation
+- 测试 failure resolution
+- Minimal fix implementation
 
-**使用场景**:当你遇到 bug、错误或异常行为时
+**Use When**: You encounter bugs, errors, or unexpected behavior
 
 ---
 
 ### 7. Data Scientist (`data-scientist.md`)
 
-**用途**:SQL 查询和数据洞察的数据分析专家
+**Purpose**: Data analysis expert for SQL queries and data insights
 
-**工具**:Bash, Read, Write
+**Tools**: Bash, Read, Write
 
-**专长**:
-- SQL 查询优化
-- BigQuery 操作
-- 数据分析和可视化
-- 统计洞察
+**Specialization**:
+- SQL query optimization
+- BigQuery operations
+- Data analysis and visualization
+- Statistical insights
 
-**使用场景**:当你需要数据分析、SQL 查询或 BigQuery 操作时
+**Use When**: You need data analysis, SQL queries, or BigQuery operations
 
 ---
 
-## 安装说明
+## 安装 Instructions
 
-### 方法 1:使用 /agents 命令(推荐)
+### Method 1: 使用 /agents Command (Recommended)
 
 ```bash
 /agents
 ```
 
-然后:
-1. 选择 'Create New Agent'
-2. 选择项目级或用户级
-3. 详细描述你的子代理
-4. 选择要授权访问的工具(或留空以继承所有工具)
-5. 保存并使用
+Then:
+1. Select '创建 New 代理'
+2. Choose 项目-level or 用户-level
+3. Describe your 子代理 in detail
+4. Select tools to grant access (or leave blank to inherit all)
+5. Save and use
 
-### 方法 2:复制到项目
+### Method 2: Copy to 项目
 
-将代理文件复制到你项目的 `.claude/agents/` 目录:
+Copy the 代理 files to your 项目's `.claude/agents/` directory:
 
 ```bash
-# 导航到你的项目
+#  Navigate to your 项目
 cd /path/to/your/project
 
-# 如果不存在则创建 agents 目录
+#  创建 agents directory if it doesn't exist
 mkdir -p .claude/agents
 
-# 从此文件夹复制所有代理文件
+#  Copy all 代理 files from this folder
 cp /path/to/04-subagents/*.md .claude/agents/
 
-# 删除 README(.claude/agents 中不需要)
+#  Remove the README (not needed in .claude/agents)
 rm .claude/agents/README.md
 ```
 
-### 方法 3:复制到用户目录
+### Method 3: Copy to 用户 Directory
 
-对于在所有项目中都可用的代理:
+For agents available in all your projects:
 
 ```bash
-# 创建用户 agents 目录
+#  创建 用户 agents directory
 mkdir -p ~/.claude/agents
 
-# 复制代理
+#  Copy agents
 cp /path/to/04-subagents/code-reviewer.md ~/.claude/agents/
 cp /path/to/04-subagents/debugger.md ~/.claude/agents/
-# ... 按需复制其他代理
+#  ... copy others as needed
 ```
 
-### 验证
+### Verification
 
-安装后,验证代理已被识别:
+After 安装, verify the agents are recognized:
 
 ```bash
 /agents
 ```
 
-你应该看到已安装的代理与内置代理一起列出。
+You should see your installed agents listed alongside the 内置 ones.
 
 ---
 
-## 文件结构
+## File Structure
 
 ```
 project/
@@ -1069,52 +1170,58 @@ project/
 
 ## 相关概念
 
-### 相关功能
+### Related Features
 
-- **[Slash Commands](../01-slash-commands/)** -- 用户触发的快捷方式
-- **[Memory](../02-memory/)** -- 持久化的跨会话上下文
-- **[Skills](../03-skills/)** -- 可复用的自主能力
-- **[MCP Protocol](../05-mcp/)** -- 实时外部数据访问
-- **[Hooks](../06-hooks/)** -- 事件驱动的 Shell 命令自动化
-- **[Plugins](../07-plugins/)** -- 打包的扩展包
+- **[Slash Commands](../01-slash-commands/)** - Quick 用户-invoked shortcuts
+- **[记忆](../02-记忆/)** - Persistent cross-session context
+- **[技能](../03-技能/)** - Reusable autonomous capabilities
+- **[MCP 协议](../05-mcp/)** - Real-time external data access
+- **[钩子](../06-钩子/)** - Event-driven shell command automation
+- **[插件](../07-插件/)** - Bundled extension packages
 
-### 与其他功能的对比
+### Comparison with Other Features
 
-| 功能 | 用户触发 | 自动触发 | 持久化 | 外部访问 | 隔离上下文 |
-|---------|--------------|--------------|-----------|------------------|------------------|
-| **Slash Commands** | 是 | 否 | 否 | 否 | 否 |
-| **Subagents** | 是 | 是 | 否 | 否 | 是 |
-| **Memory** | 自动 | 自动 | 是 | 否 | 否 |
-| **MCP** | 自动 | 是 | 否 | 是 | 否 |
-| **Skills** | 是 | 是 | 否 | 否 | 否 |
+|  | 功能 | 用户-Invoked | Auto-Invoked | Persistent | External Access | Isolated Context |  |
+|  | --------- | -------------- | -------------- | ----------- | ------------------ | ------------------ |  |
+|  | **Slash Commands** | Yes | No | No | No | No |  |
+|  | **子代理（子代理）** | Yes | Yes | No | No | Yes |  |
+|  | **记忆** | Auto | Auto | Yes | No | No |  |
+|  | **MCP** | Auto | Yes | No | Yes | No |  |
+|  | **技能** | Yes | Yes | No | No | No |  |
 
-### 集成模式
+### 集成 模式
 
 ```mermaid
 graph TD
     User["User Request"] --> Main["Main Agent"]
-    Main -->|Uses| Memory["Memory (Context)"]
-    Main -->|Queries| MCP["MCP (Live Data)"]
-    Main -->|Invokes| Skills["Skills (Auto Tools)"]
-    Main -->|Delegates| Subagents["Subagents (Specialists)"]
+    Main -->|Uses| Memory["Memory<br/>(Context)"]
+    Main -->|Queries| MCP["MCP<br/>(Live Data)"]
+    Main -->|Invokes| Skills["Skills<br/>(Auto Tools)"]
+    Main -->|Delegates| Subagents["Subagents<br/>(Specialists)"]
 
     Subagents -->|Use| Memory
     Subagents -->|Query| MCP
-    Subagents -->|Isolated| Context["Clean Context Window"]
+    Subagents -->|Isolated| Context["Clean Context<br/>Window"]
 ```
 
 ---
 
-## 其他资源
+## Additional 资源
 
-- [Official Subagents Documentation](https://code.claude.com/docs/en/sub-agents)
-- [CLI Reference](https://code.claude.com/docs/en/cli-reference) -- `--agents` 标志和其他 CLI 选项
-- [Plugins Guide](../07-plugins/) -- 关于将代理与其他功能打包
-- [Skills Guide](../03-skills/) -- 关于自动调用能力
-- [Memory Guide](../02-memory/) -- 关于持久化上下文
-- [Hooks Guide](../06-hooks/) -- 关于事件驱动自动化
+- [Official 子代理（子代理） 文档](https://code.claude.com/docs/en/sub-agents)
+- [CLI 参考](https://code.claude.com/docs/en/CLI-参考) - `--agents` flag and other CLI options
+- [插件 指南](../07-插件/) - For bundling agents with other features
+- [技能 指南](../03-技能/) - For auto-invoked capabilities
+- [记忆 指南](../02-记忆/) - For persistent context
+- [钩子 指南](../06-钩子/) - For event-driven automation
 
 ---
-**最后更新: 2026 年 4 月 9 日
-**Claude Code 版本: 2.1.97
-**兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5
+
+**Last Updated**: April 24, 2026
+**Claude Code Version**: 2.1.119
+**Sources**:
+- https://code.claude.com/docs/en/sub-agents
+- https://code.claude.com/docs/en/代理-teams
+- https://github.com/anthropics/claude-code/releases/tag/v2.1.117
+- https://github.com/anthropics/claude-code/releases/tag/v2.1.119
+**Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.7, Claude Haiku 4.5

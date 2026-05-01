@@ -51,10 +51,10 @@ Claude Code 中的 Memory 提供跨多个会话和对话的持久化上下文。
 - 为跨会话的上下文持久化奠定基础
 - 提供记录项目标准的模板结构
 
-**增强的交互模式:** 设置 `CLAUDE_CODE_NEW_INIT=true` 以启用多阶段交互流程,引导你逐步完成项目设置:
+**增强的交互模式:** 设置 `CLAUDE_CODE_NEW_INIT=1` 以启用多阶段交互流程,引导你逐步完成项目设置:
 
 ```bash
-CLAUDE_CODE_NEW_INIT=true claude
+CLAUDE_CODE_NEW_INIT=1 claude
 /init
 ```
 
@@ -84,7 +84,13 @@ CLAUDE_CODE_NEW_INIT=true claude
 - Git workflow conventions
 ```
 
-### 使用 `#` 快速更新记忆
+### ~~使用 `#` 快速更新记忆~~（已废弃）
+
+> **⚠️ 此功能已废弃。** 以下内容仅作为历史参考保留。
+>
+> 请改用以下方式添加记忆：
+> - 使用 `/memory` 命令在编辑器中直接编辑记忆文件
+> - 在对话中自然地要求 Claude 记住内容，例如："记住我们总是使用 TypeScript strict mode"
 
 你可以在任何对话中通过以 `#` 开头消息来快速向记忆添加信息:
 
@@ -1140,3 +1146,14 @@ Claude 会提示你选择要更新哪个记忆文件。
 ### 相关 Claude 功能
 - [Claude Web Memory](https://claude.ai) -- 自动合成
 - [Official Memory Docs](https://code.claude.com/docs/en/memory) -- Anthropic 文档
+
+---
+
+**最后更新**: 2026 年 4 月 24 日
+**Claude Code 版本**: 2.1.119
+**来源**:
+- https://docs.anthropic.com/en/docs/claude-code
+- https://www.anthropic.com/news/claude-opus-4-7
+- https://support.claude.com/en/articles/12138966-release-notes
+- https://docs.anthropic.com/en/docs/claude-code/memory
+**兼容模型**: Claude Sonnet 4.6、Claude Opus 4.7、Claude Haiku 4.5

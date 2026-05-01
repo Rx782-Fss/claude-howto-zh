@@ -1,10 +1,10 @@
 ---
-name: test-checker
-description: 测试覆盖率和质量分析
+name: 测试-checker
+描述: 测试覆盖率和质量分析
 tools: read, bash, grep
 ---
 
-# 测试检查器(Test Checker)
+# 测试检查器(测试 Checker)
 
 分析测试覆盖率和质量:
 - 覆盖率百分比

@@ -1,6 +1,6 @@
 ---
 name: deployment-specialist
-description: 处理所有部署操作
+描述: 处理所有部署操作
 tools: read, write, bash, grep
 ---
 

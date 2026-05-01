@@ -1,6 +1,6 @@
 ---
 name: incident-commander
-description: 协调事件响应工作流
+描述: 协调事件响应工作流
 tools: read, write, bash, grep
 ---
 

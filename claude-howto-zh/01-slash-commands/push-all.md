@@ -1,6 +1,6 @@
 ---
-description: 暂存所有变更、创建提交并推送到远程仓库(请谨慎使用)
-allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git push:*), Bash(git diff:*), Bash(git log:*), Bash(git pull:*)
+描述: 暂存所有变更、创建提交并推送到远程仓库(请谨慎使用)
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git 提交:*), Bash(git push:*), Bash(git diff:*), Bash(git log:*), Bash(git pull:*)
 ---
 
 # 暂存、提交并推送所有变更
@@ -19,19 +19,19 @@ allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git
 ### 2. 安全检查
 
 **❌ 如果检测到以下内容则停止并警告:**
-- 密钥文件:`.env*`, `*.key`, `*.pem`, `credentials.json`, `secrets.yaml`, `id_rsa`, `*.p12`, `*.pfx`, `*.cer`
-- API 密钥:包含真实值的 `*_API_KEY`, `*_SECRET`, `*_TOKEN` 变量(不包括占位符如 `your-api-key`, `xxx`, `placeholder`)
+- 密钥文件:`.env*`, `*.key`, `*.pem`, `credentials.JSON`, `secrets.YAML`, `id_rsa`, `*.p12`, `*.pfx`, `*.cer`
+- API 密钥:包含真实值的 `*_API_KEY`, `*_SECRET`, `*_TOKEN` 变量(不包括占位符如 `your-API-key`, `xxx`, `placeholder`)
 - 大文件:未使用 Git LFS 的 >10MB 文件
-- 构建产物:`node_modules/`, `dist/`, `build/`, `__pycache__/`, `*.pyc`, `.venv/`
+- 构建产物:`node_modules/`, `dist/`, `构建/`, `__pycache__/`, `*.pyc`, `.venv/`
 - 临时文件:`.DS_Store`, `thumbs.db`, `*.swp`, `*.tmp`
 
 **API 密钥校验规则:**
 ```bash
-OPENAI_API_KEY=sk-proj-xxxxx  # ❌ 检测到真实密钥!
-AWS_SECRET_KEY=AKIA...         # ❌ 检测到真实密钥!
-STRIPE_API_KEY=sk_live_...    # ❌ 检测到真实密钥!
+OPENAI_API_KEY=sk-proj-xxxxx  #   ❌ 检测到真实密钥!
+AWS_SECRET_KEY=AKIA...         #   ❌ 检测到真实密钥!
+STRIPE_API_KEY=sk_live_...    #   ❌ 检测到真实密钥!
 
-# ✅ 可接受的占位符:
+#   ✅ 可接受的占位符:
 API_KEY=your-api-key-here
 SECRET_KEY=placeholder
 TOKEN=xxx
@@ -68,12 +68,12 @@ SECRET=${YOUR_SECRET}
 按顺序执行:
 ```bash
 git add .
-git status  # 验证暂存区
+git status  #   验证暂存区
 ```
 
 ### 5. 生成提交消息
 
-分析变更并创建 Conventional Commit 格式的提交消息:
+分析变更并创建 Conventional 提交 格式的提交消息:
 
 **格式:**
 ```
@@ -93,8 +93,8 @@ git commit -m "$(cat <<'EOF'
 [生成的提交消息]
 EOF
 )"
-git push  # 如果失败:git pull --rebase && git push
-git log -1 --oneline --decorate  # 验证
+git push  #   如果失败:git pull --rebase && git push
+git log -1 --oneline --decorate  #   验证
 ```
 
 ### 7. 确认成功
@@ -110,10 +110,10 @@ git log -1 --oneline --decorate  # 验证
 ## 错误处理
 
 - **git add 失败**:检查权限、锁定文件、确认仓库已初始化
-- **git commit 失败**:修复 pre-commit hooks、检查 git config(user.name/email)
+- **git 提交 失败**:修复 pre-提交 钩子、检查 git config(用户.name/email)
 - **git push 失败**:
   - 非快进式推送:`git pull --rebase && git push`
-  - 远程无此分支:`git push -u origin [branch]`
+  - 远程无此分支:`git push -u origin [分支]`
   - 受保护分支:改用 PR 工作流
 
 ## 使用时机
@@ -131,7 +131,7 @@ git log -1 --oneline --decorate  # 验证
 - 受保护分支且未经审查
 - 存在合并冲突
 - 需要精细控制提交历史
-- Pre-commit hooks 正在失败
+- Pre-提交 钩子 正在失败
 
 ## 替代方案
 

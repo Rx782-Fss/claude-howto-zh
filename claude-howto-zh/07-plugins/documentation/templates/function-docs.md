@@ -10,10 +10,10 @@ function functionName(param1: Type1, param2: Type2): ReturnType
 
 ## 参数
 
-| 参数 | 类型 | 必填 | 描述 |
-|------|------|------|------|
-| param1 | Type1 | 是 | param1 的描述 |
-| param2 | Type2 | 否 | param2 的描述 |
+|  |  | 参数 | 类型 | 必填 | 描述 |  |  |
+|  |  | ------ | ------ | ------ | ------ |  |  |
+|  |  | param1 | Type1 | 是 | param1 的描述 |  |  |
+|  |  | param2 | Type2 | 否 | param2 的描述 |  |  |
 
 ## 返回值
 **类型**:`ReturnType`

@@ -1,6 +1,6 @@
 ---
 name: Review PR
-description: 启动全面的 PR 审查,包含安全和测试检查
+描述: 启动全面的 PR 审查,包含安全和测试检查
 ---
 
 # PR 审查

@@ -1,848 +1,800 @@
-# Claude Code 高级功能
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../resources/logos/claude-howto-logo-dark.svg">
+  <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
+</picture>
 
-> 深入了解规划模式、扩展思考、后台任务、权限系统、会话管理、定时任务、Chrome 集成、远程控制、Web 会话、桌面应用等高级功能。
+# 高级功能（Advanced Features）
 
-**详细指南 → [[Claude 概念指南]]**
-
----
+Claude Code 高级功能完整指南，涵盖规划模式（Planning Mode）、扩展思考（Extended Thinking）、自动模式（Auto Mode）、后台任务（Background Tasks）、权限模式（Permission Modes）、打印模式/非交互式模式（Print Mode）、会话管理（Session Management）、交互功能（Interactive Features）、通道（Channels）、语音听写（Voice Dictation）、远程控制（Remote Control）、Web 会话（Web Sessions）、桌面应用（Desktop App）、任务列表（Task List）、提示建议（Prompt Suggestions）、Git 工作树（Git Worktrees）、沙箱隔离（Sandboxing）、托管设置（Managed Settings）以及配置管理（Configuration）等内容。
 
 ## 目录
 
-1. [规划模式](#规划模式)
-2. [扩展思考](#扩展思考)
-3. [后台任务](#后台任务)
-4. [权限模式](#权限模式)
-5. [会话管理](#会话管理)
-6. [交互功能](#交互功能)
-7. [配置](#配置)
+1. [概述](#概述)
+2. [规划模式](#规划模式)
+3. [Ultraplan (云端计划草稿)](#ultraplan-云端计划草稿)
+4. [扩展思考](#扩展思考)
+5. [自动模式](#自动模式)
+6. [后台任务](#后台任务)
+7. [Monitor 工具（事件驱动流）](#monitor-工具事件驱动流)
 8. [定时任务](#定时任务)
-9. [Chrome 集成](#chrome-集成)
-10. [频道](#频道)
-11. [语音听写](#语音听写)
-12. [内置技能](#内置技能)
-13. [无头模式](#无头模式)
-14. [自动记忆](#自动记忆)
-15. [远程控制](#远程控制)
-16. [Web 会话](#web-会话)
-17. [桌面应用](#桌面应用)
-18. [任务列表](#任务列表)
-19. [提示建议](#提示建议)
-20. [Git Worktree](#git-worktree)
-21. [沙箱隔离](#沙箱隔离)
-22. [托管设置(企业版)](#托管设置企业版)
-23. [Agent Teams](#agent-teams)
+9. [权限模式](#权限模式)
+10. [无头模式](#无头模式)
+11. [会话管理](#会话管理)
+12. [交互功能](#交互功能)
+13. [TUI 模式（全屏）](#tui-模式全屏)
+14. [语音听写](#语音听写)
+15. [通道](#通道)
+16. [Chrome 集成](#chrome-集成)
+17. [远程控制](#远程控制)
+18. [Web 会话](#web-会话)
+19. [桌面应用](#桌面应用)
+20. [任务列表](#任务列表)
+21. [提示建议](#提示建议)
+22. [Git 工作树](#git-工作树)
+23. [沙箱隔离](#沙箱隔离)
+24. [托管设置（企业版）](#托管设置企业版)
+25. [配置与设置](#配置与设置)
+26. [代理团队](#代理团队)
+27. [最佳实践](#最佳实践)
+28. [附加资源](#附加资源)
 
 ---
 
-## 规划模式
+## 概述
 
-规划模式让 Claude 在执行前先生成一个结构化的计划。你可以审查、修改或拒绝计划，然后再执行。
+Claude Code 的高级功能通过规划、推理、自动化和控制机制扩展了核心能力。这些功能支持复杂开发任务、代码审查、自动化和多会话管理的精细化工作流程。
 
-### 启用规划模式
-
-```bash
-claude --plan
-```
-
-或在会话中使用斜杠命令：
-
-```
-/plan
-```
-
-### 工作原理
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Claude
-    participant Plan
-
-    User->>Claude: 输入请求（启用规划模式）
-    Claude->>Plan: 分析并生成计划
-    Plan-->>Claude: 结构化计划就绪
-    Claude-->>User: 展示计划供审查
-    User->>Claude: 审查/修改/批准/拒绝
-    alt 用户批准
-        Claude->>Claude: 执行已批准的计划
-        Claude-->>User: 返回结果
-    else 用户修改
-        Claude->>Plan: 更新计划
-        Plan-->>User: 更新后的计划
-    else 用户拒绝
-        Claude-->>User: 等待新指令
-    end
-```
-
-### 计划包含什么
-
-1. **目标概述** — 要实现什么
-2. **分步计划** — 具体操作步骤
-3. **涉及文件** — 将被修改的文件列表
-4. **依赖关系** — 外部依赖和前提条件
-5. **风险点** — 可能的问题和回退方案
-
-### 配置选项
-
-| 设置 | 描述 |
-|------|------|
-| `planning.autoEnter` | 自动进入规划模式 |
-| `planning.requireApproval` | 执行前需要用户确认 |
-
-### 使用场景
-
-- 大型重构项目 — 先看整体方案再动手
-- 多人协作 — 团队成员可以审查计划
-- 复杂 Bug 修复 — 分析根因后再修复
-- 学习目的 — 了解 Claude 的解题思路
+**主要高级功能包括：**
+- **规划模式（Planning Mode）**：在编码前创建详细的实现计划
+- **扩展思考（Extended Thinking）**：对复杂问题进行深度推理
+- **自动模式（Auto Mode）**：后台安全分类器在执行前审查每个操作（研究预览版）
+- **后台任务（Background Tasks）**：运行长时间操作而不阻塞对话
+- **权限模式（Permission Modes）**：控制 Claude 可以执行的操作（`default`、`acceptEdits`、`plan`、`auto`、`dontAsk`、`bypassPermissions`）
+- **打印模式（Print Mode）**：以非交互方式运行 Claude Code，用于自动化和 CI/CD（`claude -p`）
+- **会话管理（Session Management）**：管理工作会话
+- **交互功能（Interactive Features）**：键盘快捷键、多行输入和命令历史
+- **语音听写（Voice Dictation）**：支持 20 种语言的按住说话语音输入
+- **通道（Channels）**：MCP 服务器将消息推送到正在运行的会话中（研究预览版）
+- **远程控制（Remote Control）**：从 Claude.ai 或 Claude 应用程序控制 Claude Code
+- **Web 会话（Web Sessions）**：在浏览器中的 claude.ai/code 上运行 Claude Code
+- **桌面应用（Desktop App）**：独立应用程序，用于可视化差异审查和多会话管理
+- **任务列表（Task List）**：跨上下文压缩的持久化任务跟踪
+- **提示建议（Prompt Suggestions）**：基于上下文的智能命令建议
+- **Git 工作树（Git Worktrees）**：用于并行工作的隔离工作树分支
+- **沙箱隔离（Sandboxing）**：操作系统级别的文件系统和网络隔离
+- **托管设置（Managed Settings）**：通过 plist、Registry 或托管文件进行企业部署
+- **配置（Configuration）**：使用 JSON 配置文件自定义行为
 
 ---
 
-## 扩展思考
+## 规划模式（Planning Mode）
 
-扩展思考让 Claude 在回答前进行更深入的推理，产生更高质量的输出。
+规划模式允许 Claude 在实现之前仔细思考复杂任务，创建一个你可以审查和批准的详细计划。
 
-### 启用扩展思考
+### 什么是规划模式？
 
-```json
-{
-  "extendedThinking": {
-    "enabled": true,
-    "budgetTokens": 10000
-  }
-}
-```
+规划模式采用两阶段方法：
+1. **规划阶段（Planning Phase）**：Claude 分析任务并创建详细的实现计划
+2. **实现阶段（Implementation Phase）**：批准后，Claude 执行计划
 
-或使用命令行标志：
+### 何时使用规划模式
 
-```bash
-claude --thinking
-```
+✅ **适用场景：**
+- 复杂的多文件重构
+- 新功能实现
+- 架构变更
+- 数据库迁移
+- 主要 API 重设计
 
-### 思考预算
+❌ **不适用场景：**
+- 简单的错误修复
+- 格式调整
+- 单文件编辑
+- 快速查询
 
-| 预算级别 | Token 数 | 适用场景 |
-|---------|----------|---------|
-| 低 | 1000-3000 | 简单问题 |
-| 中 | 5000-10000 | 复杂推理 |
-| 高 | 15000+ | 架构设计、复杂分析 |
-
-### 何时使用
-
-- ✅ 架构决策
-- ✅ 复杂算法设计
-- ✅ 代码审查中的深度分析
-- ✅ 调试难以定位的问题
-- ❌ 简单查询（浪费 token）
-
----
-
-## 后台任务
-
-后台任务允许 Claude 在后台长时间运行操作，不会阻塞你的终端。
-
-### 创建后台任务
-
-```bash
-# 使用 /background 命令
-/background "运行完整的测试套件"
-
-# 或使用 --background 标志
-claude -p "运行测试" --background
-```
-
-### 监控任务状态
-
-```bash
-# 列出所有后台任务
-/task list
-
-# 查看特定任务的输出
-/task show <task-id>
-
-# 停止正在运行的任务
-/task stop <task-id>
-```
-
-### 任务生命周期
-
-```mermaid
-stateDiagram-v2
-    [*] --> Queued: 创建任务
-    Queued --> Running: 开始执行
-    Running --> Completed: 成功完成
-    Running --> Failed: 执行失败
-    Failed --> Running: 重试
-    Completed --> [*]
-    Failed --> [*]
-```
-
-### 配置
-
-| 设置 | 默认值 | 描述 |
-|------|--------|------|
-| `maxConcurrentTasks` | 5 | 最大并发任务数 |
-| `taskTimeout` | 3600s | 单任务超时时间 |
-
----
-
-## 权限模式
-
-权限模式控制 Claude Code 可以执行哪些操作。
-
-### 六种权限模式
-
-| 模式 | 文件编辑 | Bash 命令 | MCP 工具 | 适用场景 |
-|------|---------|-----------|---------|---------|
-| **default** | 每次询问 | 每次询问 | 每次询问 | 日常开发，需要控制 |
-| **plan** | 只读 | 禁止 | 只读 | 代码审查，只看不改 |
-| **autoEdits** | 自动允许 | 每次询问 | 自动允许 | 快速迭代开发 |
-| **acceptEdits** | 自动允许 | 每次询问 | 自动允许 | 自动化工作流 |
-| **bypassPermissions** | 全部自动 | 全部自动 | 全部自动 | 高度信任环境 |
-| **yolo** | 全部自动 | 全部自动 | 全部自动 + 无安全警告 | 完全自主（慎用）|
-
-### 切换权限模式
-
-```bash
-# 命令行启动时指定
-claude --permission-mode plan
-
-# 会话中切换
-/permissions plan
-```
-
-### 推荐用法
-
-| 场景 | 推荐模式 | 原因 |
-|------|---------|------|
-| 日常编码 | `default` | 安全第一，可控 |
-| 代码审查 | `plan` | 只读，防止误改 |
-| 批量重构 | `autoEdits` | 编辑自动通过，命令仍需确认 |
-| CI/CD 脚本 | `bypassPermissions` | 无人工干预环境 |
-| 新手学习 | `default` | 了解每次操作的细节 |
-
----
-
-## 会话管理
-
-管理多个工作会话。
-
-### 命令
-
-```bash
-/resume                # 恢复之前的对话
-/rename "Feature"      # 命名当前会话
-/fork                  # 分叉到新会话
-claude -c              # 继续最近的对话
-claude -r "Feature"    # 按名称/ID 恢复会话
-```
-
-### 会话持久化
-
-- 会话历史保存在 `~/.claude/sessions/`
-- 支持搜索历史对话
-- 可导出/导入会话
-
-### 最佳实践
-
-- 为不同任务使用独立会话
-- 定期清理旧会话释放空间
-- 对重要会话命名便于后续查找
-
----
-
-## 交互功能
-
-### 键盘快捷键
-
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl + R` | 搜索命令历史 |
-| `Tab` | 自动补全 |
-| `↑ / ↓` | 命令历史 |
-| `Ctrl + L` | 清屏 |
-| `Ctrl + C` | 中断当前操作 |
-| `Ctrl + D` | 退出 |
-
-### 多行输入
-
-```bash
-user: \
-> 长而复杂的提示词
-> 跨越多行
-> \end
-```
-
-### 输出格式化
-
-- **Markdown 渲染** — 支持表格、代码块、列表
-- **语法高亮** — 代码片段自动高亮
-- **分页输出** — 长内容自动分页
-
----
-
-## 配置
-
-完整配置示例：
-
-```json
-{
-  "planning": {
-    "autoEnter": true,
-    "requireApproval": true
-  },
-  "extendedThinking": {
-    "enabled": true,
-    "budgetTokens": 10000
-  },
-  "permissions": {
-    "mode": "default"
-  },
-  "backgroundTasks": {
-    "maxConcurrentTasks": 5
-  }
-}
-```
-
-**详见**：[[09-高级功能总览]] 获取完整指南
-
----
-
-## 定时任务
-
-使用 `/loop` 命令按计划重复运行任务。
-
-**用法：**
-```bash
-/loop every 30m "Run tests and report failures"
-/loop every 2h "Check for dependency updates"
-/loop every 1d "Generate daily summary of code changes"
-```
-
-定时任务在后台运行，完成后报告结果。适用于持续监控、定期检查和自动化维护工作流。
-
----
-
-## Chrome 集成
-
-Claude Code 可以与 Chrome 浏览器集成以实现 Web 自动化任务。这支持在开发工作流中直接导航网页、填写表单、截图和从网站提取数据等功能。
-
----
-
-## 频道
-
-频道是组织 Claude Code 功能的命名空间，用于区分不同类型的工作负载。
-
-### 可用频道
-
-| 频道 | 用途 |
-|------|------|
-| `default` | 通用开发任务 |
-| `code-review` | 代码审查专用 |
-| `security` | 安全审计专用 |
-| `testing` | 测试相关任务 |
-
-### 切换频道
-
-```bash
-claude --channel code-review
-```
-
----
-
-## 语音听写
-
-支持语音输入，将语音转换为文本提示词。
-
-### 启用
-
-```bash
-claude --voice
-```
-
-或在会话中：
-```
-/voice on
-```
-
-### 支持的语言
-
-- 英语
-- 中文（简体/繁体）
-- 日语
-- 韩语
-- 以及更多...
-
----
-
-## 内置技能
-
-Claude Code 内置了多个常用技能，无需额外配置即可使用。
-
-### 技能列表
-
-| 技能名称 | 功能 |
-|---------|------|
-| `code-reviewer` | 代码审查 |
-| `debugger` | 问题调试 |
-| `test-engineer` | 测试编写 |
-| `refactor` | 代码重构 |
-| `doc-generator` | 文档生成 |
-
-### 使用内置技能
-
-直接在对话中描述需求，Claude 会自动调用合适的技能：
-
-```
-请帮我审查 src/auth/ 目录下的所有文件的安全问题
-```
-→ 自动调用 code-reviewer 技能
-
----
-
-## 无头模式
-
-无头模式允许你在脚本和 CI/CD 流水线中使用 Claude Code，无需交互式终端。
-
-### 基本用法
-
-```bash
-# 单次命令
-claude -p "解释这个函数的作用" < source.py
-
-# 管道输入
-cat error.log | claude -p "分析这些错误"
-
-# JSON 输出
-claude -p --output-format json "列出所有公开函数" > result.json
-```
-
-### CI/CD 集成
-
-```yaml
-# GitHub Actions 示例
-- name: AI Code Review
-  run: |
-    claude -p "Review PR ${{ github.event.pull_request.number }}" \
-      --output-format json \
-      > review.json
-```
-
-### 常用标志
-
-| 标志 | 描述 |
-|------|------|
-| `-p, --prompt` | 非交互式提示模式 |
-| `--output-format` | 输出格式 (text/json) |
-| `--max-turns` | 最大轮数限制 |
-| `--model` | 指定模型 |
-
----
-
-## 自动记忆
-
-自动记忆功能让 Claude Code 自动捕获和使用上下文信息，无需手动配置。
-
-### 工作原理
-
-```mermaid
-graph LR
-    A[用户对话] --> B[Claude 处理]
-    B --> C[自动提取关键信息]
-    C --> D[存储到 .claude/local/memory/]
-    D --> E[后续对话自动加载]
-    E --> A
-```
-
-### 存储位置
-
-- 项目级：`.claude/local/memory/`
-- 用户级：`~/.claude/memory/`
-
-### 配置
-
-```json
-{
-  "autoMemory": {
-    "enabled": true,
-    "maxEntries": 100,
-    "retentionDays": 30
-  }
-}
-```
-
----
-
-## 远程控制
-
-远程控制让你从其他设备（手机、平板、另一台电脑）连接到本地运行的 Claude Code 会话。
-
-### 启动远程会话
-
-```bash
-claude --remote
-```
-
-### 连接方式
-
-1. **Session URL** — 终端输出的链接，在任何浏览器打开
-2. **QR 码** — 启动后按空格键显示二维码扫描
-3. **按名称查找** — 在 claude.ai/code 或 Claude 移动应用中浏览
-
-### 安全特性
-
-- 不开放任何入站端口
-- 仅通过 TLS 出站 HTTPS 连接
-- 作用域凭证 — 多个短期、窄范围的令牌
-- 会话隔离 — 每个远程会话独立运行
-
-### 与 Web 版的区别
-
-| 特性 | 远程控制 | Web 版 |
-|------|---------|--------|
-| 执行位置 | 你的机器 | Anthropic 云端 |
-| 本地工具 | 完全访问 MCP/文件/CLI | 无本地依赖 |
-| 适用场景 | 从其他设备继续本地工作 | 从任意浏览器开始新工作 |
-
----
-
-## Web 会话
-
-Web 会话允许你直接在浏览器中运行 Claude Code（claude.ai/code），或从 CLI 创建 Web 会话。
-
-### 创建 Web 会话
-
-```bash
-claude --remote "实现新的 API 端点"
-```
-
-### 本地恢复 Web 会话
-
-```bash
-# 在本地终端恢复 Web 会话
-claude --teleport
-
-# 或在 REPL 中
-/teleport
-```
-
-### 使用场景
-
-- 在一台机器开始工作，在另一台继续
-- 与团队成员共享会话 URL
-- 用 Web UI 做视觉 diff 审查，然后切回终端执行
-
----
-
-## 桌面应用
-
-Claude Code 桌面应用提供独立的应用程序，具有视觉 diff 审查、并行会话和集成连接器。支持 macOS 和 Windows（Pro、Max、Team 和 Enterprise 方案）。
-
-### 安装
-
-从 [claude.ai](https://claude.ai) 下载对应平台版本：
-- **macOS**: Universal 构建（Apple Silicon + Intel）
-- **Windows**: x64 和 ARM64 安装包
-
-### 核心功能
-
-| 功能 | 描述 |
-|------|------|
-| **Diff 视图** | 逐文件视觉审查，内联评论；Claude 读取评论并修订 |
-| **App 预览** | 自动启动开发服务器，内嵌浏览器实时验证 |
-| **PR 监控** | GitHub CLI 集成，自动修复 CI 失败，检查通过后自动合并 |
-| **并行会话** | 侧边栏多会话，自动 Git worktree 隔离 |
-| **定时任务** | 循环任务（每小时/每天/工作日/每周）|
-| **富渲染** | 代码、Markdown 和图表渲染，语法高亮 |
-
-### 连接器
-
-| 连接器 | 能力 |
-|--------|------|
-| **GitHub** | PR 监控、Issue 跟踪、代码审查 |
-| **Slack** | 通知、频道上下文 |
-| **Linear** | Issue 跟踪、Sprint 管理 |
-| **Notion** | 文档、知识库访问 |
-| **Asana** | 任务管理、项目跟踪 |
-| **Calendar** | 日程感知、会议上下文 |
-
-> **注意**：连接器对远程（云端）会话不可用。
-
----
-
-## 任务列表
-
-任务列表提供持久化的任务跟踪，能在上下文压缩后依然保留（当对话历史被裁剪以适应上下文窗口时）。
-
-### 开关任务列表
-
-按 `Ctrl+T` 在会话中开关任务列表视图。
-
-### 持久化任务
-
-任务在上下文压缩后仍然存在，确保长周期工作项在对话上下文被裁剪时不会丢失。这对复杂的、多步骤实现特别有用。
-
-### 命名任务目录
-
-使用 `CLAUDE_CODE_TASK_LIST_ID` 环境变量创建跨会话共享的命名任务目录：
-
-```bash
-export CLAUDE_CODE_TASK_LIST_ID=my-project-sprint-3
-```
-
-这让多个会话共享同一任务列表，适用于团队工作流或多会话项目。
-
----
-
-## 提示建议
-
-提示建议根据你的 git 历史和当前对话上下文显示灰色的示例命令。
-
-### 工作方式
-
-- 建议以灰色文本出现在输入提示下方
-- 按 `Tab` 接受建议
-- 按 `Enter` 接受并立即提交
-- 建议具有上下文感知能力，来源于 git 历史和对话状态
-
-### 禁用提示建议
-
-```bash
-export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false
-```
-
----
-
-## Git Worktree
-
-Git Worktree 让你在隔离的 worktree 中启动 Claude Code，可以在不同分支上并行工作，无需 stash 或切换分支。
-
-### 在 Worktree 中启动
-
-```bash
-claude --worktree
-# 或
-claude -w
-```
-
-### Worktree 位置
-
-Worktree 创建在：
-```
-<repo>/.claude/worktrees/<name>
-```
-
-### Monorepo 稀疏检出
-
-使用 `worktree.sparsePaths` 设置在 monorepo 中执行稀疏检出，减少磁盘占用和克隆时间：
-
-```json
-{
-  "worktree": {
-    "sparsePaths": ["packages/my-package", "shared/"]
-  }
-}
-```
-
-### Worktree 工具和钩子
-
-| 项目 | 描述 |
-|------|------|
-| `ExitWorktree` | 退出并清理当前 worktree 的工具 |
-| `WorktreeCreate` | 创建 worktree 时触发的钩子事件 |
-| `WorktreeRemove` | 移除 worktree 时触发的钩子事件 |
-
-### 自动清理
-
-如果在 worktree 中没有做任何更改，会话结束时自动清理。
-
----
-
-## 沙箱隔离
-
-沙箱为 Claude Code 执行的 Bash 命令提供操作系统级别的文件系统和网络隔离。这是对权限规则的补充，提供额外的安全层。
-
-### 启用沙箱
+### 激活规划模式
 
 **斜杠命令：**
-```
-/sandbox
+```bash
+/plan 实现用户认证系统
 ```
 
 **CLI 标志：**
 ```bash
-claude --sandbox       # 启用沙箱
-claude --no-sandbox    # 禁用沙箱
+claude --permission-mode plan
 ```
 
-### 配置设置
-
-| 设置 | 描述 |
-|------|------|
-| `sandbox.enabled` | 启用或禁用沙箱 |
-| `sandbox.failIfUnavailable` | 无法激活沙箱时失败 |
-| `sandbox.filesystem.allowWrite` | 允许写入的路径 |
-| `sandbox.filesystem.allowRead` | 允许读取的路径 |
-| `sandbox.filesystem.denyRead` | 禁止读取的路径 |
-| `sandbox.enableWeakerNetworkIsolation` | 在 macOS 上启用较弱网络隔离 |
-
-### 配置示例
-
+**设为默认值：**
 ```json
 {
-  "sandbox": {
-    "enabled": true,
-    "failIfUnavailable": true,
-    "filesystem": {
-      "allowWrite": ["/Users/me/project"],
-      "allowRead": ["/Users/me/project", "/usr/local/lib"],
-      "denyRead": ["/Users/me/.ssh", "/Users/me/.aws"]
-    },
-    "enableWeakerNetworkIsolation": true
+  "permissions": {
+    "defaultMode": "plan"
   }
 }
 ```
 
-### 使用场景
+**键盘快捷键：**
+- `Shift + Tab` - 切换权限模式（包括 plan 模式）
+- `Alt + M` - 切换权限模式（Windows/Linux）
 
-- 安全地运行不受信任或生成的代码
-- 防止意外修改项目外的文件
-- 在自动化任务期间限制网络访问
+### 规划模式的优势
 
----
+- **结构化的实现方法**：详细的实现步骤分解
+- **审查和批准**：在执行前批准或调整计划
+- **风险识别**：在实现前识别潜在问题
+- **清晰的阶段**：有组织的实现阶段和里程碑
 
-## 托管设置（企业版）
-
-托管设置使企业管理员能够使用平台原生管理工具在整个组织中部署 Claude Code 配置。
-
-### 部署方式
-
-| 平台 | 方法 | 起始版本 |
-|------|------|---------|
-| macOS | 托管 plist 文件 (MDM) | v2.1.51+ |
-| Windows | Windows 注册表 | v2.1.51+ |
-| 跨平台 | 托管配置文件 | v2.1.51+ |
-| 跨平台 | 托管放置件 (`managed-settings.d/` 目录) | v2.1.83+ |
-
-### 托管放置件
-
-自 v2.1.83 起，管理员可以在 `managed-settings.d/` 目录中部署多个托管设置文件。文件按字母顺序合并，支持团队模块化配置：
+### 示例：功能实现
 
 ```
-~/.claude/managed-settings.d/
-  00-org-defaults.json
-  10-team-policies.json
-  20-project-overrides.json
+用户: /plan 添加实时通知系统
+
+Claude: 我将为实施实时通知系统创建一个计划。
+
+## 实施计划
+
+### 阶段 1: 基础设施搭建
+1. 安装 WebSocket 库 (socket.io)
+2. 设置 WebSocket 服务器
+3. 配置连接管理
+
+### 阶段 2: 后端实现
+4. 创建通知服务
+5. 实现通知队列
+6. 添加通知数据库表结构
+7. 创建 API 端点
+
+### 阶段 3: 前端集成
+8. 设置 WebSocket 客户端
+9. 创建通知 UI 组件
+10. 实现通知状态管理
+11. 添加通知权限设置
+
+### 阶段 4: 测试与部署
+12. 编写单元测试
+13. 编写集成测试
+14. 更新文档
+15. 部署到预发布环境
+
+预计时间: 3-4 小时
+需修改文件: 12 个
+需新建文件: 8 个
+
+准备继续吗？(yes/no/modify plan)
+
+用户: yes
+
+Claude: [按照计划开始实施]
 ```
 
-### 可用的托管设置
+### 计划修改
 
-| 设置 | 描述 |
-|------|------|
-| `disableBypassPermissionsMode` | 阻止用户启用绕过权限模式 |
-| `availableModels` | 限制用户可选择哪些模型 |
-| `allowedChannelPlugins` | 控制允许哪些频道插件 |
-| `autoMode.environment` | 配置自动模式的可信基础设施 |
-| 自定义策略 | 组织特定的权限和工具策略 |
+```
+用户: 修改计划 - 先跳过队列功能，我们稍后再添加
 
----
+Claude: 已更新计划:
+[显示移除队列后的修改后计划]
 
-## Agent Teams
+用户: 看起来不错，继续
 
-Agent Teams 是实验性功能，允许多个 Claude Code 实例协作完成任务。默认禁用。
+Claude: [执行修改后的计划]
+```
 
-### 启用 Agent Teams
+### 规划模式配置
 
-通过环境变量或设置启用：
+规划模式可通过 CLI 标志或斜杠命令激活：
 
 ```bash
-export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+# 通过 CLI 激活规划模式
+claude --permission-mode plan
+
+# 或在 REPL 内使用 /plan 斜杠命令
+/plan 实现用户认证系统
 ```
 
-### 工作原理
+**用于规划的模型别名**：使用 `opusplan` 作为模型别名，让 Opus 进行规划，Sonnet 执行实现：
 
-- **团队负责人** 印调整体任务并将子任务分配给队友
-- **队友** 独立工作，各自拥有自己的上下文窗口
-- **共享任务列表** 使团队成员之间能够自我协调
-- 使用子代理定义（`.claude/agents/` 或 `--agents` 标志）定义队友角色和专业领域
+```bash
+claude --model opusplan "设计和实现新 API"
+```
 
-### 显示模式
+**外部编辑计划**：按 `Ctrl+G` 在外部编辑器中打开当前计划以进行详细修改。
 
-| 模式 | 描述 |
+> **v2.1.112 更新**：计划文件现在根据生成计划的提示词命名（而不是随机单词），使其更容易浏览和复用。
+
+---
+
+## Ultraplan (云端计划草稿)
+
+> **v2.1.101 新功能**：Ultraplan 现在会在首次调用时自动创建一个 Web 云端环境的 Claude Code——无需手动设置，无需等待容器预热即可开始起草计划。
+
+> **注意**：Ultraplan 是一个研究预览功能，需要 Claude Code v2.1.91 或更高版本。
+
+`/ultraplan` 将规划任务从本地 CLI 交给运行在规划模式的 Web 会话中的 Claude Code。Claude 在云端起草计划，同时你的终端保持空闲可用于其他工作，然后你在浏览器中审查草稿并选择执行位置——在同一云端会话中或传送回你的终端。
+
+### 何时使用 Ultraplan
+
+- 你想要比终端更丰富的审查界面：内联注释、emoji 反应、大纲侧边栏和历史记录
+- 你想在本地继续编码的同时进行无人值守的起草——云端会话研究仓库并编写计划而不阻塞你的 CLI
+- 计划需要在执行前经过利益相关者审查——可共享的 Web URL 胜过粘贴终端滚动回溯
+
+### 要求
+
+- 一个 Claude Code on the Web 账户
+- 一个 GitHub 仓库（云端会话克隆你的仓库以针对真实代码起草计划）
+- **不适用于** Amazon Bedrock、Google Cloud Vertex AI 或 Microsoft Foundry
+
+### 三种启动方式
+
+- **命令**：`/ultraplan <prompt>` — 显式调用
+- **关键词**：在任何正常提示词中包含单词 `ultraplan`，Claude 会将请求路由到云端
+- **从本地计划**：Claude 在本地完成计划后，在批准对话框中选择"否，在 Claude Code on the Web 上用 Ultraplan 完善"将草稿提交给更深入的研究
+
+### 使用示例
+
+```bash
+/ultraplan 将认证服务从 sessions 迁移到 JWTs
+```
+
+Claude 确认后启动云环境（在 v2.1.101+ 中首次运行时自动创建），并返回一个你可以在浏览器中打开的会话链接。
+
+### 状态指示器
+
+| 状态 | 含义 |
 |------|------|
-| `in-process`（默认）| 队友在同一终端进程中运行 |
-| `tmux` | 每个队友获得专用的分屏面板（需要 tmux 或 iTerm2）|
-| `auto` | 自动选择最佳显示模式 |
+| `◇ ultraplan` | Claude 正在研究你的代码库并起草计划 |
+| `◇ ultraplan needs your input` | Claude 有一个澄清问题；打开会话链接回应 |
+| `◆ ultraplan ready` | 计划已准备好在浏览器中审查 |
 
-### 使用场景
+### 执行选项
 
-- 大型重构任务，不同队友处理不同模块
-- 并行代码审查和实现
-- 跨代码库协调的多文件变更
+一旦计划准备好，你有两条执行路径。在浏览器中批准计划以在同一云端会话中执行——Claude 远程实现更改并通过 Web UI 打开拉取请求。或者选择"批准计划并传送到终端"以在本地实现。终端传送对话框提供三个选择：
 
-> **注意**：Agent Teams 是实验性功能，未来版本可能变更。
+- **在此处实现（Implement here）** — 在当前终端会话中运行已批准的计划
+- **启动新会话（Start new session）** — 在同一工作目录中打开新会话并在那里实现
+- **取消（Cancel）** — 将计划保存到文件以便稍后继续
 
----
-
-## 最佳实践
-
-### 规划模式
-- ✅ 用于复杂的多步骤任务
-- ✅ 执行前审查计划
-- ✅ 必要时修改计划
-- ❌ 不要用于简单任务
-
-### 扩展思考
-- ✅ 用于架构决策
-- ✅ 用于复杂问题解决
-- ✅ 审阅思考过程
-- ❌ 不要用于简单查询
-
-### 后台任务
-- ✅ 用于长时间运行的操作
-- ✅ 监控任务进度
-- ✅ 优雅处理任务失败
-- ❌ 不要启动过多并发任务
-
-### 权限
-- ✅ 使用 `plan` 进行代码审查（只读）
-- ✅ 使用 `default` 进行交互式开发
-- ✅ 使用 `acceptEdits` 进行自动化工作流
-- ✅ 使用 `auto` 进行有安全护栏的自主工作
-- ❌ 除非绝对必要，不要使用 `bypassPermissions`
-
-### 会话
-- ✅ 为不同任务使用独立会话
-- ✅ 保存重要的会话状态
-- ✅ 清理旧会话
-- ❌ 不要在一个会话中混合不相关的工作
+> **警告**：当 Ultraplan 启动时远程控制会断开连接。两个功能共享 claude.ai/code 界面，因此同一时间只能激活其中一个。
 
 ---
 
-## 更多资源
+## 扩展思考（Extended Thinking）
 
-关于 Claude Code 及相关功能的更多信息：
+扩展思考允许 Claude 在提供解决方案之前花费更多时间对复杂问题进行推理。
 
-- [官方交互模式文档](https://code.claude.com/docs/en/interactive-mode)
-- [官方无头模式文档](https://code.claude.com/docs/en/headless)
-- [CLI 参考](https://code.claude.com/docs/en/cli-reference)
-- [检查点指南](../08-checkpoints/) - 会话管理和回退
-- [斜杠命令](../01-slash-commands/) - 命令参考
-- [记忆指南](../02-memory/) - 持久化上下文
-- [技能指南](../03-skills/) - 自主能力
-- [子代理指南](../04-subagents/) - 委派任务执行
-- [MCP 指南](../05-mcp/) - 外部数据访问
-- [Hooks 指南](../06-hooks/) - 事件驱动自动化
-- [插件指南](../07-plugins/) - 打包扩展
-- [官方定时任务文档](https://code.claude.com/docs/en/scheduled-tasks)
-- [官方 Chrome 集成文档](https://code.claude.com/docs/en/chrome)
-- [官方远程控制文档](https://code.claude.com/docs/en/remote-control)
-- [官方快捷键文档](https://code.claude.com/docs/en/keybindings)
-- [官方桌面应用文档](https://code.claude.com/docs/en/desktop)
-- [官方 Agent Teams 文档](https://code.claude.com/docs/en/agent-teams)
+### 什么是扩展思考？
+
+扩展思考是一个深思熟虑的、逐步推理过程，Claude 在此过程中：
+- 分解复杂问题
+- 考虑多种方法
+- 评估权衡取舍
+- 推理边缘情况
+
+### 激活扩展思考
+
+**键盘快捷键：**
+- `Option + T` (macOS) / `Alt + T` (Windows/Linux) - 切换扩展思考
+
+**自动激活：**
+- 默认对所有模型启用（Opus 4.7、Sonnet 4.6、Haiku 4.5）
+- Opus 4.7：自适应推理，支持推理级别（effort levels）：`low` (○)、`medium` (◐)、`high` (●)、`xhigh`（仅 Opus 4.7，自 Opus 4.7 发布以来（2026-04-16）在 Claude Code 上为默认值）、`max`。Opus 4.6 和 Sonnet 4.6 也支持 `low`、`medium`、`high`、`max`（无 `xhigh`）。Opus 4.7 具有 1M-token 原生上下文窗口（1M 上下文修复在 v2.1.117 中落地——在此之前，`/context` 错误地将 Opus 4.7 按 200K 窗口计算并触发过早的自动压缩）。
+- Pro/Max 订阅者在 Opus 4.6 / Sonnet 4.6 上的默认推理级别在 v2.1.117 中从 `medium` 提升到 `high`。
+- 其他模型：固定预算最多 31,999 tokens
+
+**配置方法：**
+- 切换：`Alt+T` / `Option+T`，或通过 `/config`
+- 查看推理过程：`Ctrl+O`（详细模式）
+- 设置推理级别：`/effort` 命令或 `--effort` 标志
+
+**自定义预算：**
+```bash
+export MAX_THINKING_TOKENS=1024
+```
+
+**推理级别（Effort Level）**（Opus 4.7、Opus 4.6 和 Sonnet 4.6 支持）：
+```bash
+export CLAUDE_CODE_EFFORT_LEVEL=xhigh   # low (○), medium (◐), high (●), xhigh (仅 Opus 4.7, 默认), 或 max
+```
+
+**CLI 标志：**
+```bash
+claude --effort high "复杂的架构审查"
+```
+
+**斜杠命令：**
+```
+/effort high
+```
+
+> **注意**：提示词中的关键词 "ultrathink" 会激活深度推理模式。推理级别 `low`、`medium`、`high` 和 `max` 在 Opus 4.7、Opus 4.6 和 Sonnet 4.6 上受支持。`xhigh`（Opus 4.7 上的默认值）仅限 Opus 4.7。
+
+### 扩展思考的优势
+
+- **深度推理**：花费更多时间思考复杂问题
+- **更好的架构决策**：通过全面评估做出明智的选择
+- **考虑边缘情况**：彻底思考潜在问题和场景
+- **透彻分析**：结构化的复杂问题解决方法
+
+### 示例：架构决策
+
+```
+用户: /think 我们应该为电商平台使用微服务还是单体架构？
+
+Claude: 让我仔细思考这个架构决策...
+
+<extended_thinking>
+## 上下文分析
+- 团队规模: 5 名开发者
+- 预期流量: 初期 10,000 日活跃用户
+- 需要扩展到 100,000+ 用户
+- DevOps 资源有限
+- 6 个月的时间线到 MVP
+
+## 方案 1: 微服务架构
+优点:
++ 独立扩展
++ 技术灵活性
++ 团队独立性
++ 故障隔离
+
+缺点:
+- 运维复杂性
+- 网络开销
+- 需要分布式追踪
+- 需要 DevOps 专业知识
+- 初始开发速度较慢
+
+## 方案 2: 单体架构
+优点:
++ 部署更简单
++ 初始开发更快
++ 调试更容易
++ 运维开销更低
++ 单一代码库
+
+缺点:
+- 后期扩展挑战
+- 全有或全无部署
+- 技术锁定
+- 可能产生紧耦合
+
+## 决策因素
+1. 团队规模 (5 人) → 倾向于单体
+2. DevOps 资源 (有限) → 倾向于单体
+3. 时间线 (6 个月) → 倾向于单体
+4. 未来规模 (10 万用户) → 单体 + 缓存可实现
+5. 复杂度预算 → 有限
+
+## 建议
+从**模块化单体（modular monolith）**开始：
+- 单个部署单元
+- 清晰的模块边界
+- 模块间接口清晰
+- 为将来提取微服务做好准备
+
+这给你带来：
+✓ 初始开发速度快
+✓ 运维复杂度低
+✓ 以后可提取服务的选项
+✓ 架构清晰
+
+迁移路径：当你达到 50,000+ 用户或特定模块需要独立扩展时，将这些模块提取为微服务。
+</extended_thinking>
+
+**建议**：实施具有清晰模块边界的模块化单体架构。
+
+这种方法平衡了你当前的约束条件（团队规模、时间线、DevOps 资源）与未来的可扩展性需求。以后当有明确的业务需求时，你可以将特定模块迁移到微服务。
+```
+
+### 扩展思考配置
+
+扩展思考通过环境变量、键盘快捷键和 CLI 标志进行控制：
+
+```bash
+# 设置思考 token 预算
+export MAX_THINKING_TOKENS=16000
+
+# 设置推理级别 (Opus 4.7, Opus 4.6, Sonnet 4.6): low (○), medium (◐), high (●), xhigh (仅 Opus 4.7, 默认), 或 max
+export CLAUDE_CODE_EFFORT_LEVEL=xhigh
+```
+
+在会话中使用 `Alt+T` / `Option+T` 切换，使用 `/effort` 设置级别，或通过 `/config` 配置。
 
 ---
 
-*最后更新: 2026 年 4 月*
-*Claude Code 版本: 2.1.97*
-*兼容模型: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5*
+## 自动模式（Auto Mode）
+
+自动模式是一个研究预览权限模式（2026 年 3 月），它使用后台安全分类器在执行前审查每个操作。它允许 Claude 自主工作，同时阻止危险操作。
+
+### 要求
+
+- **计划（Plan）**：Team、Enterprise 或 API 计划（Pro 或 Max 计划不可用）
+- **模型**：Claude Sonnet 4.6 或 Opus 4.7
+- **提供商（Provider）**：仅 Anthropic API（不支持 Bedrock、Vertex 或 Foundry）
+- **分类器（Classifier）**：运行在 Claude Sonnet 4.6 上（增加额外的 token 成本）
+
+### 启用自动模式
+
+```bash
+# 使用 CLI 标志解锁自动模式（对于 Opus 4.7 上的 Max 订阅者不再需要——可直接访问）
+claude --enable-auto-mode
+
+# 然后在 REPL 中使用 Shift+Tab 循环切换到它
+```
+
+> **v2.1.112 更新**：自动模式不再需要 `--enable-auto-mode` 标志。Max 订阅者可在 Opus 4.7 上直接访问。
+
+或将其设置为默认权限模式：
+
+```bash
+claude --permission-mode auto
+```
+
+通过配置设置：
+```json
+{
+  "permissions": {
+    "defaultMode": "auto"
+  }
+}
+```
+
+### 分类器如何工作
+
+后台分类器使用以下决策顺序评估每个操作：
+
+1. **允许/拒绝规则（Allow/deny rules）** -- 首先检查显式权限规则
+2. **只读/编辑自动批准（Read-only/edits auto-approved）** -- 文件读取和编辑自动通过
+3. **分类器（Classifier）** -- 后台分类器审查操作
+4. **回退（Fallback）** -- 在连续 3 次或总共 20 次阻止后回退到提示用户
+
+### 默认阻止的操作
+
+自动模式默认阻止以下操作：
+
+| 阻止的操作 | 示例 |
+|-----------|------|
+| 管道到 shell 的安装 | `curl \| bash` |
+| 向外发送敏感数据 | 通过网络发送 API 密钥、凭证 |
+| 生产环境部署 | 针对生产环境的部署命令 |
+| 大规模删除 | 对大型目录执行 `rm -rf` |
+| IAM 变更 | 权限和角色修改 |
+| 强制推送到 main | `git push --force origin main` |
+
+### 默认允许的操作
+
+| 允许的操作 | 示例 |
+|-----------|------|
+| 本地文件操作 | 读取、写入、编辑项目文件 |
+| 声明的依赖安装 | 从清单文件执行 `npm install`、`pip install` |
+| 只读 HTTP | 使用 `curl` 获取文档 |
+| 推送到当前分支 | `git push origin feature-branch` |
+
+### 配置自动模式
+
+**将默认规则打印为 JSON**：
+```bash
+claude auto-mode defaults
+```
+
+**通过 `autoMode.environment` 托管设置配置受信任的基础设施**，用于企业部署。这允许管理员定义受信任的 CI/CD 环境、部署目标和基础设施模式。
+
+#### 使用 `"$defaults"` 扩展默认规则（v2.1.118）
+
+自 v2.1.118 起，`autoMode.allow`、`autoMode.soft_deny` 和 `autoMode.environment` 接受 `"$defaults"` 令牌，该令牌将你的规则**追加**到内置列表而不是替换它。在 v2.1.118 之前，任何用户定义的数组都会静默覆盖内置规则。
+
+**之前（替换内置规则 —— v2.1.118 之前的行为）：**
+
+```json
+{
+  "autoMode": {
+    "allow": ["Bash(gh pr list:*)"]
+  }
+}
+```
+
+**之后（扩展内置规则 —— v2.1.118+）：**
+
+```json
+{
+  "autoMode": {
+    "allow": ["$defaults", "Bash(gh pr list:*)"],
+    "soft_deny": ["$defaults", "Bash(kubectl delete:*)"],
+    "environment": ["$defaults", "trusted-ci.internal"]
+  }
+}
+```
+
+使用 `"$defaults"` 在保留出厂默认规则的同时，在其上叠加组织或项目特定的添加项。
+
+### 回退行为
+
+当分类器不确定时，自动模式会回退到提示用户：
+- 在**连续 3 次**分类器阻止后
+- 在会话中总共**20 次**分类器阻止后
+
+这确保当分类器无法自信地批准操作时，用户始终保留控制权。
+
+### 种子自动模式等效权限（无需 Team 计划）
+
+如果你没有 Team 计划或想要没有后台分类器的更简单方法，你可以用一组保守的安全权限规则作为基线来填充你的 `~/.claude/settings.json`。该脚本从只读和本地检查规则开始，然后仅在你需要时才允许你选择加入编辑、测试、本地 git 写入、包安装和 GitHub 写操作。
+
+**文件**：`09-advanced-features/setup-auto-mode-permissions.py`
+
+```bash
+# 预览将添加的内容（不会写入更改）
+python3 09-advanced-features/setup-auto-mode-permissions.py --dry-run
+
+# 应用保守基线
+python3 09-advanced-features/setup-auto-mode-permissions.py
+
+# 仅在需要时添加更多能力
+python3 09-advanced-features/setup-auto-mode-permissions.py --include-edits --include-tests
+python3 09-advanced-features/setup-auto-mode-permissions.py --include-git-write --include-packages
+```
+
+该脚本跨以下类别添加规则：
+
+| 类别 | 示例 |
+|------|------|
+| 核心只读工具 | `Read(*)`、`Glob(*)`、`Grep(*)`、`Agent(*)`、`WebSearch(*)`、`WebFetch(*)` |
+| 本地检查 | `Bash(git status:*)`、`Bash(git log:*)`、`Bash(git diff:*)`、`Bash(cat:*)` |
+| 可选编辑 | `Edit(*)`、`Write(*)`、`NotebookEdit(*)` |
+| 可选测试/构建 | `Bash(pytest:*)`、`Bash(python3 -m pytest:*)`、`Bash(cargo test:*)` |
+| 可选 git 写入 | `Bash(git add:*)`、`Bash(git commit:*)`、`Bash(git stash:*)` |
+| Git（本地写入） | `Bash(git add:*)`、`Bash(git commit:*)`、`Bash(git checkout:*)` |
+| 包管理器 | `Bash(npm install:*)`、`Bash(pip install:*)`、`Bash(cargo build:*)` |
+| 构建与测试 | `Bash(make:*)`、`Bash(pytest:*)`、`Bash(go test:*)` |
+| 常用 shell | `Bash(ls:*)`、`Bash(cat:*)`、`Bash(find:*)`、`Bash(cp:*)`、`Bash(mv:*)` |
+| GitHub CLI | `Bash(gh pr view:*)`、`Bash(gh pr create:*)`、`Bash(gh issue list:*)` |
+
+危险操作（`rm -rf`、`sudo`、强制推送、`DROP TABLE`、`terraform destroy` 等）被有意排除在外。该脚本是幂等的——运行两次不会重复规则。
+
+---
+
+## 后台任务（Background Tasks）
+
+后台任务允许长时间运行的操作在不阻塞对话的情况下执行。
+
+### 什么是后台任务？
+
+后台任务异步运行，同时你可以继续工作：
+- 大型测试套件
+- 构建过程
+- 数据库迁移
+- 部署脚本
+- 分析工具
+
+**基本用法：**
+```bash
+用户: 在后台运行测试
+
+Claude: 已启动任务 bg-1234
+
+/task list           # 显示所有任务
+/task status bg-1234 # 检查进度
+/task show bg-1234   # 查看输出
+/task cancel bg-1234 # 取消任务
+```
+
+### 启动后台任务
+
+```
+用户: 在后台运行完整的测试套件
+
+Claude: 正在后台启动测试（任务 ID: bg-1234）
+测试运行时你可以继续工作。
+
+[你可以继续对话]
+
+用户: 同时，让我们重构认证模块
+
+Claude: [测试在后台运行时处理认证模块]
+
+[稍后，当测试完成时]
+
+Claude: 📢 后台任务 bg-1234 已完成：
+✅ 245 个测试通过
+❌ 3 个测试失败
+查看结果: /task show bg-1234
+```
+
+### 管理后台任务
+
+**列出活动任务：**
+```
+用户: /task list
+
+活动后台任务:
+1. [bg-1234] 运行测试（已完成 50%，剩余 2 分钟）
+2. [bg-1235] 构建 Docker 镜像（已完成 25%，剩余 8 分钟）
+3. [bg-1236] 部署到预发布环境（已完成 90%，剩余 30 秒）
+```
+
+**检查任务状态：**
+```
+用户: /task status bg-1234
+
+任务 bg-1234: 运行测试
+状态: 进行中
+进度: 120/245 测试（49%）
+启动时间: 2025-11-08 10:30:15
+预计完成时间: 2025-11-08 10:34:22
+```
+
+**查看任务输出：**
+```
+用户: /task show bg-1234
+
+[显示测试运行的实时输出]
+```
+
+**取消任务：**
+```
+用户: /task cancel bg-1234
+
+已取消后台任务 bg-1234
+```
+
+### 示例：并行开发
+
+```
+用户: 在后台运行构建
+
+Claude: 正在启动构建...（任务 ID: bg-5001）
+
+用户: 同时在后台运行 linter
+
+Claude: 正在启动 linter...（任务 ID: bg-5002）
+
+用户: 当这些运行时，让我们实现新的 API 端点
+
+Claude: [构建和 linter 运行时实现 API 端点]
+
+[10 分钟后]
+
+Claude: 📢 构建成功完成（bg-5001）
+📢 Linter 发现 12 个问题（bg-5002）
+
+用户: 给我看看 linter 的问题
+
+Claude: [显示来自 bg-5002 的 linter 输出]
+```
+
+### 配置
+
+```json
+{
+  "backgroundTasks": {
+    "enabled": true,
+    "maxConcurrentTasks": 5,
+    "notifyOnCompletion": true,
+    "autoCleanup": true,
+    "logOutput": true
+  }
+}
+```
+
+---
+
+## Monitor 工具（事件驱动流）
+
+> **v2.1.98 新功能**：Monitor 工具让 Claude 监视后台命令的 stdout 并在匹配的事件出现时立即做出反应——替代轮询循环和 `sleep` 来等待长时间运行的进程。
+
+Monitor 附加到任何向 stdout 写入的 shell 命令。命令的每一行 stdout 都成为一个唤醒会话的通知。Claude 指定命令；harness 流式传输输出并在事件触发时交付它们。有关启动底层进程的信息，请参阅相关的[后台任务](#后台任务)部分。
+
+### 为什么重要
+
+使用 `/loop` 或 `sleep` 进行轮询每个周期都会消耗一次完整的 API 往返，无论是否有任何更改。Monitor 保持静默直到事件触发，在命令安静期间消耗**零 token**。当事件确实发生时，Claude 立即反应——无需等待下一个轮询周期的延迟发现。对于运行时间超过几分钟的任何事情，这既比轮循循环更便宜又更快。
+
+### 两种常见模式
+
+**流过滤器（Stream filters）**监视来自长时间运行源的持续输出。命令永远运行；每个匹配的行都是一个事件。
+
+```bash
+tail -f /var/log/app.log | grep --line-buffered "ERROR"
+```
+
+**轮询并发射过滤器（Poll-and-emit filters）**定期检查源，仅在发生变化时发出信号。将此用于 API、数据库或任何没有原生流的资源。
+
+```bash
+last=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+while true; do
+  gh api "repos/owner/repo/issues/123/comments?since=$last" || true
+  last=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+  sleep 30
+done
+```
+
+### 具体示例
+
+"启动我的开发服务器并监视错误。"Claude 将服务器作为后台任务启动，附加一个 Monitor 过滤器（`tail -F server.log | grep --line-buffered -E "ERROR|FATAL"`），然后会话进入静默状态。当日志中出现错误行的那一刻，Claude 被唤醒，读取错误，并可以做出反应——重启服务器、修复 bug 或向你展示——而无需你去检查。
+
+> **警告**：当管道传输到 `grep` 时，**务必**使用 `grep --line-buffered`。如果没有它，grep 会以 4KB 块缓冲 stdout，这在低流量流上可能会延迟事件数分钟。这是 Monitor 在实践中失效的第一大原因——如果你的过滤器在不应该沉默时看起来沉默了，首先检查 `--line-buffered` 标志。
+
+---
+
+## 定时任务（Scheduled Tasks）
+
+定时任务让你可以按重复计划或一次性提醒的方式自动运行提示词。任务是会话作用域的——它们在 Claude Code 活动时运行，并在会话结束时清除。自 v2.1.72+ 起可用。
+
+### `/loop` 命令
+
+```bash
+# 显式间隔
+/loop 5m 检查部署是否完成
+
+# 自然语言
+/loop 每 30 分钟检查构建状态
+```
+
+也支持标准的 5 字段 cron 表达式用于精确调度。
+
+### 一次性提醒
+
+设置在特定时间触发一次的提醒：
+
+```
+下午 3 点提醒我推送发布分支
+45 分钟后，运行集成测试
+```
+
+### 管理定时任务
+
+| 工具 | 说明 |
+|------|------|
+| `CronCreate` | 创建新的定时任务 |
+| `CronList` | 列出所有活动定时任务 |
+| `CronDelete` | 删除定时任务 |
+
+**限制和行为：**
+- 每个会话最多 **50 个定时任务**
+- 会话作用域——会话结束时清除
+- 重复任务在 **3 天**后自动过期
+- 任务仅在 Claude Code 运行时触发——不补发错过的触发
+
+### 行为详情
+
+| 方面 | 详情 |
+|------|------|
+| **重复抖动（Recurring jitter）** | 间隔的最多 10%（最多 15 分钟） |
+| **一次性抖动（One-shot jitter）** | :00/:30 边界上最多 90 秒 |
+| **错过触发（Missed fires）** | 不补发——如果 Claude Code 未运行则跳过 |
+| **持久性（Persistence）** | 不跨重启持久化 |
+
+### 云端定时任务
+
+使用 `/schedule` 创建在 Anthropic 基础设施上运行的云端定时任务：
+
+```
+/schedule 每天 上午 9 点运行测试套件并报告失败
+```
+
+云端定时任务跨重启持久化，不需要 Claude Code 在本地运行。
+
+### 禁用定时任务
+
+```bash
+export CLAUDE_CODE_DISABLE_CRON=1
+```
+
+### 示例：监控部署
+
+```
+/loop 5m 检查预发布环境的部署状态。
+        如果部署成功，通知我并停止循环。
+        如果失败，显示错误日志。
+```
+
+> **提示**：定时任务是会话作用域的。对于在重启后存活的持久化自动化，请改用 CI/CD 流水线、GitHub Actions 或桌面应用定时任务。
+
+---
+
+## 权限模式（Permission Modes）
+
+权限模式控制 Claude 无需明确批准即可执行的操作。
+
+### 可用的权限模式
+
+| 模式 | 行为 |
+|------|------|

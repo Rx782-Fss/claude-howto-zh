@@ -1,6 +1,6 @@
 ---
 name: Rollback
-description: 回滚到上一个部署版本
+描述: 回滚到上一个部署版本
 ---
 
 # 回滚部署

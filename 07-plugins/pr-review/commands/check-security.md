@@ -1,6 +1,6 @@
 ---
-name: Security Check
-description: 执行以安全为重点的代码审查
+name: 安全性 Check
+描述: 执行以安全为重点的代码审查
 ---
 
 # 安全检查

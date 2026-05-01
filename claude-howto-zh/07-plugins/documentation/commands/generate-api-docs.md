@@ -1,6 +1,6 @@
 ---
-name: Generate API Documentation
-description: 从源代码生成全面的 API 文档
+name: Generate API 文档
+描述: 从源代码生成全面的 API 文档
 ---
 
 # API 文档生成器

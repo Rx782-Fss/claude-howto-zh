@@ -1,6 +1,6 @@
 ---
 name: System Status
-description: 检查整体系统健康状态
+描述: 检查整体系统健康状态
 ---
 
 # 系统状态检查

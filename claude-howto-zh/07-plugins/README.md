@@ -3,73 +3,73 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code 插件(Plugins)
+# Claude Code 插件
 
-本目录包含完整的插件示例,将多个 Claude Code 功能打包成内聚的、可安装的软件包。
+This folder contains complete 插件 示例 that bundle multiple Claude Code features into cohesive, installable packages.
 
 ## 概览
 
-Claude Code 插件是自定义功能的捆绑集合(斜杠命令、子代理、MCP 服务器和钩子),只需一条命令即可安装。它们代表了最高级别的扩展机制----将多个功能组合成内聚的、可共享的包。
+Claude Code 插件 are bundled collections of customizations (slash commands, 子代理（子代理）, MCP servers, and 钩子) that 安装 with a single command. They represent the highest-level extension mechanism—combining multiple features into cohesive, shareable packages.
 
-## 插件架构
+## 插件 架构
 
 ```mermaid
 graph TB
-    A["Plugin(插件)"]
-    B["Slash Commands(斜杠命令)"]
-    C["Subagents(子代理)"]
-    D["MCP Servers(MCP 服务器)"]
-    E["Hooks(钩子)"]
-    F["Configuration(配置)"]
+    A["Plugin"]
+    B["Slash Commands"]
+    C["Subagents"]
+    D["MCP Servers"]
+    E["Hooks"]
+    F["Configuration"]
 
-    A -->|包含| B
-    A -->|包含| C
-    A -->|包含| D
-    A -->|包含| E
-    A -->|包含| F
+    A -->|bundles| B
+    A -->|bundles| C
+    A -->|bundles| D
+    A -->|bundles| E
+    A -->|bundles| F
 ```
 
-## 插件加载流程
+## 插件 Loading Process
 
 ```mermaid
 sequenceDiagram
-    participant User as User
+    participant User
     participant Claude as Claude Code
-    participant Plugin as PluginMarket
-    participant Install as Installer程序
-    participant SlashCmds as SlashCommands
-    participant Subagents as Subagent
-    participant MCPServers as MCP 服务器
-    participant Hooks as Hooks
-    participant Tools as Tools
+    participant Plugin as Plugin Marketplace
+    participant Install as Installation
+    participant SlashCmds as Slash Commands
+    participant Subagents
+    participant MCPServers as MCP Servers
+    participant Hooks
+    participant Tools as Configured Tools
 
     User->>Claude: /plugin install pr-review
-    Claude->>Plugin: 下载插件清单
-    Plugin-->>Claude: 返回插件定义
-    Claude->>Install: 提取组件
-    Install->>SlashCmds: 配置
-    Install->>Subagents: 配置
-    Install->>MCPServers: 配置
-    Install->Hooks: 配置
-    SlashCmds-->>Tools: 就绪可用
-    Subagents-->>Tools: 就绪可用
-    MCPServers-->>Tools: 就绪可用
-    Hooks-->>Tools: 就绪可用
-    Tools-->>Claude: 插件已安装 
+    Claude->>Plugin: Download plugin manifest
+    Plugin-->>Claude: Return plugin definition
+    Claude->>Install: Extract components
+    Install->>SlashCmds: Configure
+    Install->>Subagents: Configure
+    Install->>MCPServers: Configure
+    Install->>Hooks: Configure
+    SlashCmds-->>Tools: Ready to use
+    Subagents-->>Tools: Ready to use
+    MCPServers-->>Tools: Ready to use
+    Hooks-->>Tools: Ready to use
+    Tools-->>Claude: Plugin installed ✅
 ```
 
-## 插件类型与分发方式
+## 插件 Types & Distribution
 
-| 类型 | 范围 | 可共享性 | 权威方 | 示例 |
-|------|------|----------|--------|------|
-| 官方(Official) | 全局 | 所有用户 | Anthropic | PR 审查、安全指导 |
-| 社区(Community) | 公开 | 所有用户 | 社区 | DevOps、数据科学 |
-| 组织(Organization) | 内部 | 团队成员 | 公司 | 内部标准、工具 |
-| 个人(Personal) | 个人 | 单个用户 | 开发者 | 自定义工作流 |
+|  | 类型 | 作用域 | Shared | Authority | 示例 |  |
+|  | ------ | ------- | -------- | ----------- | ---------- |  |
+|  | Official | Global | All users | Anthropic | PR Review, 安全性 Guidance |  |
+|  | 社区 | Public | All users | 社区 | DevOps, Data Science |  |
+|  | Organization | Internal | 团队 members | Company | Internal standards, tools |  |
+|  | Personal | Individual | Single 用户 | 开发者 | 自定义 workflows |  |
 
-## 插件定义结构
+## 插件 Definition Structure
 
-插件清单使用 `.claude-plugin/plugin.json` 中的 JSON 格式:
+插件 manifest uses JSON 格式 in `.claude-插件/插件.JSON`:
 
 ```json
 {
@@ -85,28 +85,30 @@ sequenceDiagram
 }
 ```
 
-## 插件结构示例
+## 插件 Structure 示例
 
 ```
 my-plugin/
 ├── .claude-plugin/
-│   └── plugin.json       # 清单文件(名称、描述、版本、作者)
-├── commands/             # Markdown 格式的命令(即 Skill)
+│   └── plugin.json       #  Manifest (name, 描述, 版本, 作者)
+├── commands/             #  技能 as Markdown files
 │   ├── task-1.md
 │   ├── task-2.md
 │   └── workflows/
-├── agents/               # 自定义代理定义
+├── agents/               #  自定义 代理 definitions
 │   ├── specialist-1.md
 │   ├── specialist-2.md
 │   └── configs/
-├── skills/               # 带 SKILL.md 文件的代理技能
+├── skills/               #  代理 技能 with 技能.md files
 │   ├── skill-1.md
 │   └── skill-2.md
-├── hooks/                # hooks.json 中的事件处理器
+├── hooks/                #  Event handlers in 钩子.JSON
 │   └── hooks.json
-├── .mcp.json             # MCP 服务器配置
-├── .lsp.json             # LSP 服务器配置
-├── settings.json         # 默认设置
+├── .mcp.json             #  MCP 服务器 configurations
+├── .lsp.json             #  LSP server configurations for code intelligence
+├── bin/                  #  Executables added to Bash tool's PATH while 插件 is enabled
+├── settings.json         #  默认 settings applied when 插件 is enabled (currently only `代理` key supported)
+├── themes/               #  可选: ship 自定义 Claude Code themes (v2.1.118+)
 ├── templates/
 │   └── issue-template.md
 ├── scripts/
@@ -119,34 +121,34 @@ my-plugin/
     └── plugin.test.js
 ```
 
-### LSP 服务器配置
+### LSP server 配置
 
-插件可以包含语言服务器协议(LSP)支持,以提供实时代码智能功能。LSP 服务器在你工作时提供诊断信息、代码导航和符号信息。
+插件 can include Language Server 协议 (LSP) 支持 for real-time code intelligence. LSP servers provide diagnostics, code navigation, and symbol information as you work.
 
-**配置位置**:
-- 插件根目录下的 `.lsp.json` 文件
-- `plugin.json` 中内联的 `lsp` 键
+**Configuration locations**:
+- `.lsp.JSON` file in the 插件 root directory
+- Inline `lsp` key in `插件.JSON`
 
-#### 字段参考
+#### Field 参考
 
-| 字段 | 必填 | 描述 |
-|------|------|------|
-| `command` | 是 | LSP 服务器二进制文件路径(必须在 PATH 中)|
-| `extensionToLanguage` | 是 | 将文件扩展名映射到语言 ID |
-| `args` | 否 | 服务器的命令行参数 |
-| `transport` | 否 | 通信方式:`stdio`(默认)或 `socket` |
-| `env` | 否 | 服务器进程的环境变量 |
-| `initializationOptions` | 否 | LSP 初始化时发送的选项 |
-| `settings` | 否 | 传递给服务器的工作区配置 |
-| `workspaceFolder` | 否 | 覆盖工作区文件夹路径 |
-| `startupTimeout` | 否 | 等待服务器启动的最大时间(毫秒)|
-| `shutdownTimeout` | 否 | 优雅关闭的最大时间(毫秒)|
-| `restartOnCrash` | 否 | 服务器崩溃时自动重启 |
-| `maxRestarts` | 否 | 放弃前的最大重启尝试次数 |
+|  | Field | 必需 | 描述 |  |
+|  | ------- | ---------- | ------------- |  |
+|  | `command` | Yes | LSP server binary (must be in PATH) |  |
+|  | `extensionToLanguage` | Yes | Maps file extensions to language IDs |  |
+|  | `args` | No | Command-line arguments for the server |  |
+|  | `transport` | No | Communication method: `stdio` (默认) or `socket` |  |
+|  | `env` | No | 环境变量 for the server process |  |
+|  | `initializationOptions` | No | Options sent during LSP initialization |  |
+|  | `settings` | No | Workspace 配置 passed to the server |  |
+|  | `workspaceFolder` | No | Override the workspace folder path |  |
+|  | `startupTimeout` | No | Maximum time (ms) to wait for server startup |  |
+|  | `shutdownTimeout` | No | Maximum time (ms) for graceful shutdown |  |
+|  | `restartOnCrash` | No | Automatically restart if the server crashes |  |
+|  | `maxRestarts` | No | Maximum restart attempts before giving up |  |
 
-#### 配置示例
+#### 示例 configurations
 
-**Go(gopls)**:
+**Go (gopls)**:
 
 ```json
 {
@@ -160,7 +162,7 @@ my-plugin/
 }
 ```
 
-**Python(pyright)**:
+**Python (pyright)**:
 
 ```json
 {
@@ -192,28 +194,28 @@ my-plugin/
 }
 ```
 
-#### 可用的 LSP 插件
+#### Available LSP 插件
 
-官方市场包含预配置的 LSP 插件:
+The official marketplace includes pre-configured LSP 插件:
 
-| 插件 | 语言 | 服务器二进制 | 安装命令 |
-|------|------|-------------|----------|
-| `pyright-lsp` | Python | `pyright-langserver` | `pip install pyright` |
-| `typescript-lsp` | TypeScript/JavaScript | `typescript-language-server` | `npm install -g typescript-language-server typescript` |
-| `rust-lsp` | Rust | `rust-analyzer` | 通过 `rustup component add rust-analyzer` 安装 |
+|  | 插件 | Language | Server Binary | 安装 Command |  |
+|  | -------- | ---------- | --------------- | ---------------- |  |
+|  | `pyright-lsp` | Python | `pyright-langserver` | `pip 安装 pyright` |  |
+|  | `typescript-lsp` | TypeScript/JavaScript | `typescript-language-server` | `npm 安装 -g typescript-language-server typescript` |  |
+|  | `rust-lsp` | Rust | `rust-analyzer` | 安装 via `rustup component add rust-analyzer` |  |
 
-#### LSP 功能
+#### LSP capabilities
 
-一旦配置完成,LSP 服务器将提供:
+Once configured, LSP servers provide:
 
-- **即时诊断** -- 编辑后立即显示错误和警告
-- **代码导航** -- 跳转到定义、查找引用、查看实现
-- **悬停信息** -- 悬停时显示类型签名和文档
-- **符号列表** -- 浏览当前文件或工作区中的符号
+- **Instant diagnostics** — errors and warnings appear immediately after edits
+- **Code navigation** — go to definition, find references, implementations
+- **Hover information** — 类型 signatures and 文档 on hover
+- **Symbol listing** — browse symbols in the current file or workspace
 
-## 插件选项(v2.1.83+)
+## 插件 Options (v2.1.83+)
 
-插件可以在清单中通过 `userConfig` 声明用户可配置的选项。标记为 `sensitive: true` 的值会存储在系统密钥链中,而非明文设置文件中:
+插件 can declare 用户-configurable options in the manifest via `userConfig`. Values marked `sensitive: true` are stored in the system keychain rather than plain-text settings files:
 
 ```json
 {
@@ -221,20 +223,20 @@ my-plugin/
   "version": "1.0.0",
   "userConfig": {
     "apiKey": {
-      "description": "服务的 API 密钥",
+      "description": "API key for the service",
       "sensitive": true
     },
     "region": {
-      "description": "部署区域",
+      "description": "Deployment region",
       "default": "us-east-1"
     }
   }
 }
 ```
 
-## 插件持久化数据(`${CLAUDE_PLUGIN_DATA}`)(v2.1.78+)
+## Persistent 插件 Data (`${CLAUDE_PLUGIN_DATA}`) (v2.1.78+)
 
-插件可以通过 `${CLAUDE_PLUGIN_DATA}` 环境变量访问一个持久化状态目录。该目录对每个插件唯一,并在会话之间保持存在,适合用于缓存、数据库和其他持久化状态:
+插件 have access to a persistent state directory via the `${CLAUDE_PLUGIN_DATA}` environment variable. This directory is unique per 插件 and survives across sessions, making it suitable for caches, databases, and other persistent state:
 
 ```json
 {
@@ -248,11 +250,34 @@ my-plugin/
 }
 ```
 
-该目录在插件安装时自动创建。存储在此处的文件会一直保留到插件被卸载为止。
+The directory is created automatically when the 插件 is installed. Files stored here persist until the 插件 is uninstalled.
 
-## 通过 Settings 内联插件(`source: 'settings'`)(v2.1.80+)
+### Background Monitors (v2.1.105)
 
-插件可以在设置文件中使用 `source: 'settings'` 字段作为市场条目进行内联定义。这允许直接嵌入插件定义,而无需单独的仓库或市场:
+插件 can register background monitors that auto-arm when a session starts or when the 插件's 技能 is invoked. Add a top-level `monitors` key to your 插件 manifest:
+
+```json
+{
+  "name": "my-plugin",
+  "version": "1.0.0",
+  "monitors": [
+    {
+      "command": "tail -f /var/log/app.log",
+      "trigger": "session_start"
+    }
+  ]
+}
+```
+
+The `trigger` field accepts:
+- `"session_start"` — arm the monitor automatically when a session begins
+- `"skill_invoke"` — arm the monitor when the 插件's 技能 is invoked
+
+Monitors use the same Monitor tool under the hood, streaming stdout lines as events Claude can react to.
+
+## Inline 插件 via Settings (`source: 'settings'`) (v2.1.80+)
+
+插件 can be defined inline in settings files as marketplace entries 使用 the `source: 'settings'` field. This allows embedding a 插件 definition directly without requiring a separate 仓库 or marketplace:
 
 ```json
 {
@@ -271,9 +296,9 @@ my-plugin/
 }
 ```
 
-## 插件设置
+## 插件 Settings
 
-插件可以附带 `settings.json` 文件来提供默认配置。目前支持 `agent` 键,用于设置插件的主线程代理:
+插件 can ship a `settings.JSON` file to provide 默认 配置. This currently supports the `代理` key, which sets the main thread 代理 for the 插件:
 
 ```json
 {
@@ -281,28 +306,28 @@ my-plugin/
 }
 ```
 
-当插件包含 `settings.json` 时,其默认值会在安装时应用。用户可以在自己的项目或用户配置中覆盖这些设置。
+When a 插件 includes `settings.JSON`, its defaults are applied on 安装. Users can override these settings in their own 项目 or 用户 配置.
 
-## 独立方案 vs 插件方案
+## Standalone vs 插件 Approach
 
-| 方案 | 命令名称 | 配置方式 | 适用场景 |
-|------|----------|----------|----------|
-| **独立方案** | `/hello` | 在 CLAUDE.md 中手动配置 | 个人使用、项目特定 |
-| **插件方案** | `/plugin-name:hello` | 通过 plugin.json 自动化 | 分享、分发、团队使用 |
+|  | Approach | Command Names | 配置 | Best For |  |
+|  | ---------- | --------------- | --- | --- |  |
+|  | **Standalone** | `/hello` | 手册 设置 in CLAUDE.md | Personal, 项目-specific |  |
+|  | **插件** | `/插件-name:hello` | Automated via 插件.JSON | Sharing, distribution, 团队 use |  |
 
-对于快速的个人工作流,请使用**独立斜杠命令**。当你想要捆绑多个功能、与团队分享或发布分发时,请使用**插件**。
+Use **standalone slash commands** for quick personal workflows. Use **插件** when you want to bundle multiple features, share with a 团队, or publish for distribution.
 
-## 实际示例
+## Practical 示例
 
-### 示例 1:PR 审查插件
+### 示例 1: PR Review 插件
 
-**文件:** `.claude-plugin/plugin.json`
+**File:** `.claude-plugin/plugin.json`
 
 ```json
 {
   "name": "pr-review",
   "version": "1.0.0",
-  "description": "完整的 PR 审查工作流,包含安全、测试和文档检查",
+  "description": "Complete PR review workflow with security, testing, and docs",
   "author": {
     "name": "Anthropic"
   },
@@ -311,59 +336,59 @@ my-plugin/
 }
 ```
 
-**文件:** `commands/review-pr.md`
+**File:** `commands/review-pr.md`
 
 ```markdown
 ---
 name: Review PR
-description: 启动全面的 PR 审查,包含安全和测试检查
+description: Start comprehensive PR review with security and testing checks
 ---
 
-# PR 审查
+#  PR Review
 
-此命令发起一次完整的 Pull Request 审查,包括:
+This command initiates a complete pull request review including:
 
-1. 安全分析
-2. 测试覆盖率验证
-3. 文档更新检查
-4. 代码质量检查
-5. 性能影响评估
+1. Security analysis
+2. Test coverage verification
+3. Documentation updates
+4. Code quality checks
+5. Performance impact assessment
 ```
 
-**文件:** `agents/security-reviewer.md`
+**File:** `agents/security-reviewer.md`
 
 ```yaml
 ---
 name: security-reviewer
-description: 以安全为重点的代码审查
+description: Security-focused code review
 tools: read, grep, diff
 ---
 
-# 安全审查员
+#  安全性 Reviewer
 
-专注于发现安全漏洞:
-- 认证/授权问题
-- 数据泄露
-- 注入攻击
-- 安全配置
+Specializes in finding security vulnerabilities:
+- Authentication/authorization issues
+- Data exposure
+- Injection attacks
+- Secure configuration
 ```
 
-**安装:**
+**Installation:**
 
 ```bash
 /plugin install pr-review
 
-# 结果:
-# ✅ 3 个斜杠命令已安装
-# ✅ 3 个子代理已配置
-# ✅ 2 个 MCP 服务器已连接
-# ✅ 4 个钩子已注册
-# ✅ 可以使用了!
+#  Result:
+#  ✅ 3 slash commands installed
+#  ✅ 3 子代理（子代理） configured
+#  ✅ 2 MCP servers connected
+#  ✅ 4 钩子 registered
+#  ✅ Ready to use!
 ```
 
-### 示例 2:DevOps 插件
+### 示例 2: DevOps 插件
 
-**组件结构:**
+**Components:**
 
 ```
 devops-automation/
@@ -390,9 +415,9 @@ devops-automation/
     └── health-check.sh
 ```
 
-### 示例 3:文档插件
+### 示例 3: 文档 插件
 
-**捆绑组件:**
+**Bundled Components:**
 
 ```
 documentation/
@@ -414,54 +439,74 @@ documentation/
     └── adr-template.md
 ```
 
-## 插件市场
+## 插件 Marketplace
 
-Anthropic 官方管理的插件目录为 `anthropics/claude-plugins-official`。企业管理员也可以创建私有插件市场用于内部分发。
+The official Anthropic-managed 插件 directory is `anthropics/claude-插件-official`. Enterprise admins can also 创建 private 插件 marketplaces for internal distribution.
 
 ```mermaid
 graph TB
-    A["插件市场(Plugin Marketplace)"]
-    B["官方 anthropics/claude-plugins-official"]
-    C["社区市场 Marketplace"]
-    D["企业私有 Private Registry"]
+    A["Plugin Marketplace"]
+    B["Official<br/>anthropics/claude-plugins-official"]
+    C["Community<br/>Marketplace"]
+    D["Enterprise<br/>Private Registry"]
 
     A --> B
     A --> C
     A --> D
 
-    B -->|分类| B1["开发(Development)"]
-    B -->|分类| B2["DevOps"]
-    B -->|分类| B3["文档(Documentation)"]
+    B -->|Categories| B1["Development"]
+    B -->|Categories| B2["DevOps"]
+    B -->|Categories| B3["Documentation"]
 
-    C -->|搜索| C1["DevOps 自动化"]
-    C -->|搜索| C2["移动开发"]
-    C -->|搜索| C3["数据科学"]
+    C -->|Search| C1["DevOps Automation"]
+    C -->|Search| C2["Mobile Dev"]
+    C -->|Search| C3["Data Science"]
 
-    D -->|内部| D1["公司标准"]
-    D -->|内部| D2["遗留系统"]
-    D -->|内部| D3["合规要求"]
+    D -->|Internal| D1["Company Standards"]
+    D -->|Internal| D2["Legacy Systems"]
+    D -->|Internal| D3["Compliance"]
 
+    style A fill:# e1f5fe,stroke:#333,color:#333
+    style B fill:# e8f5e9,stroke:#333,color:#333
+    style C fill:# f3e5f5,stroke:#333,color:#333
+    style D fill:# fff3e0,stroke:#333,color:#333
 ```
 
-### 市场配置
+### Marketplace 配置
 
-企业和高级用户可以通过设置控制市场行为:
+Enterprise and advanced users can control marketplace behavior through settings:
 
-| 设置 | 描述 |
-|------|------|
-| `extraKnownMarketplaces` | 除默认值外添加额外的市场来源 |
-| `strictKnownMarketplaces` | 控制允许用户添加哪些市场 |
-| `deniedPlugins` | 管理员维护的阻止列表,防止安装特定插件 |
+|  | Setting | 描述 |  |
+|  | --------- | ------------- |  |
+|  | `extraKnownMarketplaces` | Add additional marketplace sources beyond the defaults |  |
+|  | `strictKnownMarketplaces` | Control which marketplaces users are allowed to add (managed-only) |  |
+|  | `blockedMarketplaces` | Admin-managed blocklist of marketplaces (supports `hostPattern` / `pathPattern` regex fields since v2.1.119) |  |
+|  | `deniedPlugins` | Admin-managed blocklist to prevent specific 插件 from being installed |  |
 
-### 其他市场功能
+> **Enforcement** (v2.1.117+): `blockedMarketplaces` and `strictKnownMarketplaces` are enforced on every plugin lifecycle event — install, update, refresh, and autoupdate — not just at first add. `strictKnownMarketplaces` is managed-only.
 
-- **默认 git 超时时间**:从 30 秒增加到 120 秒,以适应大型插件仓库
-- **自定义 npm 注册表**:插件可以指定自定义 npm 注册表 URL 用于依赖解析
-- **版本锁定**:将插件锁定到特定版本以实现可重现的环境
+示例 `blockedMarketplaces` with host/path regex (v2.1.119):
 
-### 市场定义模式
+```json
+{
+  "blockedMarketplaces": [
+    {
+      "hostPattern": "^evil\\.example\\.com$",
+      "pathPattern": "^/marketplaces/.*"
+    }
+  ]
+}
+```
 
-插件市场在 `.claude-plugin/marketplace.json` 中定义:
+### Additional Marketplace Features
+
+- **默认 git timeout**: Increased from 30s to 120s for large 插件 repositories
+- **自定义 npm registries**: 插件 can specify 自定义 npm registry URLs for dependency resolution
+- **版本 pinning**: Lock 插件 to specific versions for reproducible environments
+
+### Marketplace definition 模式
+
+插件 marketplaces are defined in `.claude-插件/marketplace.JSON`:
 
 ```json
 {
@@ -471,7 +516,7 @@ graph TB
     {
       "name": "code-standards",
       "source": "./plugins/code-standards",
-      "description": "强制执行团队编码规范",
+      "description": "Enforce team coding standards",
       "version": "1.2.0",
       "author": "platform-team"
     },
@@ -482,71 +527,83 @@ graph TB
         "repo": "my-org/deploy-helper",
         "ref": "v2.0.0"
       },
-      "description": "部署自动化工作流"
+      "description": "Deployment automation workflows"
     }
   ]
 }
 ```
 
-| 字段 | 必填 | 描述 |
-|------|------|------|
-| `name` | 是 | 市场名称(kebab-case 格式)|
-| `owner` | 是 | 维护市场的组织或用户 |
-| `plugins` | 是 | 插件条目数组 |
-| `plugins[].name` | 是 | 插件名称(kebab-case 格式)|
-| `plugins[].source` | 是 | 插件来源(路径字符串或源对象)|
-| `plugins[].description` | 否 | 插件简要描述 |
-| `plugins[].version` | 否 | 语义化版本字符串 |
-| `plugins[].author` | 否 | 插件作者名称 |
+|  | Field | 必需 | 描述 |  |
+|  | ------- | ---------- | ------------- |  |
+|  | `name` | Yes | Marketplace name in kebab-case |  |
+|  | `owner` | Yes | Organization or 用户 who maintains the marketplace |  |
+|  | `插件` | Yes | Array of 插件 entries |  |
+|  | `插件[].name` | Yes | 插件 name (kebab-case) |  |
+|  | `插件[].source` | Yes | 插件 source (path string or source object) |  |
+|  | `插件[].描述` | No | Brief 插件 描述 |  |
+|  | `插件[].版本` | No | Semantic 版本 string |  |
+|  | `插件[].作者` | No | 插件 作者 name |  |
 
-### 插件来源类型
+### 插件 source types
 
-插件可以从多个位置获取:
+插件 can be sourced from multiple locations:
 
-| 来源 | 语法 | 示例 |
-|------|------|------|
-| **相对路径** | 字符串路径 | `"./plugins/my-plugin"` |
-| **GitHub** | `{ "source": "github", "repo": "owner/repo" }` | `{ "source": "github", "repo": "acme/lint-plugin", "ref": "v1.0" }` |
-| **Git URL** | `{ "source": "url", "url": "..." }` | `{ "source": "url", "url": "https://git.internal/plugin.git" }` |
-| **Git 子目录** | `{ "source": "git-subdir", "url": "...", "path": "..." }` | `{ "source": "git-subdir", "url": "https://github.com/org/monorepo.git", "path": "packages/plugin" }` |
-| **npm** | `{ "source": "npm", "package": "..." }` | `{ "source": "npm", "package": "@acme/claude-plugin", "version": "^2.0" }` |
-| **pip** | `{ "source": "pip", "package": "..." }` | `{ "source": "pip", "package": "claude-data-plugin", "version": ">=1.0" }` |
+|  | Source | Syntax | 示例 |  |
+|  | -------- | -------- | --------- |  |
+|  | **Relative path** | String path | `"./插件/my-插件"` |  |
+|  | **GitHub** | `{ "source": "github", "repo": "owner/repo" }` | `{ "source": "github", "repo": "acme/lint-插件", "ref": "v1.0" }` |  |
+|  | **Git URL** | `{ "source": "url", "url": "..." }` | `{ "source": "url", "url": "https://git.internal/插件.git" }` |  |
+|  | **Git subdirectory** | `{ "source": "git-subdir", "url": "...", "path": "..." }` | `{ "source": "git-subdir", "url": "https://github.com/org/monorepo.git", "path": "packages/插件" }` |  |
+|  | **npm** | `{ "source": "npm", "package": "..." }` | `{ "source": "npm", "package": "@acme/claude-插件", "版本": "^2.0" }` |  |
+|  | **pip** | `{ "source": "pip", "package": "..." }` | `{ "source": "pip", "package": "claude-data-插件", "版本": ">=1.0" }` |  |
 
-GitHub 和 git 来源支持可选的 `ref`(分支/标签)和 `sha`(提交哈希)字段用于版本锁定。
+GitHub and git sources 支持 可选 `ref` (分支/tag) and `sha` (提交 hash) fields for 版本 pinning.
 
-### 分发方式
+### Distribution methods
 
-**GitHub(推荐)**:
+**GitHub (recommended)**:
 ```bash
-# 用户添加你的市场
+#  Users add your marketplace
 /plugin marketplace add owner/repo-name
 ```
 
-**其他 Git 服务**(需要完整 URL):
+**Other git services** (full URL required):
 ```bash
 /plugin marketplace add https://gitlab.com/org/marketplace-repo.git
 ```
 
-**私有仓库**:通过 Git 凭证助手或环境 Token 支持。用户必须拥有仓库的读取权限。
+**Private repositories**: Supported via git credential helpers or environment tokens. Users must have read access to the repository.
 
-**官方市场提交**:向 Anthropic 管理的市场提交插件以获得更广泛的分发。
+**Official marketplace submission**: Submit plugins to the Anthropic-curated marketplace for broader distribution via [claude.ai/settings/plugins/submit](https://claude.ai/settings/plugins/submit) or [platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit).
 
-### 严格模式
+### 管理 Marketplaces
 
-控制市场定义与本地 `plugin.json` 文件的交互方式:
+```bash
+#  Marketplace CLI commands
+claude plugin marketplace add <source>       #  Add marketplace (GitHub, URL, local)
+claude plugin marketplace update [name]      #  Refresh catalog index
+claude plugin marketplace remove <name>      #  Remove marketplace
+claude plugin marketplace list               #  List configured marketplaces
+```
 
-| 设置 | 行为 |
-|------|------|
-| `strict: true`(默认)| 本地 `plugin.json` 具有权威性;市场条目作为补充 |
-| `strict: false` | 市场条目即为完整的插件定义 |
+> **Important**: `marketplace update` only refreshes the plugin catalog (what's available to install). It does NOT update installed plugins. Use `plugin update <name>` to update specific installed plugins.
 
-**使用 `strictKnownMarketplaces` 的组织限制**:
+### Strict mode
 
-| 值 | 效果 |
-|-----|------|
-| 未设置 | 无限制 -- 用户可以添加任何市场 |
-| 空数组 `[]` | 全面锁定 -- 不允许任何市场 |
-| 模式数组 | 白名单 -- 仅允许匹配的市场 |
+Control how marketplace definitions interact with local `插件.JSON` files:
+
+|  | Setting | Behavior |  |
+|  | --------- | ---------- |  |
+|  | `strict: true` (默认) | Local `插件.JSON` is authoritative; marketplace entry supplements it |  |
+|  | `strict: false` | Marketplace entry is the entire 插件 definition |  |
+
+**Organization restrictions** with `strictKnownMarketplaces`:
+
+|  | Value | Effect |  |
+|  | ------- | -------- |  |
+|  | Not set | No restrictions — users can add any marketplace |  |
+|  | Empty array `[]` | Lockdown — no marketplaces allowed |  |
+|  | Array of patterns | Allowlist — only matching marketplaces can be added |  |
 
 ```json
 {
@@ -557,308 +614,344 @@ GitHub 和 git 来源支持可选的 `ref`(分支/标签)和 `sha`(提交哈希)
 }
 ```
 
-> ⚠️ **注意**:在启用 `strictKnownMarketplaces` 的严格模式下,用户只能从白名单中的市场安装插件。这对于需要控制插件分发的企业环境非常有用。
+> **Warning**: In strict mode with `strictKnownMarketplaces`, users can only install plugins from allowlisted marketplaces. This is useful for enterprise environments requiring controlled plugin distribution.
 
-## 插件安装与生命周期
+## 插件 安装 & Lifecycle
 
 ```mermaid
 graph LR
-    A["发现(Discover)"] -->|浏览| B["市场(Marketplace)"]
-    B -->|选择| C["插件页面"]
-    C -->|查看| D["组件(Components)"]
-    D -->|安装| E["/plugin install"]
-    E -->|提取| F["配置(Configure)"]
-    F -->|激活| G["使用(Use)"]
-    G -->|检查| H["更新(Update)"]
-    H -->|有更新| G
-    G -->|完成| I["禁用(Disable)"]
-    I -->|稍后| J["启用(Enable)"]
-    J -->|返回| G
+    A["Discover"] -->|Browse| B["Marketplace"]
+    B -->|Select| C["Plugin Page"]
+    C -->|View| D["Components"]
+    D -->|Install| E["/plugin install"]
+    E -->|Extract| F["Configure"]
+    F -->|Activate| G["Use"]
+    G -->|Check| H["Update"]
+    H -->|Available| G
+    G -->|Done| I["Disable"]
+    I -->|Later| J["Enable"]
+    J -->|Back| G
 ```
 
-## 插件功能对比
+## 插件 Features Comparison
 
-| 功能 | 斜杠命令 | 技能(Skill) | 子代理 | 插件 |
-|------|-----------|--------------|--------|------|
-| **安装方式** | 手动复制 | 手动复制 | 手动配置 | 一条命令 |
-| **配置耗时** | 5 分钟 | 10 分钟 | 15 分钟 | 2 分钟 |
-| **打包能力** | 单文件 | 单文件 | 单文件 | 多组件 |
-| **版本管理** | 手动 | 手动 | 手动 | 自动 |
-| **团队分享** | 复制文件 | 复制文件 | 复制文件 | 安装 ID |
-| **更新方式** | 手动 | 手动 | 手动 | 自动可用 |
-| **依赖管理** | 无 | 无 | 无 | 可包含 |
-| **市场支持** | 否 | 否 | 否 | 是 |
-| **分发渠道** | 仓库 | 仓库 | 仓库 | 市场 |
+|  | 功能 | 斜杠命令 | 技能 | 子代理 | 插件 |  |
+|  | --------- | --------------- | ------- | ---------- | -------- |  |
+|  | **安装** | 手册 copy | 手册 copy | 手册 config | One command |  |
+|  | **设置 Time** | 5 minutes | 10 minutes | 15 minutes | 2 minutes |  |
+|  | **Bundling** | Single file | Single file | Single file | Multiple |  |
+|  | **Versioning** | 手册 | 手册 | 手册 | Automatic |  |
+|  | **团队 Sharing** | Copy file | Copy file | Copy file | 安装 ID |  |
+|  | **Updates** | 手册 | 手册 | 手册 | Auto-available |  |
+|  | **Dependencies** | None | None | None | May include |  |
+|  | **Marketplace** | No | No | No | Yes |  |
+|  | **Distribution** | 仓库 | 仓库 | 仓库 | Marketplace |  |
 
-## 插件 CLI 命令
+## 插件 CLI Commands
 
-所有插件操作都可作为 CLI 命令使用:
+All 插件 operations are available as CLI commands:
 
 ```bash
-claude plugin install <name>@<marketplace>   # 从市场安装
-claude plugin uninstall <name>               # 卸载插件
-claude plugin list                           # 列出已安装的插件
-claude plugin enable <name>                  # 启用被禁用的插件
-claude plugin disable <name>                 # 禁用插件
-claude plugin validate                       # 验证插件结构
+claude plugin install <name>@<marketplace>   #  安装 from a marketplace
+claude plugin uninstall <name>               #  Remove a 插件
+claude plugin update <name>                  #  更新 installed 插件 to latest 版本
+claude plugin list                           #  List installed 插件
+claude plugin enable <name>                  #  启用 a disabled 插件
+claude plugin disable <name>                 #  禁用 a 插件
+claude plugin validate                       #  Validate 插件 structure
+claude plugin tag <version>                  #  创建 a 发布 git tag with 版本 validation (v2.1.118+)
 ```
 
-## 安装方法
+示例: `claude 插件 tag v0.3.0` validates the 版本 格式, creates the matching git tag, and is the recommended way to cut 插件 releases for distribution.
 
-### 从市场安装
+## 安装 Methods
+
+### From Marketplace
 ```bash
 /plugin install plugin-name
-# 或通过 CLI:
+#  or from CLI:
 claude plugin install plugin-name@marketplace-name
 ```
 
-### 启用 / 禁用(自动检测作用域)
+### 启用 / 禁用 (with auto-detected 作用域)
 ```bash
 /plugin enable plugin-name
 /plugin disable plugin-name
 ```
 
-### 本地插件(用于开发)
+### Local 插件 (for development)
 ```bash
-# CLI 参数用于本地测试(可重复指定多个插件)
+#  CLI flag for local testing (repeatable for multiple 插件)
 claude --plugin-dir ./path/to/plugin
 claude --plugin-dir ./plugin-a --plugin-dir ./plugin-b
 ```
 
-### 从 Git 仓库安装
+### From Git 仓库
 ```bash
 /plugin install github:username/repo
 ```
 
-## 何时创建插件
+## Auto-更新
+
+Claude Code can automatically 更新 marketplaces and their installed 插件 at startup.
+
+|  | Marketplace 类型 | Auto-更新 默认 | How to Toggle |  |
+|  | ------------------ | --------------------- | --------------- |  |
+|  | Official (`claude-插件-official`) | ✅ Enabled | `/插件` → Marketplaces → Select |  |
+|  | Third-party / Local | ❌ Disabled | Same UI path |  |
+
+When auto-更新 runs, Claude Code:
+1. Refreshes marketplace catalog
+2. Updates installed 插件 to latest versions
+3. Shows notification prompting `/reload-插件`
+
+### 环境变量
+
+|  | Variable | Effect |  |
+|  | ---------- | -------- |  |
+|  | `DISABLE_AUTOUPDATER=1` | 禁用 all auto-updates (Claude Code + 插件) |  |
+|  | `DISABLE_AUTOUPDATER=1` + `FORCE_AUTOUPDATE_PLUGINS=1` | Keep 插件 updates, 禁用 Claude Code updates |  |
+
+```bash
+#  禁用 all auto-updates
+export DISABLE_AUTOUPDATER=1
+
+#  Keep 插件 auto-updates only
+export DISABLE_AUTOUPDATER=1
+export FORCE_AUTOUPDATE_PLUGINS=1
+```
+
+## When to 创建 a 插件
 
 ```mermaid
 graph TD
-    A["我应该创建插件吗"]
-    A -->|需要多组件| B["需要多个命令 或子代理 或 MCP"]
-    B -->|是| C[" 创建插件"]
-    B -->|否| D["使用独立功能"]
-    A -->|团队工作流| E["需要与 团队分享"]
-    E -->|是| C
-    E -->|否| F["保留为本地配置"]
-    A -->|复杂配置| G["需要自动 配置"]
-    G -->|是| C
-    G -->|否| D
+    A["Should I create a plugin?"]
+    A -->|Need multiple components| B{"Multiple commands<br/>or subagents<br/>or MCPs?"}
+    B -->|Yes| C["✅ Create Plugin"]
+    B -->|No| D["Use Individual Feature"]
+    A -->|Team workflow| E{"Share with<br/>team?"}
+    E -->|Yes| C
+    E -->|No| F["Keep as Local Setup"]
+    A -->|Complex setup| G{"Needs auto<br/>configuration?"}
+    G -->|Yes| C
+    G -->|No| D
 ```
 
-### 插件适用场景
+### 插件 Use Cases
 
-| 使用场景 | 建议 | 原因 |
-|----------|------|------|
-| **团队入职引导** | ✅ 使用插件 | 即时配置,包含所有设置 |
-| **框架搭建** | ✅ 使用插件 | 捆绑框架专用命令 |
-| **企业标准** | ✅ 使用插件 | 集中分发,版本控制 |
-| **快速任务自动化** | ❌ 使用命令 | 复杂度过高 |
-| **单一领域专长** | ❌ 使用技能 | 过于重量级,改用技能 |
-| **专项分析** | ❌ 使用子代理 | 手动创建或使用技能 |
-| **实时数据访问** | ❌ 使用 MCP | 独立运行,不要捆绑 |
+|  | Use Case | Recommendation | Why |  |
+|  | ---------- | ----------------- | ----- |  |
+|  | **团队 Onboarding** | ✅ Use 插件 | Instant 设置, all configurations |  |
+|  | **Framework 设置** | ✅ Use 插件 | Bundles framework-specific commands |  |
+|  | **Enterprise Standards** | ✅ Use 插件 | Central distribution, 版本 control |  |
+|  | **Quick Task Automation** | ❌ Use Command | Overkill complexity |  |
+|  | **Single Domain Expertise** | ❌ Use 技能 | Too heavy, use 技能 instead |  |
+|  | **Specialized Analysis** | ❌ Use 子代理 | 创建 manually or use 技能 |  |
+|  | **Live Data Access** | ❌ Use MCP | Standalone, don't bundle |  |
 
-## 测试插件
+## Testing a 插件
 
-在发布前,使用 `--plugin-dir` CLI 参数在本地测试你的插件(可重复指定多个插件):
+Before publishing, 测试 your 插件 locally 使用 the `--插件-dir` CLI flag (repeatable for multiple 插件):
 
 ```bash
 claude --plugin-dir ./my-plugin
 claude --plugin-dir ./my-plugin --plugin-dir ./another-plugin
 ```
 
-这将启动加载了你插件的 Claude Code,允许你:
-- 验证所有斜杠命令是否可用
-- 测试子代理和代理是否正常工作
-- 确认 MCP 服务器连接正确
-- 验证钩子执行情况
-- 检查 LSP 服务器配置
-- 检查任何配置错误
+This launches Claude Code with your 插件 loaded, allowing you to:
+- Verify all slash commands are available
+- 测试 子代理（子代理） and agents function correctly
+- Confirm MCP servers connect properly
+- Validate 钩子 execution
+- Check LSP server configurations
+- Check for any 配置 errors
 
-## 热重载
+## Hot-Reload
 
-插件在开发过程中支持热重载。当你修改插件文件时,Claude Code 可以自动检测变更。你也可以强制重载:
+插件 支持 hot-reload during development. When you modify 插件 files, Claude Code can detect changes automatically. You can also force a reload with:
 
 ```bash
 /reload-plugins
 ```
 
-这将重新读取所有插件清单、命令、代理、技能、钩子和 MCP/LSP 配置,无需重启会话。
+This re-reads all 插件 manifests, commands, agents, 技能, 钩子, and MCP/LSP configurations without restarting the session.
 
-## 插件的托管设置
+## Managed Settings for 插件
 
-管理员可以使用托管设置在整个组织范围内控制插件行为:
+Administrators can control 插件 behavior across an organization 使用 managed settings:
 
-| 设置 | 描述 |
-|------|------|
-| `enabledPlugins` | 默认启用的插件白名单 |
-| `deniedPlugins` | 不能安装的插件黑名单 |
-| `extraKnownMarketplaces` | 除默认值外的额外市场来源 |
-| `strictKnownMarketplaces` | 限制允许用户添加哪些市场 |
-| `allowedChannelPlugins` | 控制每个发布频道允许的插件 |
+|  | Setting | 描述 |  |
+|  | --------- | ------------- |  |
+|  | `enabledPlugins` | Allowlist of 插件 that are enabled by 默认 |  |
+|  | `deniedPlugins` | Blocklist of 插件 that cannot be installed |  |
+|  | `extraKnownMarketplaces` | Add additional marketplace sources beyond the defaults |  |
+|  | `strictKnownMarketplaces` | Restrict which marketplaces users are allowed to add (managed-only; enforced on every 插件 lifecycle event since v2.1.117) |  |
+|  | `blockedMarketplaces` | Blocklist of marketplaces; enforced on every 插件 lifecycle event since v2.1.117; supports `hostPattern` / `pathPattern` regex fields since v2.1.119 |  |
+|  | `allowedChannelPlugins` | Control which 插件 are permitted per 发布 channel |  |
 
-这些设置可以通过托管配置文件在组织级别应用,并优先于用户级别的设置。
+These settings can be applied at the organization level via managed 配置 files and take precedence over 用户-level settings.
 
-## 插件安全性
+## 插件 安全性
 
-插件子代理在受限沙箱中运行。以下前置元数据键**不允许**在插件子代理定义中使用:
+插件 子代理（子代理） run in a restricted sandbox. The following frontmatter keys are **not allowed** in 插件 子代理 definitions:
 
-- `hooks` -- 子代理不能注册事件处理器
-- `mcpServers` -- 子代理不能配置 MCP 服务器
-- `permissionMode` -- 子代理不能覆盖权限模型
+- `钩子` -- 子代理（子代理） cannot register event handlers
+- `mcpServers` -- 子代理（子代理） cannot 配置 MCP servers
+- `permissionMode` -- 子代理（子代理） cannot override the permission model
 
-这确保了插件无法提升特权或超出其声明范围修改宿主环境。
+This ensures that 插件 cannot escalate privileges or modify the host environment beyond their declared 作用域.
 
-## 发布插件
+## Publishing a 插件
 
-**发布步骤:**
+**Steps to publish:**
 
-1. 创建包含所有组件的插件结构
-2. 编写 `.claude-plugin/plugin.json` 清单
-3. 创建带文档的 `README.md`
-4. 使用 `claude --plugin-dir ./my-plugin` 本地测试
-5. 提交到插件市场
-6. 接受审核并批准
-7. 发布到市场
-8. 用户可以通过一条命令安装
+1. 创建 插件 structure with all components
+2. Write `.claude-插件/插件.JSON` manifest
+3. 创建 `README.md` with 文档
+4. 测试 locally with `claude --插件-dir ./my-插件`
+5. Tag the 发布 with `claude 插件 tag v0.3.0` (v2.1.118+) — validates the 版本 string and creates the matching git tag
+6. Submit to 插件 marketplace
+7. Get reviewed and approved
+8. Published on marketplace
+9. Users can 安装 with one command
 
-**提交示例:**
+**Example submission:**
 
 ```markdown
-# PR 审查插件
+#  PR Review 插件
 
-## 简介
-完整的 PR 审查工作流,包含安全、测试和文档检查。
+# # 描述
+Complete PR review workflow with security, testing, and documentation checks.
 
-## 包含内容
-- 3 个用于不同审查类型的斜杠命令
-- 3 个专业化的子代理
-- GitHub 和 CodeQL MCP 集成
-- 自动化安全扫描钩子
+# # What's Included
+- 3 slash commands for different review types
+- 3 specialized subagents
+- GitHub and CodeQL MCP integration
+- Automated security scanning hooks
 
-## 安装
+# # 安装
 ```bash
-/plugin install pr-review
+/插件 安装 pr-review
 ```
 
-## 功能特性
-✅ 安全分析
-✅ 测试覆盖率检查
-✅ 文档验证
-✅ 代码质量评估
-✅ 性能影响分析
+# # Features
+✅ Security analysis
+✅ Test coverage checking
+✅ Documentation verification
+✅ Code quality assessment
+✅ Performance impact analysis
 
-## 使用方法
+# # 使用方法
 ```bash
 /review-pr
-/check-security
+/check-安全性
 /check-tests
 ```
 
-## 要求
+# # 系统要求
 - Claude Code 1.0+
-- GitHub 访问权限
-- CodeQL(可选)
+- GitHub access
+- CodeQL (optional)
 ```
 
-## 插件 vs 手动配置
+## 插件 vs 手册 配置
 
-**手动配置(2 小时以上):**
-- 逐个安装斜杠命令
-- 单独创建子代理
-- 分别配置 MCP
-- 手动设置钩子
-- 编写所有文档
-- 与团队分享(希望他们正确配置)
+**Manual Setup (2+ hours):**
+- 安装 slash commands one by one
+- 创建 子代理（子代理） individually
+- 配置 MCPs separately
+- Set up 钩子 manually
+- Document everything
+- Share with 团队 (hope they 配置 correctly)
 
-**使用插件(2 分钟):**
+**With Plugin (2 minutes):**
 ```bash
 /plugin install pr-review
-# ✅ 所有内容已安装并配置
-# ✅ 立即可用
-# ✅ 团队可以精确复现配置
+#  ✅ Everything installed and configured
+#  ✅ Ready to use immediately
+#  ✅ 团队 can reproduce exact 设置
 ```
 
 ## 最佳实践
 
-### 应该做的 ✅
-- 使用清晰、描述性的插件名称
-- 包含全面的 README
-- 正确地对插件进行版本管理(语义化版本)
-- 一起测试所有组件
-- 清晰记录需求
-- 提供使用示例
-- 包含错误处理
-- 合理标记以便被发现
-- 保持向后兼容性
-- 保持插件聚焦且内聚
-- 包含全面的测试
-- 记录所有依赖
+### Do's ✅
+- Use clear, descriptive 插件 names
+- Include comprehensive README
+- 版本 your 插件 properly (semver)
+- 测试 all components together
+- Document 系统要求 clearly
+- Provide 使用方法 示例
+- Include error handling
+- Tag appropriately for discovery
+- Maintain backward 兼容性
+- Keep 插件 focused and cohesive
+- Include comprehensive tests
+- Document all dependencies
 
-### 不应该做的 ❌
-- 不要捆绑不相关的功能
-- 不要硬编码凭证
-- 不要跳过测试
-- 不要忘记编写文档
-- 不要创建冗余的插件
-- 不要忽略版本管理
-- 不要过度复杂化组件依赖
-- 不要忘记优雅地处理错误
+### Don'ts ❌
+- Don't bundle unrelated features
+- Don't hardcode credentials
+- Don't skip testing
+- Don't forget 文档
+- Don't 创建 redundant 插件
+- Don't ignore versioning
+- Don't overcomplicate component dependencies
+- Don't forget to handle errors gracefully
 
-## 安装说明
+## 安装 Instructions
 
-### 从市场安装
+### Installing from Marketplace
 
-1. **浏览可用插件:**
+1. **Browse available 插件:**
    ```bash
    /plugin list
    ```
 
-2. **查看插件详情:**
+2. **View 插件 details:**
    ```bash
    /plugin info plugin-name
    ```
 
-3. **安装插件:**
+3. **安装 a 插件:**
    ```bash
    /plugin install plugin-name
    ```
 
-### 从本地路径安装
+### Installing from Local Path
 
 ```bash
 /plugin install ./path/to/plugin-directory
 ```
 
-### 从 GitHub 安装
+### Installing from GitHub
 
 ```bash
 /plugin install github:username/repo
 ```
 
-### 列出已安装的插件
+### Listing Installed 插件
 
 ```bash
 /plugin list --installed
 ```
 
-### 更新插件
+### Updating a 插件
 
 ```bash
 /plugin update plugin-name
 ```
 
-### 禁用/启用插件
+### Disabling/Enabling a 插件
 
 ```bash
-# 临时禁用
+#  Temporarily 禁用
 /plugin disable plugin-name
 
-# 重新启用
+#  Re-启用
 /plugin enable plugin-name
 ```
 
-### 卸载插件
+### Uninstalling a 插件
 
 ```bash
 /plugin uninstall plugin-name
@@ -866,79 +959,86 @@ claude --plugin-dir ./my-plugin --plugin-dir ./another-plugin
 
 ## 相关概念
 
-以下 Claude Code 功能与插件协同工作:
+The following Claude Code features work together with 插件:
 
-- **[斜杠命令](../01-slash-commands/)** -- 打包在插件中的独立命令
-- **[Memory(记忆)](../02-memory/)** -- 插件的持久化上下文
-- **[Skills(技能)](../03-skills/)** -- 可以封装到插件中的领域专业知识
-- **[Subagents(子代理)](../04-subagents/)** -- 作为插件组件包含的专业代理
-- **[MCP 服务器](../05-mcp/)** -- 打包在插件中的 Model Context Protocol 集成
-- **[Hooks(钩子)](../06-hooks/)** -- 触发插件工作流的事件处理器
+- **[Slash Commands](../01-slash-commands/)** - Individual commands bundled in 插件
+- **[记忆](../02-记忆/)** - Persistent context for 插件
+- **[技能](../03-技能/)** - Domain expertise that can be wrapped into 插件
+- **[子代理（子代理）](../04-子代理（子代理）/)** - Specialized agents included as 插件 components
+- **[MCP Servers](../05-mcp/)** - Model Context 协议 integrations bundled in 插件
+- **[钩子](../06-钩子/)** - Event handlers that trigger 插件 workflows
 
-## 完整示例工作流
+## Complete 示例 Workflow
 
-### PR 审查插件完整工作流
+### PR Review 插件 Full Workflow
 
 ```
-1. 用户: /review-pr
+1. User: /review-pr
 
-2. 插件执行:
-   ├── pre-review.js 钩子验证 git 仓库
-   ├── GitHub MCP 获取 PR 数据
-   ├── security-reviewer 子代理分析安全性
-   ├── test-checker 子代理验证覆盖率
-   └── performance-analyzer 子代理检查性能
+2. Plugin executes:
+   ├── pre-review.js hook validates git repo
+   ├── GitHub MCP fetches PR data
+   ├── security-reviewer subagent analyzes security
+   ├── test-checker subagent verifies coverage
+   └── performance-analyzer subagent checks performance
 
-3. 综合结果并呈现:
-   ✅ 安全:未发现严重问题
-   ⚠️  测试:覆盖率 65%(建议达到 80%+)
-   ✅ 性能:无显著影响
-   📝  提供 12 条改进建议
+3. Results synthesized and presented:
+   ✅ Security: No critical issues
+   ⚠️  Testing: Coverage 65% (recommend 80%+)
+   ✅ Performance: No significant impact
+   📝 12 recommendations provided
 ```
 
 ## 故障排除
 
-### 插件无法安装
-- 检查 Claude Code 版本兼容性:`/version`
-- 使用 JSON 验证器验证 `plugin.json` 语法
-- 检查网络连接(针对远程插件)
-- 查看权限:`ls -la plugin/`
+### 插件 Won't 安装
+- Check Claude Code 版本 兼容性: `/版本`
+- Verify `插件.JSON` syntax with a JSON validator
+- Check internet connection (for remote 插件)
+- Review permissions: `ls -la 插件/`
 
-### 组件未加载
-- 验证 `plugin.json` 中的路径与实际目录结构匹配
-- 检查文件权限:`chmod +x scripts/`
-- 审查组件文件语法
-- 检查日志:`/plugin debug plugin-name`
+### Components Not Loading
+- Verify paths in `插件.JSON` match actual directory structure
+- Check file permissions: `chmod +x scripts/`
+- Review component file syntax
+- Check logs: `/插件 调试 插件-name`
 
-### MCP 连接失败
-- 验证环境变量是否正确设置
-- 检查 MCP 服务器安装和健康状态
-- 使用 `/mcp test` 独立测试 MCP 连接
-- 查看 `mcp/` 目录中的 MCP 配置
+### MCP Connection Failed
+- Verify 环境变量 are set correctly
+- Check MCP 服务器 安装 and health
+- 测试 MCP connection independently with `/mcp 测试`
+- Review MCP 配置 in `mcp/` directory
 
-### 安装后命令不可用
-- 确认插件安装成功:`/plugin list --installed`
-- 检查插件是否已启用:`/plugin status plugin-name`
-- 重启 Claude Code:`exit` 并重新打开
-- 检查与现有命令的命名冲突
+### Commands Not Available After 安装
+- Ensure 插件 was installed successfully: `/插件 list --installed`
+- Check if 插件 is enabled: `/插件 status 插件-name`
+- Restart Claude Code: `exit` and reopen
+- Check for naming conflicts with existing commands
 
-### 钩子执行问题
-- 验证钩子文件具有正确的权限
-- 检查钩子语法和事件名称
-- 查看钩子日志获取错误详情
-- 尝试手动测试钩子
+### 钩子 Execution Issues
+- Verify 钩子 files have correct permissions
+- Check 钩子 syntax and event names
+- Review 钩子 logs for error details
+- 测试 钩子 manually if possible
 
-## 更多资源
+## Additional 资源
 
-- [官方插件文档](https://code.claude.com/docs/en/plugins)
-- [发现插件](https://code.claude.com/docs/en/discover-plugins)
-- [插件市场](https://code.claude.com/docs/en/plugin-marketplaces)
-- [插件参考](https://code.claude.com/docs/en/plugins-reference)
-- [MCP 服务器参考](https://modelcontextprotocol.io/)
-- [子代理配置指南](../04-subagents/README.md)
-- [钩子系统参考](../06-hooks/README.md)
+- [Official 插件 文档](https://code.claude.com/docs/en/插件)
+- [Discover 插件](https://code.claude.com/docs/en/discover-插件)
+- [插件 Marketplaces](https://code.claude.com/docs/en/插件-marketplaces)
+- [插件 参考](https://code.claude.com/docs/en/插件-参考)
+- [MCP 服务器 参考](https://modelcontextprotocol.io/)
+- [子代理 配置 指南](../04-子代理（子代理）/README.md)
+- [钩子 System 参考](../06-钩子/README.md)
 
 ---
-**最后更新: 2026 年 4 月 9 日
-**Claude Code 版本: 2.1.97
-**兼容模型**: Claude Sonnet 4.6, Claude Opus 4.6, Claude Haiku 4.5
+
+**Last Updated**: April 24, 2026
+**Claude Code Version**: 2.1.119
+**Sources**:
+- https://code.claude.com/docs/en/插件
+- https://code.claude.com/docs/en/插件-marketplaces
+- https://github.com/anthropics/claude-code/releases/tag/v2.1.117
+- https://github.com/anthropics/claude-code/releases/tag/v2.1.118
+- https://github.com/anthropics/claude-code/releases/tag/v2.1.119
+**Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.7, Claude Haiku 4.5

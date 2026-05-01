@@ -1,6 +1,6 @@
 ---
 name: code-commentator
-description: 代码注释和内联文档专家
+描述: 代码注释和内联文档专家
 tools: read, write, edit
 ---
 

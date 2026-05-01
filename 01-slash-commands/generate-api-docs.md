@@ -1,7 +1,7 @@
 ---
 name: 生成 API 文档
-description: 为选定的 API 端点或模块生成全面的 API 文档
-tags: documentation, api, openapi
+描述: 为选定的 API 端点或模块生成全面的 API 文档
+tags: 文档, API, openapi
 allowed-tools: Read, Glob, Grep, Write
 ---
 
@@ -27,7 +27,7 @@ allowed-tools: Read, Glob, Grep, Write
 
 **从代码中提取:**
 - 端点定义(路径、方法)
-- 请求/响应模型(类型定义、schema)
+- 请求/响应模型(类型定义、模式)
 - 认证方式
 - 错误码和错误处理
 - 速率限制配置
@@ -41,22 +41,22 @@ allowed-tools: Read, Glob, Grep, Write
 
 **文档结构**:
 ```markdown
-# [API 名称] API 文档
+#   [API 名称] API 文档
 
-## 概述
+#  # 概述
 [简要描述 API 的用途和范围]
 
-## 认证
+#  # 认证
 [说明认证方式和获取凭证的方法]
 
-## 基础 URL
+#  # 基础 URL
 ```
 [环境对应的 base URL]
 ```
 
-## 接口列表
+#  # 接口列表
 
-### [端点名称]
+#  ## [端点名称]
 **`[METHOD] /path`**
 
 **描述**:[接口功能说明]

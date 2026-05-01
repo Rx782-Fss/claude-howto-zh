@@ -1,6 +1,6 @@
 ---
 name: Generate README
-description: 创建或更新项目 README
+描述: 创建或更新项目 README
 ---
 
 # README 生成器

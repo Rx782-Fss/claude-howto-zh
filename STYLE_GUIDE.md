@@ -3,7 +3,7 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Style Guide(风格指南)
+# Style 指南(风格指南)
 
 > 贡献到 Claude How To 时的格式规范和排版规则。遵循本指南以保持内容一致、专业且易于维护。
 
@@ -20,11 +20,11 @@
 - [Code Blocks](#code-blocks)
 - [Links and Cross-References](#links-and-cross-references)
 - [Diagrams](#diagrams)
-- [Emoji Usage](#emoji-usage)
-- [YAML Frontmatter](#yaml-frontmatter)
+- [Emoji 使用方法](#emoji-使用方法)
+- [YAML Frontmatter](#YAML-frontmatter)
 - [Images and Media](#images-and-media)
 - [Tone and Voice](#tone-and-voice)
-- [Commit Messages](#commit-messages)
+- [提交 Messages](#提交-messages)
 - [Checklist for Authors](#checklist-for-authors)
 
 ---
@@ -47,15 +47,15 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### File Names
 
-| 类型 | 约定 | 示例 |
-|------|------|------|
-| **Lesson README** | `README.md` | `01-slash-commands/README.md` |
-| **Feature file** | Kebab-case `.md` | `code-reviewer.md`, `generate-api-docs.md` |
-| **Shell script** | Kebab-case `.sh` | `format-code.sh`, `validate-input.sh` |
-| **Config file** | 标准名称 | `.mcp.json`, `settings.json` |
-| **Memory file** | 作用域前缀 | `project-CLAUDE.md`, `personal-CLAUDE.md` |
-| **Top-level docs** | UPPER_CASE `.md` | `CATALOG.md`, `QUICK_REFERENCE.md`, `CONTRIBUTING.md` |
-| **Image assets** | Kebab-case | `pr-slash-command.png`, `claude-howto-logo.svg` |
+|  | 类型 | 约定 | 示例 |  |
+|  | ------ | ------ | ------ |  |
+|  | **Lesson README** | `README.md` | `01-slash-commands/README.md` |  |
+|  | **功能 file** | Kebab-case `.md` | `code-reviewer.md`, `generate-API-docs.md` |  |
+|  | **Shell script** | Kebab-case `.sh` | `格式-code.sh`, `validate-input.sh` |  |
+|  | **Config file** | 标准名称 | `.mcp.JSON`, `settings.JSON` |  |
+|  | **记忆 file** | 作用域前缀 | `项目-CLAUDE.md`, `personal-CLAUDE.md` |  |
+|  | **Top-level docs** | UPPER_CASE `.md` | `CATALOG.md`, `QUICK_REFERENCE.md`, `CONTRIBUTING.md` |  |
+|  | **Image assets** | Kebab-case | `pr-slash-command.png`, `claude-howto-logo.svg` |  |
 
 ### Rules
 
@@ -74,16 +74,16 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 1. Logo(`<picture>` 元素,支持深色/浅色变体)
 2. H1 标题
 3. 引言 blockquote(一行价值主张)
-4. "Why This Guide?" 章节 + 对比表格
+4. "Why This 指南?" 章节 + 对比表格
 5. 水平分隔线(`---`)
 6. 目录
-7. Feature Catalog
+7. 功能 Catalog
 8. Quick Navigation
 9. Learning Path
-10. Feature 章节
-11. Getting Started
-12. Best Practices / Troubleshooting
-13. Contributing / License
+10. 功能 章节
+11. 入门指南
+12. 最佳实践 / 故障排除
+13. Contributing / 许可证
 
 ### Lesson README
 
@@ -100,9 +100,9 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 9. 相关指南 / 官方文档
 10. 文档元数据页脚
 
-### Feature/Example File
+### 功能/示例 File
 
-独立的功能文件(例如 `optimize.md`、`pr.md`):
+独立的功能文件(例如 `优化.md`、`pr.md`):
 
 1. YAML frontmatter(如适用)
 2. H1 标题
@@ -118,7 +118,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 ```markdown
 ---
 
-## New Major Section
+# # New Major Section
 ```
 
 将其放置在引言 blockquote 之后以及文档逻辑上不同的部分之间。
@@ -129,12 +129,12 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Hierarchy
 
-| 级别 | 用途 | 示例 |
-|-------|-----|---------|
-| `#` H1 | 页面标题(每文档一个) | `# Slash Commands` |
-| `##` H2 | 主要章节 | `## Best Practices` |
-| `###` H3 | 子章节 | `### Adding a Skill` |
-| `####` H4 | 子子章节(罕见) | `#### Configuration Options` |
+|  | 级别 | 用途 | 示例 |  |
+|  | ------- | ----- | --------- |  |
+|  | `#` H1 | 页面标题(每文档一个) | `# Slash Commands` |  |
+|  | `##` H2 | 主要章节 | `## 最佳实践` |  |
+|  | `###` H3 | 子章节 | `### Adding a 技能` |  |
+|  | `####` H4 | 子子章节(罕见) | `#### 配置 Options` |  |
 
 ### Rules
 
@@ -142,7 +142,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 - **永不跳级** -- 不要从 H2 直接跳到 H4
 - **保持标题简洁** -- 目标 2-5 个词
 - **使用句子大小写** -- 仅首单词和专有名词大写(例外:功能名称保持原样)
-- **仅在根 README 章节标题上添加 emoji 前缀**(见 [Emoji Usage](#emoji-usage))
+- **仅在根 README 章节标题上添加 emoji 前缀**(见 [Emoji 使用方法](#emoji-使用方法))
 
 ---
 
@@ -150,11 +150,11 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ### Emphasis
 
-| 样式 | 使用场景 | 示例 |
-|-------|------------|---------|
-| **Bold** (`**text**`) | 关键术语、表格标签、重要概念 | `**Installation**:` |
-| *Italic* (`*text*`) | 技术术语首次使用、书/文档标题 | `*frontmatter*` |
-| `Code` (`` `text` ``) | 文件名、命令、配置值、代码引用 | `` `CLAUDE.md` `` |
+|  | 样式 | 使用场景 | 示例 |  |
+|  | ------- | ------------ | --------- |  |
+|  | **Bold** (`**text**`) | 关键术语、表格标签、重要概念 | `**安装**:` |  |
+|  | *Italic* (`*text*`) | 技术术语首次使用、书/文档标题 | `*frontmatter*` |  |
+|  | `Code` (`` `text` ``) | 文件名、命令、配置值、代码引用 | `` `CLAUDE.md` `` |  |
 
 ### Blockquotes for Callouts
 
@@ -168,7 +168,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 > **Tip**: Combine memory with skills for maximum effectiveness.
 ```
 
-支持的 callout 类型:**Note**、**Important**、**Tip**、**Warning**。
+支持的 callout 类型:**注意**、**重要**、**提示**、**警告**。
 
 ### Paragraphs
 
@@ -227,7 +227,7 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 ## Tables
 
-### Standard Format
+### 标准 格式
 
 ```markdown
 | Column 1 | Column 2 | Column 3 |
@@ -280,22 +280,22 @@ Lesson 文件夹使用 **两位数字编号前缀** 加上 **kebab-case** 描述
 
 始终指定语言标签以获得语法高亮:
 
-| 语言 | 标签 | 用于 |
-|------|-----|---------|
-| Shell | `bash` | CLI 命令、脚本 |
-| Python | `python` | Python 代码 |
-| JavaScript | `javascript` | JS 代码 |
-| TypeScript | `typescript` | TS 代码 |
-| JSON | `json` | 配置文件 |
-| YAML | `yaml` | Frontmatter、配置 |
-| Markdown | `markdown` | Markdown 示例 |
-| SQL | `sql` | 数据库查询 |
-| Plain text | (无标签) | 预期输出、目录树 |
+|  | 语言 | 标签 | 用于 |  |
+|  | ------ | ----- | --------- |  |
+|  | Shell | `bash` | CLI 命令、脚本 |  |
+|  | Python | `python` | Python 代码 |  |
+|  | JavaScript | `javascript` | JS 代码 |  |
+|  | TypeScript | `typescript` | TS 代码 |  |
+|  | JSON | `JSON` | 配置文件 |  |
+|  | YAML | `YAML` | Frontmatter、配置 |  |
+|  | Markdown | `Markdown` | Markdown 示例 |  |
+|  | SQL | `sql` | 数据库查询 |  |
+|  | Plain text | (无标签) | 预期输出、目录树 |  |
 
 ### Conventions
 
 ```bash
-# Comment explaining what the command does
+#  Comment explaining what the command does
 claude mcp add notion --transport http https://mcp.notion.com/mcp
 ```
 
@@ -304,25 +304,25 @@ claude mcp add notion --transport http https://mcp.notion.com/mcp
 - 在相关时同时展示**简单版和高级版**
 - 包含**预期输出**以辅助理解(使用无标签代码块)
 
-### Installation Blocks
+### 安装 Blocks
 
 使用此模式作为安装说明:
 
 ```bash
-# Copy files to your project
+#  Copy files to your 项目
 cp 01-slash-commands/*.md .claude/commands/
 ```
 
 ### Multi-step Workflows
 
 ```bash
-# Step 1: Create the directory
+#  Step 1: 创建 the directory
 mkdir -p .claude/commands
 
-# Step 2: Copy the templates
+#  Step 2: Copy the templates
 cp 01-slash-commands/*.md .claude/commands/
 
-# Step 3: Verify installation
+#  Step 3: Verify 安装
 ls .claude/commands/
 ```
 
@@ -337,7 +337,7 @@ ls .claude/commands/
 ```markdown
 [Slash Commands](01-slash-commands/)
 [Skills Guide](03-skills/)
-[Memory Architecture](02-memory/#memory-architecture)
+[Memory Architecture](02-memory/# 记忆-架构)
 ```
 
 从 lesson 文件夹返回根目录或同级目录:
@@ -363,16 +363,16 @@ ls .claude/commands/
 使用 GitHub 风格锚点链接到同一文档内的章节:
 
 ```markdown
-[Feature Catalog](#-feature-catalog)
-[Best Practices](#best-practices)
+[Feature Catalog](# -功能-catalog)
+[Best Practices](# best-practices)
 ```
 
-### Related Guides Pattern
+### Related Guides 模式
 
 Lesson 结尾处添加相关指南章节:
 
 ```markdown
-## Related Guides
+# # Related Guides
 
 - [Slash Commands](../01-slash-commands/) - Quick shortcuts
 - [Memory](../02-memory/) - Persistent context
@@ -404,13 +404,13 @@ graph TB
 
 **Color palette:**
 
-| 颜色 | Hex | 用于 |
-|------|-----|---------|
-| Light blue | `#e1f5fe` | 主要组件、输入 |
-| Light pink | `#fce4ec` | 处理、中间件 |
-| Light green | `#e8f5e9` | 输出、结果 |
-| Light yellow | `#fff9c4` | 配置、可选 |
-| Light purple | `#f3e5f5` | 面向用户、UI |
+|  | 颜色 | Hex | 用于 |  |
+|  | ------ | ----- | --------- |  |
+|  | Light blue | `#e1f5fe` | 主要组件、输入 |  |
+|  | Light pink | `#fce4ec` | 处理、中间件 |  |
+|  | Light green | `#e8f5e9` | 输出、结果 |  |
+|  | Light yellow | `#fff9c4` | 配置、可选 |  |
+|  | Light purple | `#f3e5f5` | 面向用户、UI |  |
 
 ### Rules
 
@@ -422,35 +422,35 @@ graph TB
 
 ---
 
-## Emoji Usage
+## Emoji 使用方法
 
 ### Emoji 使用位置
 
 Emoji **谨慎且有目的地使用** -- 仅在特定场景下:
 
-| 场景 | Emoji | 示例 |
-|------|-------|---------|
-| Root README 章节标题 | 分类图标 | `## 📚 Learning Path` |
-| 技能等级指示器 | 彩色圆圈 | 🟢 Beginner, 🔵 Intermediate, 🔴 Advanced |
-| Do's and Don'ts | 勾选/叉号标记 | ✅ Do this, ❌ Don't do this |
-| 复杂度评级 | 星星 | ⭐⭐⭐ |
+|  | 场景 | Emoji | 示例 |  |
+|  | ------ | ------- | --------- |  |
+|  | Root README 章节标题 | 分类图标 | `## 📚 Learning Path` |  |
+|  | 技能等级指示器 | 彩色圆圈 | 🟢 Beginner, 🔵 Intermediate, 🔴 Advanced |  |
+|  | Do's and Don'ts | 勾选/叉号标记 | ✅ Do this, ❌ Don't do this |  |
+|  | 复杂度评级 | 星星 | ⭐⭐⭐ |  |
 
-### Standard Emoji Set
+### 标准 Emoji Set
 
-| Emoji | 含义 |
-|-------|---------|
-| 📚 | 学习、指南、文档 |
-| ⚡ | 入门、快速参考 |
-| 🎯 | 功能、快速参考 |
-| 🎓 | 学习路径 |
-| 📊 | 统计、比较 |
-| 🚀 | 安装、快速命令 |
-| 🟢 | 初学者级别 |
-| 🔵 | 中级级别 |
-| 🔴 | 高级级别 |
-| ✅ | 推荐做法 |
-| ❌ | 避免 / 反模式 |
-| ⭐ | 复杂度评级单位 |
+|  | Emoji | 含义 |  |
+|  | ------- | --------- |  |
+|  | 📚 | 学习、指南、文档 |  |
+|  | ⚡ | 入门、快速参考 |  |
+|  | 🎯 | 功能、快速参考 |  |
+|  | 🎓 | 学习路径 |  |
+|  | 📊 | 统计、比较 |  |
+|  | 🚀 | 安装、快速命令 |  |
+|  | 🟢 | 初学者级别 |  |
+|  | 🔵 | 中级级别 |  |
+|  | 🔴 | 高级级别 |  |
+|  | ✅ | 推荐做法 |  |
+|  | ❌ | 避免 / 反模式 |  |
+|  | ⭐ | 复杂度评级单位 |  |
 
 ### Rules
 
@@ -463,7 +463,7 @@ Emoji **谨慎且有目的地使用** -- 仅在特定场景下:
 
 ## YAML Frontmatter
 
-### Feature Files(Skills、Commands、Agents)
+### 功能 Files(技能、Commands、Agents)
 
 ```yaml
 ---
@@ -473,7 +473,7 @@ allowed-tools: Bash, Read, Grep
 ---
 ```
 
-### Optional Fields
+### 可选 Fields
 
 ```yaml
 ---
@@ -481,11 +481,11 @@ name: my-feature
 description: Brief description
 argument-hint: "[file-path] [options]"
 allowed-tools: Bash, Read, Grep, Write, Edit
-model: opus                        # opus, sonnet, or haiku
-disable-model-invocation: true     # User-only invocation
-user-invocable: false              # Hidden from user menu
-context: fork                      # Run in isolated subagent
-agent: Explore                     # Agent type for context: fork
+model: opus                        #  opus, sonnet, or haiku
+disable-model-invocation: true     #  用户-only invocation
+user-invocable: false              #  Hidden from 用户 menu
+context: fork                      #  Run in isolated 子代理
+agent: Explore                     #  代理 类型 for context: fork
 ---
 ```
 
@@ -493,14 +493,14 @@ agent: Explore                     # Agent type for context: fork
 
 - 将 frontmatter 放在文件最顶部
 - `name` 字段使用 **kebab-case**
-- 保持 `description` 为一句话
+- 保持 `描述` 为一句话
 - 只包含需要的字段
 
 ---
 
 ## Images and Media
 
-### Logo Pattern
+### Logo 模式
 
 所有以 logo 开头的文档都使用 `<picture>` 元素以支持深色/浅色模式:
 
@@ -532,30 +532,30 @@ agent: Explore                     # Agent type for context: fork
 ### Writing Style
 
 - **专业但亲切** -- 技术准确但不堆砌术语
-- **主动语态** -- "Create a file" 而非 "A file should be created"
+- **主动语态** -- "创建 a file" 而非 "A file should be created"
 - **直接指令** -- "Run this command" 而非 "You might want to run this command"
 - **新手友好** -- 假设读者对 Claude Code 新手,但对编程不陌生
 
 ### Content Principles
 
-| 原则 | 示例 |
-|-----------|-----------|
-| **Show, don't tell** | 提供可工作的示例,而非抽象描述 |
-| **渐进式复杂性** | 从简单开始,在后续章节增加深度 |
-| **解释"为什么"** | "Use memory for... because..." 而不仅仅是 "Use memory for..." |
-| **可直接复制粘贴** | 每个代码块粘贴后即可运行 |
-| **真实世界场景** | 使用实际场景,而非刻意构造的例子 |
+|  | 原则 | 示例 |  |
+|  | ----------- | ----------- |  |
+|  | **Show, don't tell** | 提供可工作的示例,而非抽象描述 |  |
+|  | **渐进式复杂性** | 从简单开始,在后续章节增加深度 |  |
+|  | **解释"为什么"** | "Use 记忆 for... because..." 而不仅仅是 "Use 记忆 for..." |  |
+|  | **可直接复制粘贴** | 每个代码块粘贴后即可运行 |  |
+|  | **真实世界场景** | 使用实际场景,而非刻意构造的例子 |  |
 
 ### Vocabulary
 
 - 使用 "Claude Code"(不用 "Claude CLI" 或 "the tool")
-- 使用 "skill"(不用 "custom command" -- 旧称)
-- 使用 "lesson" 或 "guide" 指代编号章节
-- 使用 "example" 指代独立的功能文件
+- 使用 "技能"(不用 "自定义 command" -- 旧称)
+- 使用 "lesson" 或 "指南" 指代编号章节
+- 使用 "示例" 指代独立的功能文件
 
 ---
 
-## Commit Messages
+## 提交 Messages
 
 遵循 [Conventional Commits](https://www.conventionalcommits.org/):
 
@@ -565,19 +565,19 @@ type(scope): description
 
 ### Types
 
-| Type | 用于 |
-|------|---------|
-| `feat` | 新功能、示例或指南 |
-| `fix` | Bug 修复、修正、损坏的链接 |
-| `docs` | 文档改进 |
-| `refactor` | 重构而不改变行为 |
-| `style` | 仅格式变更 |
-| `test` | 测试添加或修改 |
-| `chore` | 构建、依赖、CI |
+|  | 类型 | 用于 |  |
+|  | ------ | --------- |  |
+|  | `feat` | 新功能、示例或指南 |  |
+|  | `fix` | Bug 修复、修正、损坏的链接 |  |
+|  | `docs` | 文档改进 |  |
+|  | `refactor` | 重构而不改变行为 |  |
+|  | `style` | 仅格式变更 |  |
+|  | `测试` | 测试添加或修改 |  |
+|  | `chore` | 构建、依赖、CI |  |
 
 ### Scopes
 
-使用 lesson 名称或文件区域作为 scope:
+使用 lesson 名称或文件区域作为 作用域:
 
 ```
 feat(slash-commands): Add API documentation generator
@@ -624,4 +624,4 @@ Lesson README 以元数据块结尾:
 - [ ] 图片有 alt text
 - [ ] 段落简短且聚焦
 - [ ] 相关指南章节链接到相关 lesson
-- [ ] Commit message 遵循 conventional commits 格式
+- [ ] 提交 message 遵循 conventional commits 格式

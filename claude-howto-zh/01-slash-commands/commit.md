@@ -1,7 +1,7 @@
 ---
 name: 创建 Git 提交
-description: 分析暂存区变更并生成规范的提交消息
-tags: git, commit, conventional-commits
+描述: 分析暂存区变更并生成规范的提交消息
+tags: git, 提交, conventional-commits
 allowed-tools: Bash(git diff:*, git status:*, git log:*), Read, Write
 ---
 
@@ -15,26 +15,26 @@ allowed-tools: Bash(git diff:*, git status:*, git log:*), Read, Write
 
 **收集信息:**
 ```bash
-git status          # 查看暂存的文件
-git diff --cached   # 查看具体变更内容
-git log --oneline -5  # 参考最近的提交风格
+git status          #   查看暂存的文件
+git diff --cached   #   查看具体变更内容
+git log --oneline -5  #   参考最近的提交风格
 ```
 
 ### 2. 分类变更
 
 **判断提交类型**:
-| 类型 | 适用场景 |
-|------|----------|
-| `feat` | 新功能 |
-| `fix` | Bug 修复 |
-| `docs` | 仅文档变更 |
-| `style` | 代码格式调整(不影响功能) |
-| `refactor` | 重构(非新功能也非 Bug 修复) |
-| `test` | 测试相关 |
-| `chore` | 构建/工具/依赖等杂项 |
-| `perf` | 性能优化 |
-| `build` | 构建系统或外部依赖变更 |
-| `ci` | CI 配置变更 |
+|  |  | 类型 | 适用场景 |  |  |
+|  |  | ------ | ---------- |  |  |
+|  |  | `feat` | 新功能 |  |  |
+|  |  | `fix` | Bug 修复 |  |  |
+|  |  | `docs` | 仅文档变更 |  |  |
+|  |  | `style` | 代码格式调整(不影响功能) |  |  |
+|  |  | `refactor` | 重构(非新功能也非 Bug 修复) |  |  |
+|  |  | `测试` | 测试相关 |  |  |
+|  |  | `chore` | 构建/工具/依赖等杂项 |  |  |
+|  |  | `perf` | 性能优化 |  |  |
+|  |  | `构建` | 构建系统或外部依赖变更 |  |  |
+|  |  | `ci` | CI 配置变更 |  |  |
 
 ### 3. 生成提交消息
 
@@ -48,7 +48,7 @@ git log --oneline -5  # 参考最近的提交风格
 - 变更点 2
 - 变更点 3
 
-关联 Issue: #123
+关联 Issue: #  123
 ```
 
 **示例**:
@@ -59,13 +59,13 @@ feat(auth): 添加 JWT 双 Token 刷新机制
 - 添加 Token 黑名单机制防止重放攻击
 - 更新登录接口返回新的 Token 结构
 
-Closes #142
+Closes #  142
 ```
 
 ### 4. 安全检查
 
 **⚠️ 检测到以下内容时发出警告:**
-- 密钥文件:`.env*`, `*.key`, `*.pem`, `credentials.json`
+- 密钥文件:`.env*`, `*.key`, `*.pem`, `credentials.JSON`
 - 大文件:> 5MB 且未使用 Git LFS
 - 构建产物:`node_modules/`, `dist/`, `__pycache__/`, `*.pyc`
 - 临时文件:`.DS_Store`, `*.swp`, `*.tmp`

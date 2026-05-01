@@ -18,7 +18,7 @@ Thumbs.db
 # === 下载的源码（临时） ===
 /tmp/claude-howto-src/
 
-# === Obsidian 配置（不需要纳入版本控制） ===
+# === 本地应用配置 ===
 .obsidian/
 
 # === 环境配置（含敏感信息） ===
@@ -35,6 +35,7 @@ Thumbs.db
 .DS_Store
 Thumbs.db
 
-# === 本地工具脚本（不需要推送到GitHub） ===
-scripts/
-reference/
+# === 本地维护脚本（不上传 GitHub） ===
+/scripts/
+/reference/
+translator.py

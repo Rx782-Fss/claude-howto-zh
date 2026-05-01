@@ -1,10 +1,10 @@
 ---
-name: performance-analyzer
-description: 性能影响分析
+name: 性能-analyzer
+描述: 性能影响分析
 tools: read, grep, bash
 ---
 
-# 性能分析器(Performance Analyzer)
+# 性能分析器(性能 Analyzer)
 
 评估变更的性能影响:
 - 算法复杂度

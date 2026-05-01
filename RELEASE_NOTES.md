@@ -1,25 +1,12 @@
-## v2.3.1 — 2026-04-09
+## v2.2.0 - 2026-03-26
 
-### 跟进官方 v2.3.0 后续更新（6 个 commit）
+### Bug 修复
 
-#### 文档准确性更新
-- **Claude Code 版本号**：`2.1+` → `2.1.97`
-- **日期统一**：所有文件 footer 更新为 2026 年 4 月 9 日
-- **GitHub 指标**：5,900+ stars → **21,800+ stars**，690+ forks → **2,585+ forks**
+- 移除失效的 marketplace 链接，修复 CI 链接检查失败问题（3fdf0d6）
+- 将 `sandboxed` 和 `pycache` 加入 cSpell 词典（dc64618）
 
-#### 功能变更
-
-| 文件 | 变更 | 说明 |
-|------|------|------|
-| **README.md** | 指标更新 + 移除贡献者表格 | 官方已移除 Contributors 章节 |
-| **02-memory/README.md** | `#` 前缀快捷记忆标记为**废弃** | 改用 `/memory` 命令或对话方式添加记忆 |
-| **05-mcp/README.md** | 移除 **WebSocket Transport** 章节 | 该传输方式已从官方文档中移除 |
-| **QUICK_REFERENCE.md** | Hooks 事件数 25→**26**，移除 WebSocket MCP 引用 | 同步官方最新数据 |
-
-### 变更统计
-- Footer 批量更新：**18 个文件**
-- 实质性内容变更：**4 个文件**
-- 总计影响：**22+ 个文件**
+**完整变更日志**: https://github.com/luongnv89/claude-howto/compare/v2.1.0...v2.1.1
 
 ---
-**最后更新**: 2026 年 4 月 9 日
+
+**最后更新**：2026 年 4 月 9 日

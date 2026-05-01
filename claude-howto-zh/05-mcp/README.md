@@ -91,14 +91,6 @@ Server-Sent Events 传输已被弃用,推荐使用 `http`,但仍支持:
 claude mcp add --transport sse legacy-server https://example.com/sse
 ```
 
-### WebSocket 传输
-
-用于持久化双向连接的 WebSocket 传输:
-
-```bash
-claude mcp add --transport ws realtime-server wss://example.com/mcp
-```
-
 ### Windows 特殊说明
 
 在原生 Windows(非 WSL)上,对 npx 命令使用 `cmd /c`:

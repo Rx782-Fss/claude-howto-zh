@@ -118,7 +118,7 @@ claude -r "session"    # 按名称/ID 恢复会话
 | **技能** | `.claude/skills/*/SKILL.md` | 自动调用 |
 | **子代理** | `.claude/agents/*.md` | 自动委派 |
 | **MCP** | `.mcp.json`(项目级)或 `~/.claude.json`(用户级)| `/mcp__server__action` |
-| **钩子(26 个事件)** | `~/.claude/hooks/*.sh` | 事件触发(4 种类型)|
+| **钩子(28 个事件)** | `~/.claude/hooks/*.sh` | 事件触发(5 种类型)|
 | **插件** | 通过 `/plugin install` | 打包所有功能 |
 | **检查点** | 内置功能 | `Esc+Esc` 或 `/rewind` |
 | **规划模式** | 内置功能 | `/plan <任务>` |
@@ -189,7 +189,7 @@ vim CLAUDE.md
 
 ### 自动化与钩子
 ```bash
-# 安装钩子(25 个事件,4 种类型:工具、HTTP、提示词、代理)
+# 安装钩子(28 个事件,5 种类型:工具、HTTP、MCP工具、提示词、代理)
 mkdir -p ~/.claude/hooks
 cp 06-hooks/*.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/*.sh
@@ -389,9 +389,8 @@ cp -r 03-skills/code-review ~/.claude/skills/
 | **Auto Mode(自动模式)** | 完全自主操作,带后台分类器 | `--enable-auto-mode` 标志,`Shift+Tab` 切换模式 |
 | **Channels(频道)** | Discord 和 Telegram 集成 | `--channels` 标志,Discord/Telegram Bot |
 | **Voice Dictation(语音输入)** | 向 Claude 口述命令和上下文 | `/voice` 命令 |
-| **Hooks(25 个事件)** | 扩展的钩子系统,4 种类型 | 工具、HTTP、提示词、代理钩子类型 |
+| **Hooks(28 个事件)** | 扩展的钩子系统,5 种类型 | 工具、HTTP、MCP工具、提示词、代理钩子类型 |
 | **MCP Elicitation(引导)** | MCP 服务器可在运行时请求用户输入 | 服务器需要澄清时自动提示 |
-| **WebSocket MCP** | WebSocket 传输用于 MCP 连接 | 在 `.mcp.json` 中用 `ws://` URL 配置 |
 | **Plugin LSP** | 插件的 LSP 支持 | `userConfig`、`${CLAUDE_PLUGIN_DATA}` 变量 |
 | **Remote Control(远程控制)** | 通过 WebSocket API 控制 Claude Code | `claude --remote` 用于外部集成 |
 | **Web Sessions(Web 会话)** | 浏览器端 Claude Code 界面 | `claude web` 启动 |
@@ -399,7 +398,7 @@ cp -r 03-skills/code-review ~/.claude/skills/
 | **Task List(任务列表)** | 管理后台任务 | `/task list`、`/task status <id>` |
 | **Auto Memory(自动记忆)** | 从对话中自动保存记忆 | Claude 自动将关键上下文保存到 CLAUDE.md |
 | **Git Worktrees(工作树)** | 并行开发的隔离工作区 | `/worktree` 创建隔离工作区 |
-| **Model Selection(模型选择)** | 在 Sonnet 4.6 和 Opus 4.6 间切换 | `/model` 或 `--model` 标志 |
+| **Model Selection(模型选择)** | 在 Sonnet 4.6 和 Opus 4.7 间切换 | `/model` 或 `--model` 标志 |
 | **Agent Teams(代理团队)** | 多个代理协调完成任务 | 通过 `CLAUDE_AGENT_TEAMS=1` 环境变量启用 |
 | **Scheduled Tasks(定时任务)** | 用 `/loop` 执行循环任务 | `/loop 5m /command` 或 CronCreate 工具 |
 | **Chrome Integration(浏览器集成)** | 浏览器自动化 | `--chrome` 标志或 `/chrome` 命令 |
@@ -444,8 +443,8 @@ echo $GITHUB_TOKEN
 | 团队标准 | 记忆 | `02-memory/project-CLAUDE.md` |
 | 自动工作流 | 技能 | `03-skills/code-review/` |
 | 专业任务 | 子代理 | `04-subagents/code-reviewer.md` |
-| 外部数据 | MCP(含引导、WebSocket)| `05-mcp/github-mcp.json` |
-| 事件自动化 | 钩子(25 个事件,4 种类型)| `06-hooks/pre-commit.sh` |
+| 外部数据 | MCP(含引导) | `05-mcp/github-mcp.json` |
+| 事件自动化 | 钩子(28 个事件,5 种类型)| `06-hooks/pre-commit.sh` |
 | 完整解决方案 | 插件(含 LSP 支持)| `07-plugins/pr-review/` |
 | 安全实验 | 检查点 | `08-checkpoints/checkpoint-examples.md` |
 | 完全自主 | Auto Mode | `--enable-auto-mode` 或 `Shift+Tab` |
@@ -504,3 +503,13 @@ A: 当然可以!它们就是供你定制的模板。
 **完整索引**:`cat INDEX.md`
 
 **本卡片**:随时放在手边,方便快速查阅!
+
+---
+
+**最后更新**: 2026 年 4 月 24 日
+**Claude Code 版本**: 2.1.119
+**来源**:
+- https://docs.anthropic.com/en/docs/claude-code
+- https://www.anthropic.com/news/claude-opus-4-7
+- https://support.claude.com/en/articles/12138966-release-notes
+**兼容模型**: Claude Sonnet 4.6、Claude Opus 4.7、Claude Haiku 4.5

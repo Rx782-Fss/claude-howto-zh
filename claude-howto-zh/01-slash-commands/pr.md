@@ -1,6 +1,6 @@
 ---
 name: 准备 Pull Request
-description: 分析变更、生成 PR 描述并验证就绪状态
+描述: 分析变更、生成 PR 描述并验证就绪状态
 tags: git, pull-request, code-review
 allowed-tools: Bash(git diff:*, git log:*, git status:*), Read, Glob, Grep, Write
 ---
@@ -15,8 +15,8 @@ allowed-tools: Bash(git diff:*, git log:*, git status:*), Read, Glob, Grep, Writ
 
 **并行执行:**
 ```bash
-git diff --stat origin/main...HEAD    # 变更统计
-git log --oneline origin/main...HEAD   # 提交历史
+git diff --stat origin/main...HEAD    #   变更统计
+git log --oneline origin/main...HEAD   #   提交历史
 ```
 
 ### 2. 生成 PR 内容
@@ -30,28 +30,28 @@ git log --oneline origin/main...HEAD   # 提交历史
 
 **PR 正文模板**:
 ```markdown
-## 📝 变更概述
+#  # 📝 变更概述
 [用 2-3 句话描述这个 PR 做了什么]
 
-## 🔧 变更类型
+#  # 🔧 变更类型
 - [ ] 新功能 (feature)
 - [ ] Bug 修复 (bugfix)
 - [ ] 重构 (refactoring)
 - [ ] 文档更新 (documentation)
 - [ ] 其他:______
 
-## 📋 变更清单
+#  # 📋 变更清单
 [列出关键文件的变更]
 
-## 🧪 测试情况
+#  # 🧪 测试情况
 - [ ] 新增/更新的测试
 - [ ] 测试覆盖的关键场景
 - [ ] 手动测试结果
 
-## 📸 截图/演示(如适用)
+#  # 📸 截图/演示(如适用)
 [添加截图或 GIF]
 
-## ⚠️ 注意事项
+#  # ⚠️ 注意事项
 [任何审查者需要注意的事项]
 ```
 
@@ -67,7 +67,7 @@ git log --oneline origin/main...HEAD   # 提交历史
 ### 4. 输出最终报告
 
 ```markdown
-## ✅ PR 准备完成
+#  # ✅ PR 准备完成
 
 **建议标题**:`[type](scope): description`
 

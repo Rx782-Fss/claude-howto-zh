@@ -1,6 +1,6 @@
 ---
-name: Sync Documentation
-description: 同步文档与代码变更
+name: Sync 文档
+描述: 同步文档与代码变更
 ---
 
 # 文档同步
