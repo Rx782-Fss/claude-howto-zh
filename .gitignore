@@ -1,92 +1,64 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Temporary files
-*.tmp
-*.temp
-# Keep .claude/ clean for hand-on section — except project skills
-.claude/*
-!.claude/skills/
-.claude/skills/*
-!.claude/skills/self-assessment/
-!.claude/skills/lesson-quiz/
-blog-posts/
-
-# Local progress tracker — HTML ships in repo, but exported JSON data files stay local
-local-progress/*.json
-
-# EPUB files in root directory
-/*.epub
-
-# Python virtual environment
-.venv/
-
-# Python cache
+# === 依赖 / 构建产物 ===
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.pytest_cache/
-.mypy_cache/
+*.pyc
+*.pyo
 *.egg-info/
 dist/
 build/
+.eggs/
 
-# Coverage reports
-.coverage
-htmlcov/
+# === 临时文件 ===
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
 
-# uv lockfile
-uv.lock
-blog-post/
-openspec/
-.opencode/
+# === 下载的源码（临时） ===
+/tmp/claude-howto-src/
 
-# Promo video project
-promo-video/
-.agents/
-.codex/
+# === 本地应用配置 ===
+.obsidian/
 
-# Video files (too large for git)
-*.mp4
+# === 环境配置（含敏感信息） ===
+.env
+.env.local
+*.secret
 
-update-plan*.md
+# === IDE ===
+.vscode/
+.idea/
+*.code-workspace
+
+# === OS 文件 ===
+.DS_Store
+Thumbs.db
+
+# =====================================================
+# 本地维护文件（不上传 GitHub - 仅本地使用）
+# =====================================================
+
+# --- 本地维护脚本 ---
+/scripts/
+/reference/
+translator.py
+
+# --- .gitignore 本身（本地配置）---
+.gitignore
+
+# --- AI 维护指南（仅本地 AI 使用） ---
+CLAUDE.md
+
+# --- Prompts 模板（仅本地使用） ---
+/prompts/
+
+# --- 翻译状态追踪（仅本地参考） ---
+TRANSLATION-STATUS.md
+
+# --- 版本标记 ---
+.version
+
+# --- 本地规划文档 ---
+/docs/ROADMAP-*.md
+/docs/TASKS-*.md
