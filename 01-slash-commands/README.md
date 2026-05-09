@@ -549,3 +549,13 @@ allowed-tools: Bash(npm *), Bash(git *)
 
 ---
 *属于 [Claude How To](../) 指南系列的一部分*
+
+---
+
+**最后更新**: 2026年5月9日
+**Claude Code 版本**: 2.1.119
+**来源**:
+- https://docs.anthropic.com/en/docs/claude-code/slash-commands
+- https://docs.anthropic.com/en/docs/claude-code/interactive-mode
+- https://github.com/anthropics/claude-code/releases/tag/v2.1.119
+**兼容模型**: Claude Sonnet 4.6, Claude Opus 4.7, Claude Haiku 4.5
