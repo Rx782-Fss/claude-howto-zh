@@ -1,0 +1,92 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+# Keep .claude/ clean for hand-on section — except project skills
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/self-assessment/
+!.claude/skills/lesson-quiz/
+blog-posts/
+
+# Local progress tracker — HTML ships in repo, but exported JSON data files stay local
+local-progress/*.json
+
+# EPUB files in root directory
+/*.epub
+
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# uv lockfile
+uv.lock
+blog-post/
+openspec/
+.opencode/
+
+# Promo video project
+promo-video/
+.agents/
+.codex/
+
+# Video files (too large for git)
+*.mp4
+
+update-plan*.md

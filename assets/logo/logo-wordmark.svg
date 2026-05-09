@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="340" height="48" viewBox="0 0 340 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wordmark: "Claude How-To" -->
+
+  <!-- "Claude" in bold black -->
+  <text x="0" y="35" font-family="'Inter', 'SF Pro Display', '-apple-system', 'Segoe UI', sans-serif" font-size="36" font-weight="700" fill="#000000" letter-spacing="-0.5">
+    Claude
+  </text>
+
+  <!-- "How-To" in medium weight with green accent -->
+  <text x="170" y="35" font-family="'Inter', 'SF Pro Display', '-apple-system', 'Segoe UI', sans-serif" font-size="36" font-weight="500" fill="#6B7280" letter-spacing="-0.5">
+    How-To
+  </text>
+
+  <!-- Green underline accent on "How-To" -->
+  <line x1="170" y1="42" x2="330" y2="42" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+</svg>
